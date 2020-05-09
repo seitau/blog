@@ -1,10 +1,27 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.70.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="ja"><meta charset="utf-8"><meta name="generator" content="Hugo 0.70.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark"><title>browserify&#43;babelでasync/awaitを使用した快適p5.js開発環境構築&nbsp;&ndash;&nbsp;Seita Uchimura</title><link rel="stylesheet" href="/css/core.min.d395a79dded74421e74ec643c2073f04f7ce037c87be755c7ca30a168d12828f30f6f6f16faa88e38c1d1a9d5d107d88.css" integrity="sha384-05Wnnd7XRCHnTsZDwgc/BPfOA3yHvnVcfKMKFo0Sgo8w9vbxb6qI44wdGp1dEH2I"><meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="browserify&#43;babelでasync/awaitを使用した快適p5.js開発環境構築" /><body><section id="header">
+<meta name="supported-color-schemes" content="light dark"><title>browserify&#43;babelでasync/awaitを使用した快適p5.js開発環境構築&nbsp;&ndash;&nbsp;Seita Uchimura</title><link rel="stylesheet" href="/css/core.min.1da70b65b9c82f71467709aa7a330775043330343060d023bd8bf952c866afd590f3c03e043790670f1e868dff06ab27.css" integrity="sha384-HacLZbnIL3FGdwmqejMHdQQzMDQwYNAjvYv5Ushmr9WQ88A&#43;BDeQZw8eho3/Bqsn"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="browserify&#43;babelでasync/awaitを使用した快適p5.js開発環境構築" /><link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/favicon/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+<link rel="manifest" href="/favicon/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+<body><section id="header">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Seita Uchimura</span></a></span>
-        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about">About</a><a class="nav item" href="https://gohugo%2eio/"target="_blank">Hugo</a></nav></div></span></div><div class="site slogan"><span class="title">100% JavaScript-free</span></div></section><section id="content"><div class="article-container"><section class="article header">
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/">Articles</a><a class="nav item" href="/about">About</a><a class="nav item" href="/categories">Categories</a><a class="nav item" href="/tags">Tags</a></nav></div></span></div><div class="site slogan"><span class="title">You ain't gonna need it</span></div></section><section id="content"><div class="article-container"><section class="article header">
     <h1 class="article title">browserify+babelでasync/awaitを使用した快適p5.js開発環境構築</h1><p class="article date">Friday, April 26, 2019</p></section><article class="article markdown-body"><p>今回は、<a href="https://processing.org/"target="_blank">processing</a>のjs版として、ブラウザでインタラクティブなグラフィックを実装できる<a href="https://p5js.org"target="_blank">p5js</a>を使用してwebsiteに以下のようなアニメーションを実装した経験から、自分がどのように快適な開発環境を構築したかをご紹介します。</p>
 <div id="p5js-example" style="margin:0px 20%;width:60%;height:auto;background:rgb(0,0,0,0);position:relative;"></div>
 
@@ -103,35 +120,33 @@ new p5(sketch)
 
 
 <div class="body-iframe page-embed hatena-web-card">
+  <a href="https://qiita.com/ea54595/items/e6e36fcf1d10deadc17a" target="_blank">
     <div class="embed-wrapper">
-        <div class="embed-wrapper-inner">
-            <div class="embed-content with-thumb">
-                <div class="thumb-wrapper">
-                    <a href="https://qiita.com/ea54595/items/e6e36fcf1d10deadc17a" target="_blank">
-                        <img src="https://qiita-user-contents.imgix.net/https:%2F%2Fcdn.qiita.com%2Fassets%2Fpublic%2Farticle-ogp-background-1150d8b18a7c15795b701a55ae908f94.png?ixlib=rb-1.2.2&amp;w=1200&amp;mark=https://qiita-user-contents.imgix.net/~text?ixlib=rb-1.2.2%26w=840%26h=380%26txt=%25E4%25BB%258A%25E6%259B%25B4%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589%2520Babel%2520%25E3%2581%25A7%2520ES7%2520Async%252FAwait%2520%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%26txt-color=%2523333%26txt-font=Avenir-Black%26txt-size=54%26txt-clip=ellipsis%26txt-align=center%252Cmiddle%26s=d91314ac9b50aa4c1f6d7a98cbfa15f3&amp;mark-align=center,middle&amp;blend=https://qiita-user-contents.imgix.net/~text?ixlib=rb-1.2.2%26w=840%26h=500%26txt=%2540ea54595%26txt-color=%2523333%26txt-font=Avenir-Black%26txt-size=45%26txt-align=right%252Cbottom%26s=909a7944e450bce49602d9741c5d6cc7&amp;blend-align=center,middle&amp;blend-mode=normal&amp;s=b46b7ecb2a8ed84254fea4fa2a443c37" class="thumb">
-                    </a>
-                </div>
-                <div class="entry-body">
-                    <h2 class="entry-title">
-                        <a href="https://qiita.com/ea54595/items/e6e36fcf1d10deadc17a" target="_blank">
-                            
-                        </a>
-                    </h2>
-                    <div class="entry-content">
-                            この記事は Sansan Advent Calendar 2015の15日目です。
+      <div class="embed-wrapper-inner">
+        <div class="embed-content with-thumb">
+          <div class="thumb-wrapper">
+            <img src="https://qiita-user-contents.imgix.net/https:%2F%2Fcdn.qiita.com%2Fassets%2Fpublic%2Farticle-ogp-background-1150d8b18a7c15795b701a55ae908f94.png?ixlib=rb-1.2.2&amp;w=1200&amp;mark=https://qiita-user-contents.imgix.net/~text?ixlib=rb-1.2.2%26w=840%26h=380%26txt=%25E4%25BB%258A%25E6%259B%25B4%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589%2520Babel%2520%25E3%2581%25A7%2520ES7%2520Async%252FAwait%2520%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%26txt-color=%2523333%26txt-font=Avenir-Black%26txt-size=54%26txt-clip=ellipsis%26txt-align=center%252Cmiddle%26s=d91314ac9b50aa4c1f6d7a98cbfa15f3&amp;mark-align=center,middle&amp;blend=https://qiita-user-contents.imgix.net/~text?ixlib=rb-1.2.2%26w=840%26h=500%26txt=%2540ea54595%26txt-color=%2523333%26txt-font=Avenir-Black%26txt-size=45%26txt-align=right%252Cbottom%26s=909a7944e450bce49602d9741c5d6cc7&amp;blend-align=center,middle&amp;blend-mode=normal&amp;s=b46b7ecb2a8ed84254fea4fa2a443c37" class="thumb">
+          </div>
+          <div class="entry-body">
+            <h2 class="entry-title">
+              今更ながら Babel で ES7 Async/Await を試してみた - Qiita
+            </h2>
+            <div class="entry-content">
+              この記事は Sansan Advent Calendar 2015の15日目です。
 さぁ AdventCalender なんて書いてるので年末ですね。
 最近フロントエンドをやらなかったので JavaScript 書かなくなって追いかけ...
-                    </div>
-                </div>
             </div>
-            <div class="embed-footer">
-                <a href="https/qiita.com"target="_blank">
-                    <img src="https://www.google.com/s2/favicons?domain=qiita.com" alt="" title="" class="favicon">
-                    https/qiita.com
-                </a>
-            </div>
+          </div>
         </div>
+        <div class="embed-footer">
+          <a href="https/qiita.com"target="_blank">
+            <img src="https://www.google.com/s2/favicons?domain=qiita.com" alt="" title="今更ながら Babel で ES7 Async/Await を試してみた - Qiita" class="favicon">
+            https/qiita.com
+          </a>
+        </div>
+      </div>
     </div>
+  </a>
 </div>
 
 </p>
@@ -150,37 +165,35 @@ new p5(sketch)
 
 
 <div class="body-iframe page-embed hatena-web-card">
+  <a href="https://qiita.com/foursue/items/d80667eff2faed8613f2#browserify%E3%81%A7%E4%BD%BF%E3%81%86%E5%A0%B4%E5%90%88" target="_blank">
     <div class="embed-wrapper">
-        <div class="embed-wrapper-inner">
-            <div class="embed-content with-thumb">
-                <div class="thumb-wrapper">
-                    <a href="https://qiita.com/foursue/items/d80667eff2faed8613f2#browserify%E3%81%A7%E4%BD%BF%E3%81%86%E5%A0%B4%E5%90%88" target="_blank">
-                        <img src="https://qiita-user-contents.imgix.net/https:%2F%2Fcdn.qiita.com%2Fassets%2Fpublic%2Farticle-ogp-background-1150d8b18a7c15795b701a55ae908f94.png?ixlib=rb-1.2.2&amp;w=1200&amp;mark=https://qiita-user-contents.imgix.net/~text?ixlib=rb-1.2.2%26w=840%26h=380%26txt=Babel%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%258A%25E3%2581%2586%26txt-color=%2523333%26txt-font=Avenir-Black%26txt-size=54%26txt-clip=ellipsis%26txt-align=center%252Cmiddle%26s=bc5376f2cd7fddd891abca1339a9a2c9&amp;mark-align=center,middle&amp;blend=https://qiita-user-contents.imgix.net/~text?ixlib=rb-1.2.2%26w=840%26h=500%26txt=%2540foursue%26txt-color=%2523333%26txt-font=Avenir-Black%26txt-size=45%26txt-align=right%252Cbottom%26s=4bb495dfde03005c5d33ccfbd1a505e9&amp;blend-align=center,middle&amp;blend-mode=normal&amp;s=55e00037825470ab572dc1c6ae16ad79" class="thumb">
-                    </a>
-                </div>
-                <div class="entry-body">
-                    <h2 class="entry-title">
-                        <a href="https://qiita.com/foursue/items/d80667eff2faed8613f2#browserify%E3%81%A7%E4%BD%BF%E3%81%86%E5%A0%B4%E5%90%88" target="_blank">
-                            
-                        </a>
-                    </h2>
-                    <div class="entry-content">
-                            
+      <div class="embed-wrapper-inner">
+        <div class="embed-content with-thumb">
+          <div class="thumb-wrapper">
+            <img src="https://qiita-user-contents.imgix.net/https:%2F%2Fcdn.qiita.com%2Fassets%2Fpublic%2Farticle-ogp-background-1150d8b18a7c15795b701a55ae908f94.png?ixlib=rb-1.2.2&amp;w=1200&amp;mark=https://qiita-user-contents.imgix.net/~text?ixlib=rb-1.2.2%26w=840%26h=380%26txt=Babel%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%258A%25E3%2581%2586%26txt-color=%2523333%26txt-font=Avenir-Black%26txt-size=54%26txt-clip=ellipsis%26txt-align=center%252Cmiddle%26s=bc5376f2cd7fddd891abca1339a9a2c9&amp;mark-align=center,middle&amp;blend=https://qiita-user-contents.imgix.net/~text?ixlib=rb-1.2.2%26w=840%26h=500%26txt=%2540foursue%26txt-color=%2523333%26txt-font=Avenir-Black%26txt-size=45%26txt-align=right%252Cbottom%26s=4bb495dfde03005c5d33ccfbd1a505e9&amp;blend-align=center,middle&amp;blend-mode=normal&amp;s=55e00037825470ab572dc1c6ae16ad79" class="thumb">
+          </div>
+          <div class="entry-body">
+            <h2 class="entry-title">
+              Babelを使おう - Qiita
+            </h2>
+            <div class="entry-content">
+              
 
 Babel
 
 Reactやる時に生のJSを書くとシンドイので、ES2015やJSXで書きます。だけど、生のJSとは違いES2015やJSXはブラウザで直接実行できません。ですのでトランスパイラとよばれるプリプロセッサを使ってそれら...
-                    </div>
-                </div>
             </div>
-            <div class="embed-footer">
-                <a href="https/qiita.com"target="_blank">
-                    <img src="https://www.google.com/s2/favicons?domain=qiita.com" alt="" title="" class="favicon">
-                    https/qiita.com
-                </a>
-            </div>
+          </div>
         </div>
+        <div class="embed-footer">
+          <a href="https/qiita.com"target="_blank">
+            <img src="https://www.google.com/s2/favicons?domain=qiita.com" alt="" title="Babelを使おう - Qiita" class="favicon">
+            https/qiita.com
+          </a>
+        </div>
+      </div>
     </div>
+  </a>
 </div>
 
 </p>
@@ -241,12 +254,33 @@ Reactやる時に生のJSを書くとシンドイので、ES2015やJSXで書き�
 
 <span class="k">new</span> <span class="nx">p5</span><span class="p">(</span><span class="nx">sketch</span><span class="p">)</span>
 </code></pre></div><p>以上のサンプルが以下のcanvasで実行されています。draw関数の中でawaitをつかって1秒後に描画されるようにしました。canvasの上でマウスを動かすと1秒遅れで円がついてくるのがわかると思います。async/awaitが解釈され、ちゃんと動いてますね！</p>
-<div id="sample" style="margin:0px 20%;width:60%;height:auto;background:rgb(0,0,0,0);position:relative;"></div></article><section class="article labels"><a class="category" href=/categories/programming/>programming</a><a class="tag" href=/tags/p5%2ejs/>p5.js</a><a class="tag" href=/tags/processing/>processing</a><a class="tag" href=/tags/babel/>babel</a><a class="tag" href=/tags/browserify/>browserify</a><a class="tag" href=/tags/javascript/>javascript</a></section></div>
-<div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/parity-poa-truffle/"><span class="li iconfont icon-article"></span>ParityのPOAプライベートネット建ててtruffleを使う時はbyzantium対応をお忘れなく</a></p><p><a class="link" href="/post/hugo-sass-version/"><span class="li iconfont icon-article"></span>HugoでSCSS/SASSをCSSに変換するならVersionに注意</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+<div id="sample" style="margin:0px 20%;width:60%;height:auto;background:rgb(0,0,0,0);position:relative;"></div></article><section class="article labels"><a class="category" href=/categories/programming/>programming</a><a class="tag" href=/tags/p5%2ejs/>p5.js</a><a class="tag" href=/tags/processing/>processing</a><a class="tag" href=/tags/babel/>babel</a><a class="tag" href=/tags/browserify/>browserify</a><a class="tag" href=/tags/javascript/>javascript</a></section><section class="article author"><img class="avatar" src="/img/me.png" alt><p class="name">Seita Uchimura</p><div class="bio">Software Engineer in Tokyo | ICU20</div><div class="details"><a class="item" href="https://github.com/seita-uc" target="_blank"><span class="iconfont icon-github"></span>&nbsp;seita-uc</a><a class="item" href="https://twitter.com/sei_uchi_mura" target="_blank"><span class="iconfont icon-twitter"></span>&nbsp;@sei_uchi_mura</a></div>
+</section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/parity-poa-truffle/"><span class="li iconfont icon-article"></span>ParityのPOAプライベートネット建ててtruffleを使う時はbyzantium対応をお忘れなく</a></p><p><a class="link" href="/post/hugo-sass-version/"><span class="li iconfont icon-article"></span>HugoでSCSS/SASSをCSSに変換するならVersionに注意</a></p></section><section class="article discussion"><div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "seita-blog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></section></div></section><section id="footer"><div class="footer-wrap">
     <p class="copyright">©2019 Seita Uchimura.</p>
-    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
-        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io"
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/"
         target="_blank">Notepadium</a></p>
-</div></section></body>
+</div>
+</section></body>
 
 </html>

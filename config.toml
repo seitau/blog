@@ -52,6 +52,9 @@ inlineToolId = ""
 #[params.nav]
 #showCategories = true
 #showTags = true
+[[params.nav.custom]]
+title = "Articles"
+url = "/"
 
 [[params.nav.custom]]
 title = "About"

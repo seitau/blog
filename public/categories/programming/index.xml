@@ -5,7 +5,7 @@
     <link>/categories/programming/</link>
     <description>Recent content in programming on Seita Uchimura</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
+    <language>ja</language>
     <copyright>©2019 Seita Uchimura.</copyright>
     <lastBuildDate>Sat, 30 Nov 2019 07:24:15 -0800</lastBuildDate>
     
@@ -41,33 +41,31 @@
 
 
 &lt;div class=&#34;body-iframe page-embed hatena-web-card&#34;&gt;
+  &lt;a href=&#34;https://wiki.parity.io/Demo-PoA-tutorial&#34; target=&#34;_blank&#34;&gt;
     &lt;div class=&#34;embed-wrapper&#34;&gt;
-        &lt;div class=&#34;embed-wrapper-inner&#34;&gt;
-            &lt;div class=&#34;embed-content with-thumb&#34;&gt;
-                &lt;div class=&#34;thumb-wrapper&#34;&gt;
-                    &lt;a href=&#34;https://wiki.parity.io/Demo-PoA-tutorial&#34; target=&#34;_blank&#34;&gt;
-                        &lt;img src=&#34;https://openethereum.github.io/wiki/public/Paritytech_logo_400x400.jpg&#34; class=&#34;thumb&#34;&gt;
-                    &lt;/a&gt;
-                &lt;/div&gt;
-                &lt;div class=&#34;entry-body&#34;&gt;
-                    &lt;h2 class=&#34;entry-title&#34;&gt;
-                        &lt;a href=&#34;https://wiki.parity.io/Demo-PoA-tutorial&#34; target=&#34;_blank&#34;&gt;
-                            
-                        &lt;/a&gt;
-                    &lt;/h2&gt;
-                    &lt;div class=&#34;entry-content&#34;&gt;
-                            This tutorial will walk through setting up two Parity nodes locally and sending transactions between them. If you want to learn more about differen...
-                    &lt;/div&gt;
-                &lt;/div&gt;
+      &lt;div class=&#34;embed-wrapper-inner&#34;&gt;
+        &lt;div class=&#34;embed-content with-thumb&#34;&gt;
+          &lt;div class=&#34;thumb-wrapper&#34;&gt;
+            &lt;img src=&#34;https://openethereum.github.io/wiki/public/Paritytech_logo_400x400.jpg&#34; class=&#34;thumb&#34;&gt;
+          &lt;/div&gt;
+          &lt;div class=&#34;entry-body&#34;&gt;
+            &lt;h2 class=&#34;entry-title&#34;&gt;
+              Parity Documentation - Demo PoA-Tutorial
+            &lt;/h2&gt;
+            &lt;div class=&#34;entry-content&#34;&gt;
+              This tutorial will walk through setting up two Parity nodes locally and sending transactions between them. If you want to learn more about differen...
             &lt;/div&gt;
-            &lt;div class=&#34;embed-footer&#34;&gt;
-                &lt;a href=&#34;https/wiki.parity.io&#34;target=&#34;_blank&#34;&gt;
-                    &lt;img src=&#34;https://www.google.com/s2/favicons?domain=wiki.parity.io&#34; alt=&#34;&#34; title=&#34;&#34; class=&#34;favicon&#34;&gt;
-                    https/wiki.parity.io
-                &lt;/a&gt;
-            &lt;/div&gt;
+          &lt;/div&gt;
         &lt;/div&gt;
+        &lt;div class=&#34;embed-footer&#34;&gt;
+          &lt;a href=&#34;https/wiki.parity.io&#34;target=&#34;_blank&#34;&gt;
+            &lt;img src=&#34;https://www.google.com/s2/favicons?domain=wiki.parity.io&#34; alt=&#34;&#34; title=&#34;Parity Documentation - Demo PoA-Tutorial&#34; class=&#34;favicon&#34;&gt;
+            https/wiki.parity.io
+          &lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
     &lt;/div&gt;
+  &lt;/a&gt;
 &lt;/div&gt;
 
 &lt;/p&gt;
@@ -172,7 +170,7 @@
       <pubDate>Tue, 29 Jan 2019 11:24:15 -0800</pubDate>
       
       <guid>/post/hugo-shortcode-web-embed/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://seita.tokyo/2019/01/22/netlify-cms%E3%81%A7%E7%94%BB%E5%83%8F%E3%81%AE%E5%A4%A7%E3%81%8D%E3%81%95%E3%82%92%E5%A4%89%E6%9B%B4%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%88%E3%81%86%E3%81%AB%E3%81%99%E3%82%8B/&#34;target=&#34;_blank&#34;&gt;先日書いた記事&lt;/a&gt;で、他に自分が運営している&lt;a href=&#34;https://ucsb.tokyo/&#34;target=&#34;_blank&#34;&gt;UCSB留学ブログ&lt;/a&gt;を記事に埋め込んで紹介したのですが、実はその埋め込み作業にかなり手間がかかったのでまとめます。&lt;/p&gt;</description>
+      <description>&lt;p&gt;&lt;a href=&#34;https://seita.icu/2019/01/22/netlify-cms%E3%81%A7%E7%94%BB%E5%83%8F%E3%81%AE%E5%A4%A7%E3%81%8D%E3%81%95%E3%82%92%E5%A4%89%E6%9B%B4%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%88%E3%81%86%E3%81%AB%E3%81%99%E3%82%8B/&#34;target=&#34;_blank&#34;&gt;先日書いた記事&lt;/a&gt;で、他に自分が運営している&lt;a href=&#34;https://ucsb.tokyo/&#34;target=&#34;_blank&#34;&gt;UCSB留学ブログ&lt;/a&gt;を記事に埋め込んで紹介したのですが、実はその埋め込み作業にかなり手間がかかったのでまとめます。&lt;/p&gt;</description>
       
     </item>
     
@@ -254,7 +252,7 @@
       <pubDate>Tue, 18 Dec 2018 14:48:24 -0800</pubDate>
       
       <guid>/post/ginco-intern-engineer/</guid>
-      <description>こんにちは、Gincoでエンジニアインターンをしていた文系大学生の内村です。 していた、というのも、実は2018年の9月をもってGincoを退</description>
+      <description>Gincoのエンジニアインターンってどんな感じ？ こんにちは、Gincoでエンジニアインターンをしていた文系大学生の内村です。 していた、という</description>
       
     </item>
     
@@ -264,7 +262,7 @@
       <pubDate>Fri, 14 Sep 2018 15:02:50 -0800</pubDate>
       
       <guid>/post/neo-hackathon/</guid>
-      <description>こんにちは、エンジニアインターンの内村です。 みなさま、NEOの開発はされていますでしょうか？ 実は先日開催された、NEOブロックチェーンチャレ</description>
+      <description>NEOブロックチェーンチャレンジ東京で準優勝しました! こんにちは、エンジニアインターンの内村です。 みなさま、NEOの開発はされていますでしょ</description>
       
     </item>
     
