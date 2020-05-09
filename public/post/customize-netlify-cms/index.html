@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.70.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Netlify CMSで画像の大きさを変更できるようにする&nbsp;&ndash;&nbsp;Seita Uchimura</title><link rel="stylesheet" href="/css/core.min.d395a79dded74421e74ec643c2073f04f7ce037c87be755c7ca30a168d12828f30f6f6f16faa88e38c1d1a9d5d107d88.css" integrity="sha384-05Wnnd7XRCHnTsZDwgc/BPfOA3yHvnVcfKMKFo0Sgo8w9vbxb6qI44wdGp1dEH2I"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Netlify CMSで画像の大きさを変更できるようにする" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Seita Uchimura</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about">About</a><a class="nav item" href="https://gohugo%2eio/"target="_blank">Hugo</a></nav></div></span></div><div class="site slogan"><span class="title">100% JavaScript-free</span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Netlify CMSで画像の大きさを変更できるようにする</h1><p class="article date">Tuesday, January 22, 2019</p></section><article class="article markdown-body"><p>2019年に入ってから友人と<a href="https://ucsb.tokyo/"target="_blank">UCSB留学ブログ</a>を運営しており、主に友人が記事の執筆、自分はブログサイトの開発を担当しています。</p>
+<p>そこで現在、<a href="https://www.netlifycms.org/"target="_blank">Netlify CMS</a>を利用して執筆と開発を分離しているのですが、CMSからアップロードした画像のサイズが変更できないという苦情を受けたのでごにょごにょして修正しました。</p>
+<div class="body-iframe page-embed hatena-web-card">
+    <div class="embed-wrapper">
+        <div class="embed-wrapper-inner">
+            <div class="embed-content with-thumb">
+                <div class="thumb-wrapper">
+                    <a href="https://ucsb.tokyo/post/2019-01-14-%E3%81%9D%E3%82%82%E3%81%9D%E3%82%82%E3%82%AB%E3%83%AA%E3%83%95%E3%82%A9%E3%83%AB%E3%83%8B%E3%82%A2%E5%A4%A7%E5%AD%A6%E3%81%A3%E3%81%A6%E3%81%A9%E3%82%93%E3%81%AA%E3%81%A8%E3%81%93/" target="_blank">
+                        <img src="https://ucsb.tokyo/images/campus-lagoon.jpg" class="thumb">
+                    </a>
+                </div>
+                <div class="entry-body">
+                    <h2 class="entry-title">
+                        <a href="https://ucsb.tokyo/post/2019-01-14-%E3%81%9D%E3%82%82%E3%81%9D%E3%82%82%E3%82%AB%E3%83%AA%E3%83%95%E3%82%A9%E3%83%AB%E3%83%8B%E3%82%A2%E5%A4%A7%E5%AD%A6%E3%81%A3%E3%81%A6%E3%81%A9%E3%82%93%E3%81%AA%E3%81%A8%E3%81%93/" target="_blank">
+                            
+                        </a>
+                    </h2>
+                    <div class="entry-content">
+                            UCSBに留学する日本人学生のブログ！
+                    </div>
+                </div>
+            </div>
+            <div class="embed-footer">
+                <a href="https/ucsb.tokyo"target="_blank">
+                    <img src="https://www.google.com/s2/favicons?domain=ucsb.tokyo" alt="" title="" class="favicon">
+                    https/ucsb.tokyo
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<h1 id="editorcomponentを追加する">EditorComponentを追加する</h1>
+<p>Netlify CMSはreactで書かれているということで、最初はカスタマイズできるか自信がなかったのですが、<a href="https://www.netlifycms.org/docs/custom-widgets/#registereditorcomponent"target="_blank">document</a>を確認してみると、意外にもeditorのcomponentを簡単にカスタマイズできるようになっていて素敵でした。Hugoのfront matterに合わせて適当にボタンとかインプットとか増やせるみたいですね。</p>
+<p>早速documentに従って、<code>/static/admin/index.html</code>に記述していきます。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nx">CMS</span><span class="p">.</span><span class="nx">registerEditorComponent</span><span class="p">({</span>
+  <span class="nx">id</span><span class="o">:</span> <span class="s2">&#34;customImage&#34;</span><span class="p">,</span>
+  <span class="nx">label</span><span class="o">:</span> <span class="s2">&#34;CustomImage&#34;</span><span class="p">,</span>
+  <span class="nx">fields</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span><span class="nx">label</span><span class="o">:</span> <span class="s2">&#34;Image&#34;</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;image&#34;</span><span class="p">,</span> <span class="nx">widget</span><span class="o">:</span> <span class="s2">&#34;image&#34;</span><span class="p">},</span>
+    <span class="p">{</span><span class="nx">label</span><span class="o">:</span> <span class="s2">&#34;Width&#34;</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;width&#34;</span><span class="p">,</span> <span class="nx">widget</span><span class="o">:</span> <span class="s2">&#34;number&#34;</span><span class="p">,</span> <span class="nx">min</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="k">default</span><span class="o">:</span> <span class="mi">400</span><span class="p">}</span>
+  <span class="p">],</span>
+  <span class="nx">pattern</span><span class="o">:</span> <span class="sr">/^{ {&lt; customImage &#34;(\S+)&#34; (\S+) &gt;} }$/</span><span class="p">,</span>
+  <span class="nx">fromBlock</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">match</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">match</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="nx">image</span><span class="o">:</span> <span class="nx">match</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+      <span class="nx">width</span><span class="o">:</span> <span class="nx">match</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="p">};</span>
+  <span class="p">},</span>
+  <span class="nx">toBlock</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s1">&#39;{ {&lt; customImage &#34;&#39;</span> <span class="o">+</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">image</span> <span class="o">+</span> <span class="s1">&#39;&#34; &#39;</span> <span class="o">+</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">width</span> <span class="o">+</span> <span class="s1">&#39; &gt;} }&#39;</span>
+  <span class="p">},</span>
+  <span class="nx">toPreview</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+          <span class="s1">&#39;&lt;figure&gt;&lt;img src=&#39;</span> <span class="o">+</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">image</span> <span class="o">+</span> <span class="s1">&#39; width=&#39;</span> <span class="o">+</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">width</span> <span class="o">+</span> <span class="s1">&#39; style=&#34;height:auto;&#34;/&gt;&lt;/figure&gt;&#39;</span>
+         <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+<p>上記のようにindex.htmlにscriptを追加すると、CMSからcustomImageという項目を選択することができるようになります。</p>
+<p>これで終わりかと思いきや、まだ一つやることがあります。</p>
+<p>上記のEditorComponentを使用してcustomImageを選択し画像を挿入すると、</p>
+<div class="highlight"><pre class="chroma"><code class="language-go-html-template" data-lang="go-html-template">{ {<span class="p">&lt;</span> <span class="nt">customImage</span> <span class="err">&#34;</span><span class="na">example</span><span class="err">.</span><span class="na">jpg</span><span class="err">&#34;</span> <span class="na">400</span> <span class="p">&gt;</span>} } 
+</code></pre></div><p>このようなshortcodeが実際のmarkdownファイルには記述されます。</p>
+<p>このままではまだhugoがimageとして解釈してくれないため、<a href="https://gohugo.io/templates/shortcode-templates/#create-custom-shortcodes"target="_blank">custom shortcode</a>を追加しましょう。</p>
+<h1 id="hugoのcustom-shortcodeを追加する">hugoのcustom shortcodeを追加する</h1>
+<p>hugoのプロジェクトルートにある<code>/layout/shortcodes</code>に<code>customImage.html</code>というファイルを作成し、以下のコードを保存してください。</p>
+<div class="highlight"><pre class="chroma"><code class="language-go-html-template" data-lang="go-html-template"><span class="p">&lt;</span><span class="nt">figure</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;</span><span class="cp">{{</span><span class="na">.Get</span><span class="w"> </span><span class="nx">0</span><span class="cp">}}</span><span class="s">&#34;</span> <span class="na">width</span><span class="o">=</span><span class="s">&#34;</span><span class="cp">{{</span><span class="na">.Get</span><span class="w"> </span><span class="nx">1</span><span class="cp">}}</span><span class="s">&#34;</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;height:auto;&#34;</span><span class="p">/&gt;</span>
+<span class="p">&lt;/</span><span class="nt">figure</span><span class="p">&gt;</span>
+</code></pre></div><p>shortcodeの第一引数にimageへのパス、第二引数にwidthの数値を入れることでサイズ可変のfigureを挿入することが可能になっています。</p>
+<p>これで、CMSからサイズの変更できるcustomImageを挿入することができるようになりました。</p>
+<h1 id="netlify-cms良き">Netlify CMS良き</h1>
+<p>CMSを選定する際に<a href="https://forestry.io/"target="_blank">forestly.io</a>とも迷いましたが、もともとの機能がシンプルな分Netlify CMSのほうが拡張性があったので、選んで正解だったかなと思いました。</p></article><section class="article labels"><a class="category" href=/categories/programming/>programming</a><a class="tag" href=/tags/netlify/>netlify</a><a class="tag" href=/tags/netlify-cms/>netlify-cms</a><a class="tag" href=/tags/hugo/>hugo</a></section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/english-themas/"><span class="li iconfont icon-article"></span>英語病みからのエモいサイト作った話</a></p><p><a class="link" href="/post/deploy-hugo-with-circleci/"><span class="li iconfont icon-article"></span>Hugoをcircleciで自動デプロイする</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2019 Seita Uchimura.</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section></body>
+
+</html>

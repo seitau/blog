@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.70.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>HugoでSCSS/SASSをCSSに変換するならVersionに注意&nbsp;&ndash;&nbsp;Seita Uchimura</title><link rel="stylesheet" href="/css/core.min.d395a79dded74421e74ec643c2073f04f7ce037c87be755c7ca30a168d12828f30f6f6f16faa88e38c1d1a9d5d107d88.css" integrity="sha384-05Wnnd7XRCHnTsZDwgc/BPfOA3yHvnVcfKMKFo0Sgo8w9vbxb6qI44wdGp1dEH2I"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="HugoでSCSS/SASSをCSSに変換するならVersionに注意" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Seita Uchimura</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about">About</a><a class="nav item" href="https://gohugo%2eio/"target="_blank">Hugo</a></nav></div></span></div><div class="site slogan"><span class="title">100% JavaScript-free</span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">HugoでSCSS/SASSをCSSに変換するならVersionに注意</h1><p class="article date">Wednesday, April 24, 2019</p></section><article class="article markdown-body"><p>Hugoにbulmaを導入した際にbulmaのSASSをCSSに変換していたのが、なぜかCircleCIでビルドする時に<code>error: failed to transform resource: TOCSS: failed to transform &quot;bulma/bulma.sass&quot; (text/x-scss): this feature is not available</code>というエラーを吐いていたので報告。</p>
+<h2 id="scsssassをcssに変換してくれる">SCSS/SASSをCSSに変換してくれる</h2>
+<p>Hugoでは以下のようにSCSS/SASSをCSSに変換してくれる機能があるので非常に便利です。</p>
+<div class="highlight"><pre class="chroma"><code class="language-go-html-template" data-lang="go-html-template"><span class="cp">{{</span><span class="w"> </span><span class="nx">$bulma</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">resources</span><span class="na">.Get</span><span class="w"> </span><span class="s">&#34;bulma/bulma.sass&#34;</span><span class="cp">}}</span>
+<span class="cp">{{</span><span class="w"> </span><span class="nx">$scss</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">$bulma</span><span class="w"> </span><span class="cp">}}</span>
+<span class="cp">{{</span><span class="w"> </span><span class="nx">$options</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">(</span><span class="nx">dict</span><span class="w"> </span><span class="s">&#34;targetPath&#34;</span><span class="w"> </span><span class="s">&#34;style.css&#34;</span><span class="w"> </span><span class="s">&#34;outputStyle&#34;</span><span class="w"> </span><span class="s">&#34;compressed&#34;</span><span class="w"> </span><span class="s">&#34;enableSourceMap&#34;</span><span class="w"> </span><span class="k">true</span><span class="o">)</span><span class="w"> </span><span class="cp">}}</span>
+<span class="cp">{{</span><span class="w"> </span><span class="nx">$style</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">$scss</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">resources</span><span class="na">.ToCSS</span><span class="w"> </span><span class="nx">$options</span><span class="w"> </span><span class="cp">}}</span>
+<span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;</span><span class="cp">{{</span><span class="w"> </span><span class="nx">$style</span><span class="na">.Permalink</span><span class="w"> </span><span class="cp">}}</span><span class="s">&#34;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#34;stylesheet&#34;</span><span class="p">/&gt;</span>
+</code></pre></div><h2 id="hugoのversionにextendedが必要">Hugoのversionにextendedが必要</h2>
+<p>しかしながら、以下のFAQにある通り、この機能を使用するにはHugoのversionにextendedがついている必要があります。
+
+
+
+
+
+
+
+
+
+
+
+<div class="body-iframe page-embed hatena-web-card">
+    <div class="embed-wrapper">
+        <div class="embed-wrapper-inner">
+            <div class="embed-content with-thumb">
+                <div class="thumb-wrapper">
+                    <a href="https://gohugo.io/troubleshooting/faq/#i-get-tocss-this-feature-is-not-available-in-your-current-hugo-version" target="_blank">
+                        <img src="https://gohugo.io/images/gohugoio-card.png" class="thumb">
+                    </a>
+                </div>
+                <div class="entry-body">
+                    <h2 class="entry-title">
+                        <a href="https://gohugo.io/troubleshooting/faq/#i-get-tocss-this-feature-is-not-available-in-your-current-hugo-version" target="_blank">
+                            
+                        </a>
+                    </h2>
+                    <div class="entry-content">
+                            Solutions to some common Hugo problems.
+                    </div>
+                </div>
+            </div>
+            <div class="embed-footer">
+                <a href="https/gohugo.io"target="_blank">
+                    <img src="https://www.google.com/s2/favicons?domain=gohugo.io" alt="" title="" class="favicon">
+                    https/gohugo.io
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</p>
+<p>自分はCircleCIでDocker HubからpullしていたimageでextendedのついていないHugoのversionをinstallしていたため、直ちに修正しました。</p>
+<p>念の為修正後のDockerfileを晒しておきます。</p>
+<div class="highlight"><pre class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="c"># use latest Node (alpine)</span><span class="err">
+</span><span class="err"></span><span class="k">FROM</span><span class="s"> node:8</span><span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="c"># Download and install hugo ここ!!</span><span class="err">
+</span><span class="err"></span><span class="k">ENV</span> HUGO_VERSION 0.55.3<span class="err">
+</span><span class="err"></span><span class="k">ENV</span> HUGO_BINARY hugo_extended_<span class="si">${</span><span class="nv">HUGO_VERSION</span><span class="si">}</span>_Linux-64bit.deb<span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="c">#ADD https://github.com/spf13/hugo/releases/download/v${HUGO_VERSION}/${HUGO_BINARY} /tmp/hugo.deb</span><span class="err">
+</span><span class="err"></span><span class="k">RUN</span> curl -sL -o /tmp/hugo.deb <span class="se">\
+</span><span class="se"></span>    https://github.com/spf13/hugo/releases/download/v<span class="si">${</span><span class="nv">HUGO_VERSION</span><span class="si">}</span>/<span class="si">${</span><span class="nv">HUGO_BINARY</span><span class="si">}</span> <span class="o">&amp;&amp;</span> <span class="se">\
+</span><span class="se"></span>    dpkg -i /tmp/hugo.deb <span class="o">&amp;&amp;</span> <span class="se">\
+</span><span class="se"></span>    rm /tmp/hugo.deb <span class="o">&amp;&amp;</span> <span class="se">\
+</span><span class="se"></span>    mkdir /usr/share/blog<span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /usr/share/blog</span><span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">RUN</span>  npm -g config <span class="nb">set</span> user root <span class="o">&amp;&amp;</span> <span class="se">\
+</span><span class="se"></span>     npm install -g firebase-tools<span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="c"># Expose default hugo port</span><span class="err">
+</span><span class="err"></span><span class="k">EXPOSE</span><span class="s"> 1313</span><span class="err">
+</span></code></pre></div><p>それでは良いHugoライフを。</p></article><section class="article labels"><a class="category" href=/categories/programming/>programming</a><a class="tag" href=/tags/hugo/>hugo</a><a class="tag" href=/tags/circleci/>circleci</a><a class="tag" href=/tags/docker/>docker</a><a class="tag" href=/tags/sass/>sass</a><a class="tag" href=/tags/scss/>scss</a></section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/p5js-browserify/"><span class="li iconfont icon-article"></span>browserify+babelでasync/awaitを使用した快適p5.js開発環境構築</a></p><p><a class="link" href="/post/hugo-resources/"><span class="li iconfont icon-article"></span>HugoのPage Resourcesの使い方</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2019 Seita Uchimura.</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section></body>
+
+</html>

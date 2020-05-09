@@ -1,0 +1,7 @@
+{{ $path := .Get "path" }}
+{{ $filename := $.Page.Params.filename }}
+{{ $post := printf "%s%s" "/post/" $filename }}
+{{ with .Site.GetPage $post }}
+<script>{{ (.Resources.GetMatch $path).Content | safeJS }}</script>
+{{ end }}
+

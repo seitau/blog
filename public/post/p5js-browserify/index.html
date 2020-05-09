@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.70.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>browserify&#43;babelでasync/awaitを使用した快適p5.js開発環境構築&nbsp;&ndash;&nbsp;Seita Uchimura</title><link rel="stylesheet" href="/css/core.min.d395a79dded74421e74ec643c2073f04f7ce037c87be755c7ca30a168d12828f30f6f6f16faa88e38c1d1a9d5d107d88.css" integrity="sha384-05Wnnd7XRCHnTsZDwgc/BPfOA3yHvnVcfKMKFo0Sgo8w9vbxb6qI44wdGp1dEH2I"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="browserify&#43;babelでasync/awaitを使用した快適p5.js開発環境構築" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Seita Uchimura</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about">About</a><a class="nav item" href="https://gohugo%2eio/"target="_blank">Hugo</a></nav></div></span></div><div class="site slogan"><span class="title">100% JavaScript-free</span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">browserify+babelでasync/awaitを使用した快適p5.js開発環境構築</h1><p class="article date">Friday, April 26, 2019</p></section><article class="article markdown-body"><p>今回は、<a href="https://processing.org/"target="_blank">processing</a>のjs版として、ブラウザでインタラクティブなグラフィックを実装できる<a href="https://p5js.org"target="_blank">p5js</a>を使用してwebsiteに以下のようなアニメーションを実装した経験から、自分がどのように快適な開発環境を構築したかをご紹介します。</p>
+<div id="p5js-example" style="margin:0px 20%;width:60%;height:auto;background:rgb(0,0,0,0);position:relative;"></div>
+
+
+
+
+<script>const totals = 100;
+const limitMin = 15;
+const limitMax = 150;
+const speedMin = 0.5;
+const speedMax = 5;
+
+let x = new Array();
+let y = new Array();
+let speed = new Array();
+let particleX = new Array();
+let limit = new Array();
+let showBackground = true;
+let example;
+
+const sketch = function(p5) {
+    p5.setup =  function() {
+        example = document.getElementById("p5js-example");
+        example.style.height = `${example.clientWidth}px`;
+        const canvas = p5.createCanvas(example.clientWidth, example.clientHeight);
+        canvas.parent('p5js-example');
+        canvas.position(0, 0);
+        canvas.style('z-index', '0');
+
+        fillArrays();
+    }
+
+    p5.draw =  function() {
+        if(p5.random(100) > 80) {
+            showBackground = !showBackground;
+        }
+        if(showBackground) {
+            p5.background(0);
+        } 
+        showSystem();
+    }
+
+    function fillArrays() {
+        for(let i = 0; i < totals; i++) {
+            x[i] = p5.random(example.clientWidth);
+            y[i] = p5.random(example.clientHeight);
+            speed[i] = p5.random(speedMin, speedMax);
+            limit[i] = p5.random(limitMin, limitMax);
+            particleX[i] = 0.0;
+        }
+    }
+
+    function showSystem() {
+        for(let i = 0; i < totals; i++) {
+            p5.stroke(255);
+            p5.line(x[i], y[i], x[i]+limit[i], y[i]);
+
+            particleX[i] += speed[i];
+
+            p5.fill(255);
+            p5.ellipse(x[i]+particleX[i], y[i], 5, 5);
+
+            if(particleX[i] > limit[i]) {
+                x[i] = p5.random(example.clientWidth);
+                y[i] = p5.random(example.clientHeight);
+                speed[i] = p5.random(speedMin, speedMax);
+                limit[i] = p5.random(limitMin, limitMax);
+                particleX[i] = 0.0;
+            }
+
+            if(i > 0) {
+                p5.line(x[i]+ particleX[i], y[i], x[i-1] + particleX[i-1], y[i-1]);
+            }
+        }
+    }
+}
+
+new p5(sketch)
+</script>
+
+
+
+<h2 id="asyncawaitを使おう">async/awaitを使おう</h2>
+<p>上記の例では使用していませんが、jsでapiを叩いたりするとpromiseのハンドリングが必要になります。しかし、promiseが頻繁に登場するとthen/catchが複雑になったりして可読性が損なわれることがあるので、モダンなasync/awaitで同期処理をスッキリ書きたいところです。</p>
+<p>比較的新しい機能であるこのasync/awaitを各主要ブラウザで使用するには、babel等のツールでブラウザに互換性のある形式にjsをトランスパイルする必要があります。</p>
+<p>babelとasync/awaitについてはこちらの記事で詳しく説明されているのでご参照ください。
+
+
+
+
+
+
+
+
+
+
+
+<div class="body-iframe page-embed hatena-web-card">
+    <div class="embed-wrapper">
+        <div class="embed-wrapper-inner">
+            <div class="embed-content with-thumb">
+                <div class="thumb-wrapper">
+                    <a href="https://qiita.com/ea54595/items/e6e36fcf1d10deadc17a" target="_blank">
+                        <img src="https://qiita-user-contents.imgix.net/https:%2F%2Fcdn.qiita.com%2Fassets%2Fpublic%2Farticle-ogp-background-1150d8b18a7c15795b701a55ae908f94.png?ixlib=rb-1.2.2&amp;w=1200&amp;mark=https://qiita-user-contents.imgix.net/~text?ixlib=rb-1.2.2%26w=840%26h=380%26txt=%25E4%25BB%258A%25E6%259B%25B4%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589%2520Babel%2520%25E3%2581%25A7%2520ES7%2520Async%252FAwait%2520%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%26txt-color=%2523333%26txt-font=Avenir-Black%26txt-size=54%26txt-clip=ellipsis%26txt-align=center%252Cmiddle%26s=d91314ac9b50aa4c1f6d7a98cbfa15f3&amp;mark-align=center,middle&amp;blend=https://qiita-user-contents.imgix.net/~text?ixlib=rb-1.2.2%26w=840%26h=500%26txt=%2540ea54595%26txt-color=%2523333%26txt-font=Avenir-Black%26txt-size=45%26txt-align=right%252Cbottom%26s=909a7944e450bce49602d9741c5d6cc7&amp;blend-align=center,middle&amp;blend-mode=normal&amp;s=b46b7ecb2a8ed84254fea4fa2a443c37" class="thumb">
+                    </a>
+                </div>
+                <div class="entry-body">
+                    <h2 class="entry-title">
+                        <a href="https://qiita.com/ea54595/items/e6e36fcf1d10deadc17a" target="_blank">
+                            
+                        </a>
+                    </h2>
+                    <div class="entry-content">
+                            この記事は Sansan Advent Calendar 2015の15日目です。
+さぁ AdventCalender なんて書いてるので年末ですね。
+最近フロントエンドをやらなかったので JavaScript 書かなくなって追いかけ...
+                    </div>
+                </div>
+            </div>
+            <div class="embed-footer">
+                <a href="https/qiita.com"target="_blank">
+                    <img src="https://www.google.com/s2/favicons?domain=qiita.com" alt="" title="" class="favicon">
+                    https/qiita.com
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</p>
+<h3 id="browserifybabel">browserify+babel</h3>
+<p>数あるツールの中でも、今回はbrowserifyを選択しました。理由は機能が大きすぎず学習コストを抑えながら自分の目的を果たしてくれそうだったからです。</p>
+<p>browserify+babelの基本的な使い方はこちらの記事で紹介されています。
+
+
+
+
+
+
+
+
+
+
+
+<div class="body-iframe page-embed hatena-web-card">
+    <div class="embed-wrapper">
+        <div class="embed-wrapper-inner">
+            <div class="embed-content with-thumb">
+                <div class="thumb-wrapper">
+                    <a href="https://qiita.com/foursue/items/d80667eff2faed8613f2#browserify%E3%81%A7%E4%BD%BF%E3%81%86%E5%A0%B4%E5%90%88" target="_blank">
+                        <img src="https://qiita-user-contents.imgix.net/https:%2F%2Fcdn.qiita.com%2Fassets%2Fpublic%2Farticle-ogp-background-1150d8b18a7c15795b701a55ae908f94.png?ixlib=rb-1.2.2&amp;w=1200&amp;mark=https://qiita-user-contents.imgix.net/~text?ixlib=rb-1.2.2%26w=840%26h=380%26txt=Babel%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%258A%25E3%2581%2586%26txt-color=%2523333%26txt-font=Avenir-Black%26txt-size=54%26txt-clip=ellipsis%26txt-align=center%252Cmiddle%26s=bc5376f2cd7fddd891abca1339a9a2c9&amp;mark-align=center,middle&amp;blend=https://qiita-user-contents.imgix.net/~text?ixlib=rb-1.2.2%26w=840%26h=500%26txt=%2540foursue%26txt-color=%2523333%26txt-font=Avenir-Black%26txt-size=45%26txt-align=right%252Cbottom%26s=4bb495dfde03005c5d33ccfbd1a505e9&amp;blend-align=center,middle&amp;blend-mode=normal&amp;s=55e00037825470ab572dc1c6ae16ad79" class="thumb">
+                    </a>
+                </div>
+                <div class="entry-body">
+                    <h2 class="entry-title">
+                        <a href="https://qiita.com/foursue/items/d80667eff2faed8613f2#browserify%E3%81%A7%E4%BD%BF%E3%81%86%E5%A0%B4%E5%90%88" target="_blank">
+                            
+                        </a>
+                    </h2>
+                    <div class="entry-content">
+                            
+
+Babel
+
+Reactやる時に生のJSを書くとシンドイので、ES2015やJSXで書きます。だけど、生のJSとは違いES2015やJSXはブラウザで直接実行できません。ですのでトランスパイラとよばれるプリプロセッサを使ってそれら...
+                    </div>
+                </div>
+            </div>
+            <div class="embed-footer">
+                <a href="https/qiita.com"target="_blank">
+                    <img src="https://www.google.com/s2/favicons?domain=qiita.com" alt="" title="" class="favicon">
+                    https/qiita.com
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</p>
+<p>念の為自分の<code>package.json</code>の一部を掲載しておきます。以下の内容でbrowserifyを走らせれば、module化されたファイルを<code>import</code>や<code>require</code>で複数読み込んでいる場合でもブラウザで実行できる形式によしなに変換してくれて、かつbabelがjsをトランスパイルしてくれます。ありがたや〜。</p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&#34;scripts&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;watch-js&#34;</span><span class="p">:</span> <span class="s2">&#34;watchify -t babelify static/js/src/*.js -o static/js/dist/bundle.js -dv&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;watch&#34;</span><span class="p">:</span> <span class="s2">&#34;npm run watch-js&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;build&#34;</span><span class="p">:</span> <span class="s2">&#34;browserify static/js/src/main.js -o static/js/dist/bundle.js&#34;</span>
+    <span class="p">},</span>
+    <span class="nt">&#34;browserify&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;transform&#34;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&#34;babelify&#34;</span><span class="p">,</span> <span class="p">{</span> <span class="nt">&#34;presets&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;@babel/preset-env&#34;</span><span class="p">]</span> <span class="p">}]]</span>
+    <span class="p">},</span>
+    <span class="nt">&#34;devDependencies&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;@babel/core&#34;</span><span class="p">:</span> <span class="s2">&#34;^7.3.4&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;@babel/preset-env&#34;</span><span class="p">:</span> <span class="s2">&#34;^7.3.4&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;babel-preset-env&#34;</span><span class="p">:</span> <span class="s2">&#34;^1.7.0&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;babelify&#34;</span><span class="p">:</span> <span class="s2">&#34;^10.0.0&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;babel-polyfill&#34;</span><span class="p">:</span> <span class="s2">&#34;^6.26.0&#34;</span>
+    <span class="p">},</span>
+    <span class="nt">&#34;dependencies&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;p5&#34;</span><span class="p">:</span> <span class="s2">&#34;^0.8.0&#34;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p>localにwatchifyがインストールされていれば、以上の<code>watch-js</code>を実行するとjsファイルの変更を検知して自動ビルドしてくれるようになります。</p>
+<h2 id="p5jsを使おう">p5.jsを使おう</h2>
+<p>自分は以下のようにCDNでp5.jsをhtmlファイル内で読み込んで使用しています。適宜最新のバージョンを指定するようにしましょう。</p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.min.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></div><p>実際にp5.jsの処理を記述するファイルでは、まず冒頭で<code>import 'babel-polyfill';</code>とすることで一部機能が利用可能になります。</p>
+<p>公式によると、</p>
+<blockquote>
+<p>This will emulate a full ES2015+ environment (no &lt; Stage 4 proposals) and is intended to be used in an application rather than a library/tool. (this polyfill is automatically loaded when using babel-node).</p>
+</blockquote>
+<blockquote>
+<p>This means you can use new built-ins like Promise or WeakMap, static methods like Array.from or Object.assign, instance methods like Array.prototype.includes, and generator functions (provided you use the regenerator plugin).</p>
+</blockquote>
+<p>だそうで、プロミスだったり、WeakMapだったりの便利機能が実際には利用できるようになっているらしいです。</p>
+<p>また、自分は<a href="https://github.com/processing/p5.js/wiki/Global-and-instance-mode"target="_blank">instance mode</a>でp5.jsを記述しています。この方が、複数のsketchを管理したり、他のjsモジュールを使用する際に便利だからです。</p>
+<p>以下にp5.jsのサンプルコードを貼り付けておきます。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">import</span> <span class="s1">&#39;babel-polyfill&#39;</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">sleep</span> <span class="o">=</span> <span class="nx">msec</span> <span class="p">=&gt;</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="p">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">msec</span><span class="p">));</span>
+<span class="kr">const</span> <span class="nx">sketch</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">p5</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">p5</span><span class="p">.</span><span class="nx">setup</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">p5</span><span class="p">.</span><span class="nx">createCanvas</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span> <span class="mi">800</span><span class="p">);</span>
+        <span class="nx">p5</span><span class="p">.</span><span class="nx">background</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nx">p5</span><span class="p">.</span><span class="nx">draw</span> <span class="o">=</span> <span class="nx">async</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">p5</span><span class="p">.</span><span class="nx">fill</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+        <span class="kr">const</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">p5</span><span class="p">.</span><span class="nx">mouseX</span><span class="p">;</span>
+        <span class="kr">const</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">p5</span><span class="p">.</span><span class="nx">mouseY</span><span class="p">;</span>
+        <span class="nx">await</span> <span class="nx">sleep</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+        <span class="nx">p5</span><span class="p">.</span><span class="nx">ellipse</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">new</span> <span class="nx">p5</span><span class="p">(</span><span class="nx">sketch</span><span class="p">)</span>
+</code></pre></div><p>以上のサンプルが以下のcanvasで実行されています。draw関数の中でawaitをつかって1秒後に描画されるようにしました。canvasの上でマウスを動かすと1秒遅れで円がついてくるのがわかると思います。async/awaitが解釈され、ちゃんと動いてますね！</p>
+<div id="sample" style="margin:0px 20%;width:60%;height:auto;background:rgb(0,0,0,0);position:relative;"></div></article><section class="article labels"><a class="category" href=/categories/programming/>programming</a><a class="tag" href=/tags/p5%2ejs/>p5.js</a><a class="tag" href=/tags/processing/>processing</a><a class="tag" href=/tags/babel/>babel</a><a class="tag" href=/tags/browserify/>browserify</a><a class="tag" href=/tags/javascript/>javascript</a></section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/parity-poa-truffle/"><span class="li iconfont icon-article"></span>ParityのPOAプライベートネット建ててtruffleを使う時はbyzantium対応をお忘れなく</a></p><p><a class="link" href="/post/hugo-sass-version/"><span class="li iconfont icon-article"></span>HugoでSCSS/SASSをCSSに変換するならVersionに注意</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2019 Seita Uchimura.</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section></body>
+
+</html>

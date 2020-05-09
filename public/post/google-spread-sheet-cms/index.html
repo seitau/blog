@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.70.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Google Spreadsheets&#43;NetlifyでHugoの簡易CMS作成&nbsp;&ndash;&nbsp;Seita Uchimura</title><link rel="stylesheet" href="/css/core.min.d395a79dded74421e74ec643c2073f04f7ce037c87be755c7ca30a168d12828f30f6f6f16faa88e38c1d1a9d5d107d88.css" integrity="sha384-05Wnnd7XRCHnTsZDwgc/BPfOA3yHvnVcfKMKFo0Sgo8w9vbxb6qI44wdGp1dEH2I"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Google Spreadsheets&#43;NetlifyでHugoの簡易CMS作成" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Seita Uchimura</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about">About</a><a class="nav item" href="https://gohugo%2eio/"target="_blank">Hugo</a></nav></div></span></div><div class="site slogan"><span class="title">100% JavaScript-free</span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Google Spreadsheets+NetlifyでHugoの簡易CMS作成</h1><p class="article date">Sunday, March 31, 2019</p></section><article class="article markdown-body"><p>現在留学中のカリフォルニア大学サンタバーバラ校(UCSB)で、<a href="https://www.blockchainatucsb.com/"target="_blank">Blockchain at UCSB</a>という組織の幹部をしてまして、一応技術担当なので組織の紹介用<a href="https://www.blockchainatucsb.com/"target="_blank">website</a>を開発していたところ、最近の活動を掲載するセクションを他のメンバーでも編集できるようにしてほしいと要望を受けたため、特定の箇所のみ編集可能なhugoのcmsをgoogleのspreadsheetsを使用して作成しました。</p>
+<div class="body-iframe page-embed hatena-web-card">
+    <div class="embed-wrapper">
+        <div class="embed-wrapper-inner">
+            <div class="embed-content with-thumb">
+                <div class="thumb-wrapper">
+                    <a href="https://blockchain-at-ucsb-develop.netlify.com" target="_blank">
+                        <img src="https://blockchain-at-ucsb-develop.netlify.com/img/blockchain-at-ucsb.png" class="thumb">
+                    </a>
+                </div>
+                <div class="entry-body">
+                    <h2 class="entry-title">
+                        <a href="https://blockchain-at-ucsb-develop.netlify.com" target="_blank">
+                            
+                        </a>
+                    </h2>
+                    <div class="entry-content">
+                            Blockchain at UCSB (BCUCSB) is a community of students, entrepreneurs, and academics at UC Santa Barbara who have come together to educate and bring awareness about compelling blockchain technology and its applications. We host workshops, speaker events, innovation competitions, and socials to bring blockchain awareness to our local community.
+                    </div>
+                </div>
+            </div>
+            <div class="embed-footer">
+                <a href="https/blockchain-at-ucsb-develop.netlify.com"target="_blank">
+                    <img src="https://www.google.com/s2/favicons?domain=blockchain-at-ucsb-develop.netlify.com" alt="" title="" class="favicon">
+                    https/blockchain-at-ucsb-develop.netlify.com
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<h1 id="先に完成形">先に完成形</h1>
+<p>完成したsheetはこんな感じです。</p>
+<p>各項目のtitle, link, description, google driveに保存したimageのlinkが整理されています。</p>
+<span class="image-container"><span class="link" ><a href="/img/google-sheets.png" 
+        target="_blank"><img class="img" src="/img/google-sheets.png"/></a></span>
+</span>
+<p>右側の派手な&quot;Update Website&quot;というボタンを押すと、netlifyのwebhookをtriggerしてsheetの内容を反映したwebsiteをdeployできます。</p>
+<p>Updateすると、<a href="https://www.blockchainatucsb.com/#activities"target="_blank">website</a>のactivitiesセクションのみがsheetの内容に沿って更新されます。</p>
+<p>以下のセクションです。
+<span class="image-container"><span class="link" ><a href="/img/activities_screenshot.png" 
+        target="_blank"><img class="img" src="/img/activities_screenshot.png"/></a></span>
+</span></p>
+<p>Netlify CMSや他のCMSは今回の用途にはオーバースペックだったのと、spreadsheetsをJSONバックエンドとして使用してみたいという個人的な願望があったため、あえてnetlify+spreadsheetsという構成にしました。</p>
+<h2 id="spreadsheetsのデータをjsonで取得">spreadsheetsのデータをJSONで取得</h2>
+<p>参考にしたのはこちらのサイト</p>
+<ul>
+<li><a href="https://coderwall.com/p/duapqq/use-a-google-spreadsheet-as-your-json-backend"target="_blank">Use a Google Spreadsheet as your JSON backend</a></li>
+<li><a href="https://developers.google.com/gdata/samples/spreadsheet_sample"target="_blank">Simple example of retrieving JSON feeds from Spreadsheets Data API</a></li>
+</ul>
+<p>細かい説明は上記のサイトでみてもらうとして、spreadsheetsを<code>ファイル</code>-&gt;<code>webで公開する</code>の順で公開してから、<code>https://spreadsheets.google.com/feeds/list/ + spreadsheetsのID + /od6/public/values?alt=json</code>にGETするとsheetの内容をJSONで受け取ることができます。spreadsheetsのIDは普通にsheetを開いたときのurlに含まれています。</p>
+<p>自分のtitle, link, imageurl, descriptionというカラムに分けたsheetでは以下のようにデータがJSONで返ってきます。</p>
+<div class="highlight"><pre class="chroma"><code class="language-JSON" data-lang="JSON"><span class="err">//省略</span>
+<span class="s2">&#34;gsx$title&#34;</span><span class="err">:</span> <span class="p">{</span>
+  <span class="nt">&#34;$t&#34;</span><span class="p">:</span> <span class="s2">&#34;Innovation Summit&#34;</span>
+<span class="p">}</span><span class="err">,</span>
+<span class="s2">&#34;gsx$link&#34;</span><span class="err">:</span> <span class="p">{</span>
+  <span class="nt">&#34;$t&#34;</span><span class="p">:</span> <span class="s2">&#34;https://innovateucsb.wixsite.com/website&#34;</span>
+<span class="p">}</span><span class="err">,</span>
+<span class="s2">&#34;gsx$imageurl&#34;</span><span class="err">:</span> <span class="p">{</span>
+  <span class="nt">&#34;$t&#34;</span><span class="p">:</span> <span class="s2">&#34;https://drive.google.com/file/d/1aFXSAnavoPCkVwI5v7VV-UQJEykN9wMt/view?usp=sharing&#34;</span>
+<span class="p">}</span><span class="err">,</span>
+<span class="s2">&#34;gsx$description&#34;</span><span class="err">:</span> <span class="p">{</span>
+  <span class="nt">&#34;$t&#34;</span><span class="p">:</span> <span class="s2">&#34;BCUCSB collaborated with UCSB Innovation Council and other campus organizations to put together a one-day campus event (November 17, 2018) designed to foster and harness creative thinking and develop a innovative business model to improve problems found in global categories such as energy, sustainability, income inequality, digital security, and health.&#34;</span>
+<span class="p">}</span>
+</code></pre></div><h2 id="hugoでsheetの内容を表示する">Hugoでsheetの内容を表示する</h2>
+<p>Hugoで上記のJSONデータを表示するため、getJSONでデータを受け取るのですが、上記のようにJSONのプロパティ名に<code>$</code>(ドル記号)が入っているとhugoではエラーが発生してしまいます。これを回避するため、以下では<code>$</code>が含まれる箇所を正規表現で取り除いています。</p>
+<p>ここでは、Hugoの<code>config.toml</code>にSite ParamとしてGoogleSpreadSheetIdを設定しており、partialの先頭でspreadsheetsのendpointを組み立てています。</p>
+<div class="highlight"><pre class="chroma"><code class="language-go-html-template" data-lang="go-html-template"><span class="cp">{{</span><span class="w"> </span><span class="nx">$googleSpreadSheetEndpoint</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">printf</span><span class="w"> </span><span class="s">&#34;%s%s%s&#34;</span><span class="w"> </span><span class="s">&#34;https://spreadsheets.google.com/feeds/list/&#34;</span><span class="w"> </span><span class="na">$.Page.Site.Params.GoogleSpreadSheetId</span><span class="w"> </span><span class="s">&#34;/od6/public/values?alt=json&#34;</span><span class="w"> </span><span class="cp">}}</span>
+<span class="cp">{{</span><span class="w"> </span><span class="nx">$json</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">getJSON</span><span class="w"> </span><span class="nx">$googleSpreadSheetEndpoint</span><span class="w"> </span><span class="cp">}}</span>
+
+<span class="cp">{{</span><span class="w"> </span><span class="nx">$entries</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">$json</span><span class="na">.feed.entry</span><span class="w"> </span><span class="cp">}}</span>
+
+<span class="cp">{{</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">$entry</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">$entries</span><span class="w"> </span><span class="cp">}}</span>
+  <span class="cp">{{</span><span class="w"> </span><span class="nx">$scratch</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">newScratch</span><span class="w"> </span><span class="cp">}}</span>
+  <span class="cp">{{</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">$key</span><span class="err">,</span><span class="w"> </span><span class="nx">$value</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">$entry</span><span class="w"> </span><span class="cp">}}</span>
+    <span class="cp">{{</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nx">hasPrefix</span><span class="w"> </span><span class="nx">$key</span><span class="w"> </span><span class="s">&#34;gsx&#34;</span><span class="cp">}}</span>
+      <span class="cp">{{</span><span class="w"> </span><span class="nx">$sanitizedKey</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">replaceRE</span><span class="w"> </span><span class="s">&#34;^gsx.&#34;</span><span class="w"> </span><span class="s">&#34;&#34;</span><span class="w"> </span><span class="nx">$key</span><span class="w"> </span><span class="cp">}}</span>
+      <span class="cp">{{</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">$k</span><span class="err">,</span><span class="w"> </span><span class="nx">$v</span><span class="w"> </span><span class="o">:=</span><span class="w">  </span><span class="nx">$value</span><span class="w"> </span><span class="cp">}}</span>
+        <span class="cp">{{</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="o">(</span><span class="k">eq</span><span class="w"> </span><span class="nx">$sanitizedKey</span><span class="w"> </span><span class="s">&#34;imageurl&#34;</span><span class="o">)</span><span class="w"> </span><span class="cp">}}</span>
+          <span class="cp">{{</span><span class="w"> </span><span class="nx">$imageId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">replaceRE</span><span class="w"> </span><span class="s">&#34;^https?://drive.google.com/file/d/(.*)/view.usp=sharing&#34;</span><span class="w"> </span><span class="s">&#34;$1&#34;</span><span class="w"> </span><span class="nx">$v</span><span class="w"> </span><span class="cp">}}</span>
+          <span class="cp">{{</span><span class="w"> </span><span class="nx">$v</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="k">printf</span><span class="w"> </span><span class="s">&#34;%s%s&#34;</span><span class="w"> </span><span class="s">&#34;http://drive.google.com/uc?export=view&amp;id=&#34;</span><span class="w"> </span><span class="nx">$imageId</span><span class="w"> </span><span class="cp">}}</span>
+        <span class="cp">{{</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="cp">}}</span>
+      <span class="cp">{{</span><span class="w"> </span><span class="nx">$scratch</span><span class="na">.Set</span><span class="w"> </span><span class="nx">$sanitizedKey</span><span class="w"> </span><span class="nx">$v</span><span class="w"> </span><span class="cp">}}</span>
+    <span class="cp">{{</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="cp">}}</span>
+  <span class="cp">{{</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="cp">}}</span>
+<span class="cp">{{</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="cp">}}</span>
+</code></pre></div><p>imageurlを加工しているのは、google driveに保存されたimageのurlをそのまま使用してもwebsiteに画像が表示されないためで、urlを<code>http://drive.google.com/uc?export=view&amp;id=</code>に置き換えて対応しています。詳しくは以下を参照。</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="body-iframe page-embed hatena-web-card">
+    <div class="embed-wrapper">
+        <div class="embed-wrapper-inner">
+            <div class="embed-content with-thumb">
+                <div class="thumb-wrapper">
+                    <a href="http://posaune.hatenablog.com/entry/2013/08/14/162251" target="_blank">
+                        <img src="https://cdn.blog.st-hatena.com/images/theme/og-image-1500.png" class="thumb">
+                    </a>
+                </div>
+                <div class="entry-body">
+                    <h2 class="entry-title">
+                        <a href="http://posaune.hatenablog.com/entry/2013/08/14/162251" target="_blank">
+                            
+                        </a>
+                    </h2>
+                    <div class="entry-content">
+                            
+                    </div>
+                </div>
+            </div>
+            <div class="embed-footer">
+                <a href="http/posaune.hatenablog.com"target="_blank">
+                    <img src="https://www.google.com/s2/favicons?domain=posaune.hatenablog.com" alt="" title="" class="favicon">
+                    http/posaune.hatenablog.com
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<p>また、加工したJSONのプロパティ名をkeyにvalueを一時的に保持するため、<a href="https://gohugo.io/functions/scratch/"target="_blank">.Scratch</a>というscratchpadの役割を果たすhugoの備え付け関数を使用しています。ここでは一時的なDictionaryのように用いています。</p>
+<h3 id="partial全体像">partial全体像</h3>
+<p>結果として作成したhugoのpartialは以下のようになりました。</p>
+<p>spreadsheetsから取得したJSONのfeed.entryに含まれる配列をrangeで繰り返し処理しながら各eventの項目を展開しています。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go-html-template" data-lang="go-html-template"><span class="cp">{{</span><span class="w"> </span><span class="nx">$googleSpreadSheetEndpoint</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">printf</span><span class="w"> </span><span class="s">&#34;%s%s%s&#34;</span><span class="w"> </span><span class="s">&#34;https://spreadsheets.google.com/feeds/list/&#34;</span><span class="w"> </span><span class="na">$.Page.Site.Params.GoogleSpreadSheetId</span><span class="w"> </span><span class="s">&#34;/od6/public/values?alt=json&#34;</span><span class="w"> </span><span class="cp">}}</span>
+<span class="cp">{{</span><span class="w"> </span><span class="nx">$json</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">getJSON</span><span class="w"> </span><span class="nx">$googleSpreadSheetEndpoint</span><span class="w"> </span><span class="cp">}}</span>
+<span class="cp">{{</span><span class="w"> </span><span class="nx">$entries</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">$json</span><span class="na">.feed.entry</span><span class="w"> </span><span class="cp">}}</span>
+
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;events&#34;</span><span class="p">&gt;</span>
+    <span class="cp">{{</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">$entry</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">$entries</span><span class="w"> </span><span class="cp">}}</span>
+      <span class="cp">{{</span><span class="w"> </span><span class="nx">$scratch</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">newScratch</span><span class="w"> </span><span class="cp">}}</span>
+      <span class="cp">{{</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">$key</span><span class="err">,</span><span class="w"> </span><span class="nx">$value</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">$entry</span><span class="w"> </span><span class="cp">}}</span>
+        <span class="cp">{{</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nx">hasPrefix</span><span class="w"> </span><span class="nx">$key</span><span class="w"> </span><span class="s">&#34;gsx&#34;</span><span class="cp">}}</span>
+          <span class="cp">{{</span><span class="w"> </span><span class="nx">$sanitizedKey</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">replaceRE</span><span class="w"> </span><span class="s">&#34;^gsx.&#34;</span><span class="w"> </span><span class="s">&#34;&#34;</span><span class="w"> </span><span class="nx">$key</span><span class="w"> </span><span class="cp">}}</span>
+          <span class="cp">{{</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">$k</span><span class="err">,</span><span class="w"> </span><span class="nx">$v</span><span class="w"> </span><span class="o">:=</span><span class="w">  </span><span class="nx">$value</span><span class="w"> </span><span class="cp">}}</span>
+            <span class="cp">{{</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="o">(</span><span class="k">eq</span><span class="w"> </span><span class="nx">$sanitizedKey</span><span class="w"> </span><span class="s">&#34;imageurl&#34;</span><span class="o">)</span><span class="w"> </span><span class="cp">}}</span>
+              <span class="cp">{{</span><span class="w"> </span><span class="nx">$imageId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">replaceRE</span><span class="w"> </span><span class="s">&#34;^https?://drive.google.com/file/d/(.*)/view.usp=sharing&#34;</span><span class="w"> </span><span class="s">&#34;$1&#34;</span><span class="w"> </span><span class="nx">$v</span><span class="w"> </span><span class="cp">}}</span>
+              <span class="cp">{{</span><span class="w"> </span><span class="nx">$v</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="k">printf</span><span class="w"> </span><span class="s">&#34;%s%s&#34;</span><span class="w"> </span><span class="s">&#34;http://drive.google.com/uc?export=view&amp;id=&#34;</span><span class="w"> </span><span class="nx">$imageId</span><span class="w"> </span><span class="cp">}}</span>
+            <span class="cp">{{</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="cp">}}</span>
+            <span class="cp">{{</span><span class="w"> </span><span class="nx">$scratch</span><span class="na">.Set</span><span class="w"> </span><span class="nx">$sanitizedKey</span><span class="w"> </span><span class="nx">$v</span><span class="w"> </span><span class="cp">}}</span>
+          <span class="cp">{{</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="cp">}}</span>
+        <span class="cp">{{</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="cp">}}</span>
+      <span class="cp">{{</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="cp">}}</span>
+
+      <span class="cp">{{</span><span class="w"> </span><span class="nx">$imageUrl</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">$scratch</span><span class="na">.Get</span><span class="w"> </span><span class="s">&#34;imageurl&#34;</span><span class="w"> </span><span class="cp">}}</span>
+      <span class="cp">{{</span><span class="w"> </span><span class="nx">$link</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">$scratch</span><span class="na">.Get</span><span class="w"> </span><span class="s">&#34;link&#34;</span><span class="w"> </span><span class="cp">}}</span>
+      <span class="cp">{{</span><span class="w"> </span><span class="nx">$title</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">$scratch</span><span class="na">.Get</span><span class="w"> </span><span class="s">&#34;title&#34;</span><span class="w"> </span><span class="cp">}}</span>
+      <span class="cp">{{</span><span class="w"> </span><span class="nx">$description</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">$scratch</span><span class="na">.Get</span><span class="w"> </span><span class="s">&#34;description&#34;</span><span class="w"> </span><span class="cp">}}</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;is-col item&#34;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;</span><span class="cp">{{</span><span class="w"> </span><span class="nx">$link</span><span class="w"> </span><span class="cp">}}</span><span class="s">&#34;</span><span class="p">&gt;</span>
+              <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;eyecatch-wrapper&#34;</span><span class="p">&gt;</span>
+                  <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;</span><span class="cp">{{</span><span class="w"> </span><span class="nx">$imageUrl</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">absURL</span><span class="w"> </span><span class="cp">}}</span><span class="s">&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;eyecatch&#34;</span><span class="p">&gt;</span>
+              <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+              <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;content&#34;</span><span class="p">&gt;</span>
+                  <span class="p">&lt;</span><span class="nt">h3</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;title&#34;</span><span class="p">&gt;</span>
+                      <span class="cp">{{</span><span class="w"> </span><span class="nx">$title</span><span class="w"> </span><span class="cp">}}</span>
+                  <span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+                  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;description is-muted&#34;</span><span class="p">&gt;</span>
+                      <span class="cp">{{</span><span class="w"> </span><span class="nx">$description</span><span class="w"> </span><span class="cp">}}</span>
+                  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+              <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+          <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="cp">{{</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="cp">}}</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>これで、このサイトをbuildするたび、spreadsheetsの内容が反映されるようになりました。</p>
+<h2 id="spreadsheetsにupdateボタンを設置する">SpreadsheetsにUpdateボタンを設置する</h2>
+<p>Spreadsheetsを更新するたびwebsiteに表示されている内容も更新されてほしいので、sheetにボタンを設置します。</p>
+<p>Spreadsheetsの<code>ツール</code>-&gt;<code>スクリプトエディター</code>から、google apps scriptを以下のように記述します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-GAS" data-lang="GAS"><span class="nf">function</span> <span class="no">updateWebsite</span><span class="p">()</span> <span class="err">{</span>
+  <span class="nf">var</span> <span class="no">url</span> <span class="err">=</span> <span class="err">&#34;</span><span class="no">netlify_build_hooks_endpoint</span><span class="err">&#34;</span><span class="c">;
+</span><span class="c"></span>  <span class="no">var</span> <span class="no">payload</span> <span class="err">=</span> <span class="err">{}</span>
+  <span class="nf">var</span> <span class="no">options</span> <span class="err">=</span> <span class="err">{</span>
+        <span class="err">&#34;</span><span class="nf">method</span><span class="err">&#34;</span>  <span class="p">:</span> <span class="err">&#34;</span><span class="no">POST</span><span class="err">&#34;</span><span class="p">,</span>
+        <span class="err">&#34;</span><span class="nf">payload</span><span class="err">&#34;</span> <span class="p">:</span> <span class="no">payload</span><span class="p">,</span>
+        <span class="err">&#34;</span><span class="nf">followRedirects</span><span class="err">&#34;</span> <span class="p">:</span> <span class="no">true</span><span class="p">,</span>
+        <span class="err">&#34;</span><span class="nf">muteHttpExceptions</span><span class="err">&#34;</span><span class="p">:</span> <span class="no">true</span>
+  <span class="err">}</span><span class="c">;
+</span><span class="c"></span>  <span class="nf">var</span> <span class="no">result</span> <span class="err">=</span> <span class="no">UrlFetchApp.fetch</span><span class="p">(</span><span class="no">url</span><span class="p">,</span> <span class="no">options</span><span class="p">)</span><span class="c">;
+</span><span class="c"></span>
+  <span class="nf">if</span> <span class="p">(</span><span class="no">result.getResponseCode</span><span class="p">()</span> <span class="err">==</span> <span class="mi">200</span><span class="p">)</span> <span class="err">{</span>
+    <span class="nf">Logger.log</span><span class="p">(</span><span class="no">result.getContentText</span><span class="p">())</span><span class="c">;
+</span><span class="c"></span>  <span class="err">}</span>
+<span class="err">}</span>
+</code></pre></div><p><code>netlify_build_hooks_endpoint</code>にnetlifyでホスティングされている方は自身のサイトのbuild webhookを入力してください。</p>
+<p>このスクリプトのupdateWebsite()という関数をspreadsheetsから実行することにより、netlifyのbuild webhookに対して空のpostリクエストを送信し、websiteをbuildすることができます。</p>
+<p>ボタンの設置とgoogle apps scriptの連携に関しては、<a href="https://www.atmarkit.co.jp/ait/articles/1708/14/news011.html"target="_blank">こちら</a>を参考にしてください。</p>
+<h2 id="おわりに">おわりに</h2>
+<p>Spreadsheetsはシェアが簡単でかつ多くの人に馴染みのあるツールなので、今回のような開発者ではない人に提供するインターフェースとしてはとても便利で優秀なんじゃないかなと感じました。他のプロジェクトでも機会があれば利用していきたいです。</p></article><section class="article labels"><a class="category" href=/categories/programming/>programming</a><a class="tag" href=/tags/hugo/>hugo</a><a class="tag" href=/tags/cms/>cms</a><a class="tag" href=/tags/google-spreadsheets/>google-spreadsheets</a><a class="tag" href=/tags/netlify/>netlify</a></section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/hugo-resources/"><span class="li iconfont icon-article"></span>HugoのPage Resourcesの使い方</a></p><p><a class="link" href="/post/barcelona-output/"><span class="li iconfont icon-article"></span>バルセロナに来てアウトプットは大事だなと思った話</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2019 Seita Uchimura.</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section></body>
+
+</html>

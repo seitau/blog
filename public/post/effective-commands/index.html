@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.70.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>ディレクトリ移動/ファイル選択を爆速にするTerminalツール&nbsp;&ndash;&nbsp;Seita Uchimura</title><link rel="stylesheet" href="/css/core.min.d395a79dded74421e74ec643c2073f04f7ce037c87be755c7ca30a168d12828f30f6f6f16faa88e38c1d1a9d5d107d88.css" integrity="sha384-05Wnnd7XRCHnTsZDwgc/BPfOA3yHvnVcfKMKFo0Sgo8w9vbxb6qI44wdGp1dEH2I"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="ディレクトリ移動/ファイル選択を爆速にするTerminalツール" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Seita Uchimura</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about">About</a><a class="nav item" href="https://gohugo%2eio/"target="_blank">Hugo</a></nav></div></span></div><div class="site slogan"><span class="title">100% JavaScript-free</span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">ディレクトリ移動/ファイル選択を爆速にするTerminalツール</h1><p class="article date">Saturday, November 30, 2019</p></section><article class="article markdown-body"><p>fishからzshに乗り換える際に、快適な環境を構築していく中で幾つか便利コマンドを発見したりスクリプトを作成したので紹介します。</p>
+<h1 id="便利ツール群">便利ツール群</h1>
+<h2 id="z">&ldquo;z&rdquo;</h2>
+<p>特定の文字列にマッチしたディレクトリを利用頻度でsortして表示/移動してくれるコマンド。
+
+
+
+
+
+
+
+
+
+
+
+<div class="body-iframe page-embed hatena-web-card">
+    <div class="embed-wrapper">
+        <div class="embed-wrapper-inner">
+            <div class="embed-content with-thumb">
+                <div class="thumb-wrapper">
+                    <a href="https://github.com/rupa/z" target="_blank">
+                        <img src="https://avatars2.githubusercontent.com/u/46809?s=400&amp;v=4" class="thumb">
+                    </a>
+                </div>
+                <div class="entry-body">
+                    <h2 class="entry-title">
+                        <a href="https://github.com/rupa/z" target="_blank">
+                            
+                        </a>
+                    </h2>
+                    <div class="entry-content">
+                            z - jump around. Contribute to rupa/z development by creating an account on GitHub.
+                    </div>
+                </div>
+            </div>
+            <div class="embed-footer">
+                <a href="https/github.com"target="_blank">
+                    <img src="https://www.google.com/s2/favicons?domain=github.com" alt="" title="" class="favicon">
+                    https/github.com
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</p>
+<h2 id="fasd">&ldquo;fasd&rdquo;</h2>
+<p>上記のzを拡張し、ディレクトリ移動のみならずvimでのファイル編集や実行も可能にしたコマンド。
+
+
+
+
+
+
+
+
+
+
+
+<div class="body-iframe page-embed hatena-web-card">
+    <div class="embed-wrapper">
+        <div class="embed-wrapper-inner">
+            <div class="embed-content with-thumb">
+                <div class="thumb-wrapper">
+                    <a href="https://github.com/clvv/fasd" target="_blank">
+                        <img src="https://avatars1.githubusercontent.com/u/200888?s=400&amp;v=4" class="thumb">
+                    </a>
+                </div>
+                <div class="entry-body">
+                    <h2 class="entry-title">
+                        <a href="https://github.com/clvv/fasd" target="_blank">
+                            
+                        </a>
+                    </h2>
+                    <div class="entry-content">
+                            Command-line productivity booster, offers quick access to files and directories, inspired by autojump, z and v. - clvv/fasd
+                    </div>
+                </div>
+            </div>
+            <div class="embed-footer">
+                <a href="https/github.com"target="_blank">
+                    <img src="https://www.google.com/s2/favicons?domain=github.com" alt="" title="" class="favicon">
+                    https/github.com
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</p>
+<h2 id="fzfvim">&ldquo;fzf.vim&rdquo;</h2>
+<p>有名なfuzzy finderであるfzfのvimプラグイン。vimから周辺ファイルをfuzzy findして編集できたり、各種gitコマンド結果をリッチに表示したりできる。
+
+
+
+
+
+
+
+
+
+
+
+<div class="body-iframe page-embed hatena-web-card">
+    <div class="embed-wrapper">
+        <div class="embed-wrapper-inner">
+            <div class="embed-content with-thumb">
+                <div class="thumb-wrapper">
+                    <a href="https://github.com/junegunn/fzf.vim" target="_blank">
+                        <img src="https://avatars0.githubusercontent.com/u/700826?s=400&amp;v=4" class="thumb">
+                    </a>
+                </div>
+                <div class="entry-body">
+                    <h2 class="entry-title">
+                        <a href="https://github.com/junegunn/fzf.vim" target="_blank">
+                            
+                        </a>
+                    </h2>
+                    <div class="entry-content">
+                            fzf :heart: vim. Contribute to junegunn/fzf.vim development by creating an account on GitHub.
+                    </div>
+                </div>
+            </div>
+            <div class="embed-footer">
+                <a href="https/github.com"target="_blank">
+                    <img src="https://www.google.com/s2/favicons?domain=github.com" alt="" title="" class="favicon">
+                    https/github.com
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</p>
+<h1 id="自作スクリプト">自作スクリプト</h1>
+<p>普段ghq+pecoでプロジェクト間を移動しているので、ghqで管理するgitプロジェクトで頻繁にディレクトリの移動やファイル編集をします。
+その際、上に挙げたツールでは少し物足りなかったり逆に機能が大きすぎたりしたので、自分に合ったものを自作しました。</p>
+<h2 id="ghqpecoでgitプロジェクト移動">ghq+pecoでgitプロジェクト移動</h2>
+<p>以下の記事を参考に追加したスクリプト。もはやこれなしじゃ生きられない。
+
+
+
+
+
+
+
+
+
+
+
+<div class="body-iframe page-embed hatena-web-card">
+    <div class="embed-wrapper">
+        <div class="embed-wrapper-inner">
+            <div class="embed-content with-thumb">
+                <div class="thumb-wrapper">
+                    <a href="https://qiita.com/strsk/items/9151cef7e68f0746820d" target="_blank">
+                        <img src="https://qiita-user-contents.imgix.net/https:%2F%2Fcdn.qiita.com%2Fassets%2Fpublic%2Farticle-ogp-background-1150d8b18a7c15795b701a55ae908f94.png?ixlib=rb-1.2.2&amp;w=1200&amp;mark=https://qiita-user-contents.imgix.net/~text?ixlib=rb-1.2.2%26w=840%26h=380%26txt=ghq%25E3%2581%25A7%25E3%2583%25AA%25E3%2583%259D%25E3%2582%25B8%25E3%2583%2588%25E3%2583%25AA%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%25A8peco%25E9%2580%25A3%25E6%2590%25BA%25E3%2581%25A7%25E5%25BF%25AB%25E9%2581%25A9git%25E7%2594%259F%25E6%25B4%25BB%26txt-color=%2523333%26txt-font=Avenir-Black%26txt-size=54%26txt-clip=ellipsis%26txt-align=center%252Cmiddle%26s=fff024b8fb2b0cda7ee56a5ca7e97684&amp;mark-align=center,middle&amp;blend=https://qiita-user-contents.imgix.net/~text?ixlib=rb-1.2.2%26w=840%26h=500%26txt=%2540strsk%26txt-color=%2523333%26txt-font=Avenir-Black%26txt-size=45%26txt-align=right%252Cbottom%26s=0a2edeb02e0b7ec6384b2195fd2118bd&amp;blend-align=center,middle&amp;blend-mode=normal&amp;s=ef5e3f0c1936fd3b31eb1a531a0460ed" class="thumb">
+                    </a>
+                </div>
+                <div class="entry-body">
+                    <h2 class="entry-title">
+                        <a href="https://qiita.com/strsk/items/9151cef7e68f0746820d" target="_blank">
+                            
+                        </a>
+                    </h2>
+                    <div class="entry-content">
+                            Gitのローカルリポジトリが増えてくるとどういう構成にすればいいか悩むところだけど、ghqとpecoがあれば考える必要がありません。今まで入れてなかった事を後悔するレベル。
+
+
+ghqインストール
+
+Goがまだ入ってなければGoをイン...
+                    </div>
+                </div>
+            </div>
+            <div class="embed-footer">
+                <a href="https/qiita.com"target="_blank">
+                    <img src="https://www.google.com/s2/favicons?domain=qiita.com" alt="" title="" class="favicon">
+                    https/qiita.com
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</p>
+<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh"><span class="k">function</span> peco_select_src <span class="o">()</span> <span class="o">{</span>
+  <span class="nb">local</span> <span class="nv">selected_dir</span><span class="o">=</span><span class="k">$(</span>ghq list -p <span class="p">|</span> peco --query <span class="s2">&#34;</span><span class="nv">$LBUFFER</span><span class="s2">&#34;</span><span class="k">)</span>
+  <span class="k">if</span> <span class="o">[</span> -n <span class="s2">&#34;</span><span class="nv">$selected_dir</span><span class="s2">&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nv">BUFFER</span><span class="o">=</span><span class="s2">&#34;cd </span><span class="si">${</span><span class="nv">selected_dir</span><span class="si">}</span><span class="s2">&#34;</span>
+    zle accept-line
+  <span class="k">fi</span>
+<span class="o">}</span>
+</code></pre></div><h2 id="現在のディレクトリ以下のファイルを選択">現在のディレクトリ以下のファイルを選択</h2>
+<p>対象ファイル数が多くなりすぎると重くなるので、ghqプロジェクト内のみで実行可能にしています。
+選択結果がファイルの場合はvimで開き、ディレクトリの場合はcdするように<code>go_to</code>という関数を使用しています。</p>
+<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh"><span class="k">function</span> select_file_below_pwd<span class="o">()</span> <span class="o">{</span>
+  <span class="k">if</span> <span class="o">[</span> ! <span class="sb">`</span><span class="nb">pwd</span> <span class="p">|</span> grep <span class="s2">&#34;</span><span class="k">$(</span>ghq root<span class="k">)</span><span class="s2">&#34;</span><span class="sb">`</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">echo</span> <span class="s2">&#34;you are not in ghq path&#34;</span>
+    zle accept-line
+    <span class="k">return</span> <span class="m">0</span>
+  <span class="k">fi</span>
+  <span class="c1"># grep -v -e で除外対象を指定</span>
+  <span class="nb">local</span> <span class="nv">selected_path</span><span class="o">=</span><span class="s2">&#34;\
+</span><span class="s2">    </span><span class="k">$(</span>find . <span class="p">|</span> <span class="se">\
+</span><span class="se"></span>    sed <span class="s2">&#34;s/^.//g&#34;</span> <span class="p">|</span> <span class="se">\
+</span><span class="se"></span>    grep -v -e node_modules -e vendor -e /.git <span class="p">|</span> <span class="se">\
+</span><span class="se"></span>    fzf --ansi --reverse --height 20% --border<span class="k">)</span><span class="s2">&#34;</span>
+
+  <span class="k">if</span> <span class="o">[</span> -n <span class="s2">&#34;</span><span class="nv">$selected_path</span><span class="s2">&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">local</span> <span class="nv">dest_path</span><span class="o">=</span><span class="s2">&#34;.</span><span class="k">$(</span><span class="nb">echo</span> <span class="nv">$selected_path</span> <span class="p">|</span> awk <span class="s1">&#39;{print $1}&#39;</span><span class="k">)</span><span class="s2">&#34;</span>
+    go_to <span class="nv">$dest_path</span>
+  <span class="k">fi</span>
+<span class="o">}</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh"><span class="k">function</span> go_to<span class="o">()</span> <span class="o">{</span>
+  <span class="k">if</span> <span class="o">[</span> -f <span class="nv">$1</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    nvim <span class="nv">$1</span>
+    <span class="nv">dir_path</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="nv">$1</span> <span class="p">|</span> rev <span class="p">|</span> cut -d <span class="s1">&#39;/&#39;</span> -f 2- <span class="p">|</span> rev<span class="k">)</span>
+    <span class="nv">BUFFER</span><span class="o">=</span><span class="s2">&#34;cd </span><span class="nv">$dir_path</span><span class="s2">&#34;</span>
+  <span class="k">elif</span> <span class="o">[</span> -d <span class="nv">$1</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nv">BUFFER</span><span class="o">=</span><span class="s2">&#34;cd </span><span class="nv">$1</span><span class="s2">&#34;</span>
+  <span class="k">else</span>
+    <span class="nb">echo</span> <span class="s2">&#34;selected path is neither file nor directory&#34;</span>
+  <span class="k">fi</span>
+  zle accept-line
+<span class="o">}</span>
+</code></pre></div><h2 id="ghqで管理するgitプロジェクト内で飛ぶ">ghqで管理するgitプロジェクト内で飛ぶ</h2>
+<p>ここまで紹介しておいてなんですが、実際ほぼこれしか使ってないってくらい重宝しているスクリプトです。
+ghqで管理するgitプロジェクト内の全てのファイル、ディレクトリへ瞬時に移動/編集でき、かつ<code>(root)</code>を選択するとプロジェクトルートに飛ぶことができます。</p>
+<p>こちらも<code>go_to</code>を使用しています。</p>
+<div class="highlight"><pre class="chroma"><code class="language-zsh" data-lang="zsh"><span class="k">function</span> peco_select_file_within_project<span class="o">()</span> <span class="o">{</span>
+  <span class="nb">local</span> <span class="nv">base_path</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span> <span class="p">|</span> grep -o <span class="s2">&#34;</span><span class="k">$(</span>ghq list -p<span class="k">)</span><span class="s2">&#34;</span><span class="k">)</span>
+  <span class="k">if</span> <span class="o">[</span> -z <span class="nv">$base_path</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">echo</span> <span class="s2">&#34;you are not in ghq project&#34;</span>
+    zle accept-line
+    <span class="k">return</span> <span class="m">0</span>
+  <span class="k">fi</span>
+
+  <span class="nb">local</span> <span class="nv">trim_base_path</span><span class="o">=</span><span class="s2">&#34;^</span><span class="k">$(</span><span class="nb">echo</span> <span class="nv">$base_path</span> <span class="p">|</span> sed <span class="s2">&#34;s/\//./g&#34;</span><span class="k">)</span><span class="s2">.&#34;</span>
+  <span class="nb">local</span> <span class="nv">paths</span><span class="o">=</span><span class="s2">&#34;\
+</span><span class="s2">    </span><span class="k">$(</span>find <span class="nv">$base_path</span> <span class="p">|</span> <span class="se">\
+</span><span class="se"></span>    sed <span class="s2">&#34;s/</span><span class="nv">$trim_base_path</span><span class="s2">//g&#34;</span> <span class="p">|</span> <span class="se">\
+</span><span class="se"></span>    grep -v -e node_modules -e vendor -e .git<span class="k">)</span><span class="s2">&#34;</span>
+  <span class="nb">local</span> <span class="nv">selected_path</span><span class="o">=</span><span class="s2">&#34;</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">&#34;(root)\n</span><span class="nv">$paths</span><span class="s2">&#34;</span> <span class="p">|</span> awk <span class="s1">&#39;{print $1}&#39;</span> <span class="p">|</span> fzf --ansi --reverse --height 30% --border<span class="k">)</span><span class="s2">&#34;</span>
+
+  <span class="k">if</span> <span class="o">[</span> -n <span class="s2">&#34;</span><span class="nv">$selected_path</span><span class="s2">&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="k">if</span> <span class="o">[[</span> <span class="s2">&#34;</span><span class="nv">$selected_path</span><span class="s2">&#34;</span> <span class="o">=</span> <span class="s2">&#34;(root)&#34;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+      go_to <span class="nv">$base_path</span>
+      <span class="k">return</span> <span class="m">0</span>
+    <span class="k">fi</span>
+    <span class="nb">local</span> <span class="nv">dest_path</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$base_path</span><span class="s2">/</span><span class="k">$(</span><span class="nb">echo</span> <span class="nv">$selected_path</span> <span class="p">|</span> awk <span class="s1">&#39;{print $1}&#39;</span><span class="k">)</span><span class="s2">&#34;</span>
+    go_to <span class="nv">$dest_path</span>
+  <span class="k">fi</span>
+<span class="o">}</span>
+
+</code></pre></div><span class="image-container"><span class="link" ><a href="/img/command-view.png" 
+        target="_blank"><img class="img" src="/img/command-view.png"/></a></span>
+</span>
+<h1 id="おわりに">おわりに</h1>
+<p>自作スクリプトは慣れてないのもありごちゃごちゃしている感が否めないので、もっとエレガントな書き方や代替コマンドをご存知の方がいらっしゃれば教えて下さい！</p></article><section class="article labels"><a class="category" href=/categories/programming/>programming</a><a class="tag" href=/tags/zsh/>zsh</a><a class="tag" href=/tags/command/>command</a><a class="tag" href=/tags/vim/>vim</a><a class="tag" href=/tags/terminal/>terminal</a><a class="tag" href=/tags/advent-calendar/>advent calendar</a></section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/parity-poa-truffle/"><span class="li iconfont icon-article"></span>ParityのPOAプライベートネット建ててtruffleを使う時はbyzantium対応をお忘れなく</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2019 Seita Uchimura.</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section></body>
+
+</html>

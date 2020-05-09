@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.70.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Hugoをcircleciで自動デプロイする&nbsp;&ndash;&nbsp;Seita Uchimura</title><link rel="stylesheet" href="/css/core.min.d395a79dded74421e74ec643c2073f04f7ce037c87be755c7ca30a168d12828f30f6f6f16faa88e38c1d1a9d5d107d88.css" integrity="sha384-05Wnnd7XRCHnTsZDwgc/BPfOA3yHvnVcfKMKFo0Sgo8w9vbxb6qI44wdGp1dEH2I"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Hugoをcircleciで自動デプロイする" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Seita Uchimura</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about">About</a><a class="nav item" href="https://gohugo%2eio/"target="_blank">Hugo</a></nav></div></span></div><div class="site slogan"><span class="title">100% JavaScript-free</span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Hugoをcircleciで自動デプロイする</h1><p class="article date">Monday, January 21, 2019</p></section><article class="article markdown-body"><p>最近このブログを含めて、hugoを使ってブログを構築する機会が多かったので、githubにプッシュしたらciが自動でfirebaseにデプロイしてくれる環境を作りました。</p>
+<p>ちなみに、このブログはgithub + firebase + hugo + circleciで実装してます。</p>
+<h1 id="dockerイメージの作成">dockerイメージの作成</h1>
+<p>circleciからfirebaseへのデプロイに関しては<a href="https://circleci.com/docs/2.0/deployment-integrations/#firebase"target="_blank">circleci公式ページ</a>に説明があるので省略しますが、公式で紹介されているdockerイメージにはhugoとfirebase-toolsがインストールされているものがなかったので、勉強を兼ねて自作しました。完成イメージは<a href="https://hub.docker.com/r/seitauc/docker-hugo-firebase"target="_blank">docker hub</a>にupload済みです。</p>
+<p>以下のdockerfileはnode.jsのv8をベースにしてhugoとfirebase-toolsをインストールしています。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="c"># use latest Node (alpine)</span><span class="err">
+</span><span class="err"></span><span class="k">FROM</span><span class="s"> node:8</span><span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="c"># Download and install hugo</span><span class="err">
+</span><span class="err"></span><span class="k">ENV</span> HUGO_VERSION 0.53<span class="err">
+</span><span class="err"></span><span class="k">ENV</span> HUGO_BINARY hugo_<span class="si">${</span><span class="nv">HUGO_VERSION</span><span class="si">}</span>_Linux-64bit.deb<span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">RUN</span> curl -sL -o /tmp/hugo.deb <span class="se">\
+</span><span class="se"></span>    https://github.com/spf13/hugo/releases/download/v<span class="si">${</span><span class="nv">HUGO_VERSION</span><span class="si">}</span>/<span class="si">${</span><span class="nv">HUGO_BINARY</span><span class="si">}</span> <span class="o">&amp;&amp;</span> <span class="se">\
+</span><span class="se"></span>    dpkg -i /tmp/hugo.deb <span class="o">&amp;&amp;</span> <span class="se">\
+</span><span class="se"></span>    rm /tmp/hugo.deb <span class="o">&amp;&amp;</span> <span class="se">\
+</span><span class="se"></span>    mkdir /usr/share/blog<span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /usr/share/blog</span><span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">RUN</span>  npm -g config <span class="nb">set</span> user root <span class="o">&amp;&amp;</span> <span class="se">\
+</span><span class="se"></span>     npm install -g firebase-tools<span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="c"># Expose default hugo port</span><span class="err">
+</span><span class="err"></span><span class="k">EXPOSE</span><span class="s"> 1313</span></code></pre></td></tr></table>
+</div>
+</div>
+<h1 id="circleciのconfigymlを設定">CircleCIのconfig.ymlを設定</h1>
+<p>上で作成したimageをcircleciでpullしてfirebase hostingにデプロイします。</p>
+<p>config.ymlは以下のような流れになりました。
+circleciの環境変数には<code>$FIREBASE_DEPLOY_TOKEN</code>と<code>FIREBASE_PROJECT_ID</code>を設定しています。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">version</span><span class="p">:</span><span class="w"> </span><span class="m">2</span><span class="w">
+</span><span class="w"></span><span class="k">jobs</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">build</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">branches</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="k">only</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span>- master<span class="w">
+</span><span class="w">    </span><span class="k">docker</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="k">image</span><span class="p">:</span><span class="w"> </span>seitauc/docker-hugo-firebase<span class="p">:</span>latest<span class="w">
+</span><span class="w">    </span><span class="k">steps</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- checkout<span class="w">
+</span><span class="w">        </span><span class="c"># install git submodules for managing third-party dependencies</span><span class="w">
+</span><span class="w">      </span>- <span class="k">run</span><span class="p">:</span><span class="w"> </span>git<span class="w"> </span>submodule<span class="w"> </span>sync<span class="w"> </span><span class="cp">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>submodule<span class="w"> </span>update<span class="w"> </span>--init<span class="w">
+</span><span class="w">      </span>- <span class="k">run</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>Build<span class="w"> </span>Hugo<span class="w"> </span>Website<span class="w">
+</span><span class="w">          </span><span class="k">command</span><span class="p">:</span><span class="w"> </span>hugo<span class="w"> </span>-t<span class="w"> </span>hugo-icarus-theme<span class="w">
+</span><span class="w">      </span>- <span class="k">deploy</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>Deploy<span class="w"> </span>Website<span class="w"> </span>to<span class="w"> </span>Firebase<span class="w"> </span>Hosting<span class="w">
+</span><span class="w">          </span><span class="k">branch</span><span class="p">:</span><span class="w"> </span>master<span class="w">
+</span><span class="w">          </span><span class="k">command</span><span class="p">:</span><span class="w"> </span>firebase<span class="w"> </span>deploy<span class="w"> </span>--token=$FIREBASE_DEPLOY_TOKEN<span class="w"> </span>--project<span class="w"> </span>$FIREBASE_PROJECT_ID</code></pre></td></tr></table>
+</div>
+</div>
+<p>ここでは、git submoduleの更新、サイトのビルドとfirebaseへのデプロイを行なっています。</p>
+<p>以上で、快適なci環境の完成です。</p></article><section class="article labels"><a class="category" href=/categories/programming/>programming</a><a class="tag" href=/tags/hugo/>hugo</a><a class="tag" href=/tags/circleci/>circleci</a></section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/customize-netlify-cms/"><span class="li iconfont icon-article"></span>Netlify CMSで画像の大きさを変更できるようにする</a></p><p><a class="link" href="/post/import-mnemonic-from-envvariable/"><span class="li iconfont icon-article"></span>環境変数からmnemonicを読み込んだら躓いたメモ</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2019 Seita Uchimura.</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section></body>
+
+</html>

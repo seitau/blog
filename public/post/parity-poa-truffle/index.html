@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.70.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>ParityのPOAプライベートネット建ててtruffleを使う時はbyzantium対応をお忘れなく&nbsp;&ndash;&nbsp;Seita Uchimura</title><link rel="stylesheet" href="/css/core.min.d395a79dded74421e74ec643c2073f04f7ce037c87be755c7ca30a168d12828f30f6f6f16faa88e38c1d1a9d5d107d88.css" integrity="sha384-05Wnnd7XRCHnTsZDwgc/BPfOA3yHvnVcfKMKFo0Sgo8w9vbxb6qI44wdGp1dEH2I"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="ParityのPOAプライベートネット建ててtruffleを使う時はbyzantium対応をお忘れなく" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Seita Uchimura</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about">About</a><a class="nav item" href="https://gohugo%2eio/"target="_blank">Hugo</a></nav></div></span></div><div class="site slogan"><span class="title">100% JavaScript-free</span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">ParityのPOAプライベートネット建ててtruffleを使う時はbyzantium対応をお忘れなく</h1><p class="article date">Tuesday, July 23, 2019</p></section><article class="article markdown-body"><p>以下のtutorialに従ってparityのpoaプライベートネットを構築してから、
+
+
+
+
+
+
+
+
+
+
+
+<div class="body-iframe page-embed hatena-web-card">
+    <div class="embed-wrapper">
+        <div class="embed-wrapper-inner">
+            <div class="embed-content with-thumb">
+                <div class="thumb-wrapper">
+                    <a href="https://wiki.parity.io/Demo-PoA-tutorial" target="_blank">
+                        <img src="https://openethereum.github.io/wiki/public/Paritytech_logo_400x400.jpg" class="thumb">
+                    </a>
+                </div>
+                <div class="entry-body">
+                    <h2 class="entry-title">
+                        <a href="https://wiki.parity.io/Demo-PoA-tutorial" target="_blank">
+                            
+                        </a>
+                    </h2>
+                    <div class="entry-content">
+                            This tutorial will walk through setting up two Parity nodes locally and sending transactions between them. If you want to learn more about differen...
+                    </div>
+                </div>
+            </div>
+            <div class="embed-footer">
+                <a href="https/wiki.parity.io"target="_blank">
+                    <img src="https://www.google.com/s2/favicons?domain=wiki.parity.io" alt="" title="" class="favicon">
+                    https/wiki.parity.io
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</p>
+<p>truffleでコントラクトをデプロイしようとしたら以下のエラーに遭遇、</p>
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">Error: Transaction ran out of gas. Please provide more gas.
+</code></pre></div><p>とか</p>
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">The contract code couldn&#39;t be stored, please check your gas limit.
+</code></pre></div><p>など。</p>
+<p>どれもtruffleで開発をしてると馴染みがある感じのエラーなので、configでgasの設定いじったりdeploy時にgasをちゃんと指定すれば治るかなーと思ったのですが、全然治らず。</p>
+<p>試しに<code>truffle console</code>で普通のtxを発行してみると、tx自体は発行され、送金も正常に行われるものの、なぜか</p>
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">Error: Transaction has been reverted by the EVM:
+</code></pre></div><p>というエラーだけが吐かれる。実際にはrevertされてないのに奇妙である。</p>
+<p>試しに<code>curl</code>で素のrpcを叩いてreceiptを確認してみると、</p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+  <span class="nt">&#34;jsonrpc&#34;</span><span class="p">:</span> <span class="s2">&#34;2.0&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;result&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;blockHash&#34;</span><span class="p">:</span> <span class="s2">&#34;0x9664e8fe7be2ec3579b0b17b4ccd83fc0054adf6ca4ee227f794561e225a289f&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;blockNumber&#34;</span><span class="p">:</span> <span class="s2">&#34;0x12&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;contractAddress&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&#34;cumulativeGasUsed&#34;</span><span class="p">:</span> <span class="s2">&#34;0x5208&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;from&#34;</span><span class="p">:</span> <span class="s2">&#34;0x004ec07d2329997267ec62b4166639513386f32e&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;gasUsed&#34;</span><span class="p">:</span> <span class="s2">&#34;0x5208&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;logs&#34;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="nt">&#34;logsBloom&#34;</span><span class="p">:</span> <span class="s2">&#34;0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;root&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&#34;status&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="err">&lt;---</span> <span class="err">nullになっとる！！！！！</span>
+    <span class="nt">&#34;to&#34;</span><span class="p">:</span> <span class="s2">&#34;0xa43e00a4d376d14117e7c97bfb57b54409f9b2b4&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;transactionHash&#34;</span><span class="p">:</span> <span class="s2">&#34;0x60b0ea2f7fff204391119ecf68620b83df4be67a2add3660ef00e056b758ccbf&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;transactionIndex&#34;</span><span class="p">:</span> <span class="s2">&#34;0x0&#34;</span>
+  <span class="p">},</span>
+  <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">1</span>
+<span class="p">}</span>
+</code></pre></div><p>statusがnullになっていた。これが原因でtruffle側でtxの結果がfalseと判断されerrorが出ていたのだろう。</p>
+<p>これってもしかしてparity特有の問題？と疑ったりもしたのだが、以下のpageを発見。</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="body-iframe page-embed hatena-web-card">
+    <div class="embed-wrapper">
+        <div class="embed-wrapper-inner">
+            <div class="embed-content with-thumb">
+                <div class="thumb-wrapper">
+                    <a href="https://ethereum.stackexchange.com/questions/61879/why-root-and-status-is-null-in-transaction-receipts" target="_blank">
+                        <img src="https://cdn.sstatic.net/Sites/ethereum/Img/apple-touch-icon@2.png?v=fcf6615497f4" class="thumb">
+                    </a>
+                </div>
+                <div class="entry-body">
+                    <h2 class="entry-title">
+                        <a href="https://ethereum.stackexchange.com/questions/61879/why-root-and-status-is-null-in-transaction-receipts" target="_blank">
+                            
+                        </a>
+                    </h2>
+                    <div class="entry-content">
+                            I deployed a smart contract on my private Parity node with Web3js. I got transaction hash and logs those I submitted at my contract creation. Everything works well, I can call functions correctly. 
+                    </div>
+                </div>
+            </div>
+            <div class="embed-footer">
+                <a href="https/ethereum.stackexchange.com"target="_blank">
+                    <img src="https://www.google.com/s2/favicons?domain=ethereum.stackexchange.com" alt="" title="" class="favicon">
+                    https/ethereum.stackexchange.com
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<p>どうやらparityのnodeを建てる時のchain specの設定でbyzantiumへの対応ができていなかったらしい。(statusはbyzantiumから導入されたのでnullになっていた)</p>
+<p>ということで以下のissueに倣い、chain specにparamsとaccountを書き足してnodeを起動したら、何事もなく上手くいった。
+
+
+
+
+
+
+
+
+
+
+
+<div class="body-iframe page-embed hatena-web-card">
+    <div class="embed-wrapper">
+        <div class="embed-wrapper-inner">
+            <div class="embed-content with-thumb">
+                <div class="thumb-wrapper">
+                    <a href="https://github.com/paritytech/parity-ethereum/issues/7124#issuecomment-346647725" target="_blank">
+                        <img src="https://avatars3.githubusercontent.com/u/58831716?s=400&amp;v=4" class="thumb">
+                    </a>
+                </div>
+                <div class="entry-body">
+                    <h2 class="entry-title">
+                        <a href="https://github.com/paritytech/parity-ethereum/issues/7124#issuecomment-346647725" target="_blank">
+                            
+                        </a>
+                    </h2>
+                    <div class="entry-content">
+                            I&#39;m running: Which Parity version?: 1.8.x When using parity &gt;=1.8 to create a new private PoA network, how to enable byzantium fork functionality? Changelog mentions that 1.8.0 has &#34;Full Byzantium-fork compatibility&#34;, but is it included ...
+                    </div>
+                </div>
+            </div>
+            <div class="embed-footer">
+                <a href="https/github.com"target="_blank">
+                    <img src="https://www.google.com/s2/favicons?domain=github.com" alt="" title="" class="favicon">
+                    https/github.com
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</p></article><section class="article labels"><a class="category" href=/categories/programming/>programming</a><a class="tag" href=/tags/truffle/>truffle</a><a class="tag" href=/tags/ethereum/>ethereum</a><a class="tag" href=/tags/parity/>parity</a><a class="tag" href=/tags/poa/>poa</a><a class="tag" href=/tags/privatenet/>privatenet</a><a class="tag" href=/tags/smartcontract/>smartcontract</a></section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/effective-commands/"><span class="li iconfont icon-article"></span>ディレクトリ移動/ファイル選択を爆速にするTerminalツール</a></p><p><a class="link" href="/post/p5js-browserify/"><span class="li iconfont icon-article"></span>browserify+babelでasync/awaitを使用した快適p5.js開発環境構築</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2019 Seita Uchimura.</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section></body>
+
+</html>

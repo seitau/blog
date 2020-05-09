@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>programming on Seita Uchimura</title>
+    <link>/categories/programming/</link>
+    <description>Recent content in programming on Seita Uchimura</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>©2019 Seita Uchimura.</copyright>
+    <lastBuildDate>Sat, 30 Nov 2019 07:24:15 -0800</lastBuildDate>
+    
+        <atom:link href="/categories/programming/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>ディレクトリ移動/ファイル選択を爆速にするTerminalツール</title>
+      <link>/post/effective-commands/</link>
+      <pubDate>Sat, 30 Nov 2019 07:24:15 -0800</pubDate>
+      
+      <guid>/post/effective-commands/</guid>
+      <description>&lt;p&gt;fishからzshに乗り換える際に、快適な環境を構築していく中で幾つか便利コマンドを発見したりスクリプトを作成したので紹介します。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>ParityのPOAプライベートネット建ててtruffleを使う時はbyzantium対応をお忘れなく</title>
+      <link>/post/parity-poa-truffle/</link>
+      <pubDate>Tue, 23 Jul 2019 23:04:21 +0900</pubDate>
+      
+      <guid>/post/parity-poa-truffle/</guid>
+      <description>&lt;p&gt;以下のtutorialに従ってparityのpoaプライベートネットを構築してから、
+
+
+
+
+
+
+
+
+
+
+
+&lt;div class=&#34;body-iframe page-embed hatena-web-card&#34;&gt;
+    &lt;div class=&#34;embed-wrapper&#34;&gt;
+        &lt;div class=&#34;embed-wrapper-inner&#34;&gt;
+            &lt;div class=&#34;embed-content with-thumb&#34;&gt;
+                &lt;div class=&#34;thumb-wrapper&#34;&gt;
+                    &lt;a href=&#34;https://wiki.parity.io/Demo-PoA-tutorial&#34; target=&#34;_blank&#34;&gt;
+                        &lt;img src=&#34;https://openethereum.github.io/wiki/public/Paritytech_logo_400x400.jpg&#34; class=&#34;thumb&#34;&gt;
+                    &lt;/a&gt;
+                &lt;/div&gt;
+                &lt;div class=&#34;entry-body&#34;&gt;
+                    &lt;h2 class=&#34;entry-title&#34;&gt;
+                        &lt;a href=&#34;https://wiki.parity.io/Demo-PoA-tutorial&#34; target=&#34;_blank&#34;&gt;
+                            
+                        &lt;/a&gt;
+                    &lt;/h2&gt;
+                    &lt;div class=&#34;entry-content&#34;&gt;
+                            This tutorial will walk through setting up two Parity nodes locally and sending transactions between them. If you want to learn more about differen...
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class=&#34;embed-footer&#34;&gt;
+                &lt;a href=&#34;https/wiki.parity.io&#34;target=&#34;_blank&#34;&gt;
+                    &lt;img src=&#34;https://www.google.com/s2/favicons?domain=wiki.parity.io&#34; alt=&#34;&#34; title=&#34;&#34; class=&#34;favicon&#34;&gt;
+                    https/wiki.parity.io
+                &lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;truffleでコントラクトをデプロイしようとしたら以下のエラーに遭遇、&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>browserify&#43;babelでasync/awaitを使用した快適p5.js開発環境構築</title>
+      <link>/post/p5js-browserify/</link>
+      <pubDate>Fri, 26 Apr 2019 20:09:30 -0700</pubDate>
+      
+      <guid>/post/p5js-browserify/</guid>
+      <description>&lt;p&gt;今回は、&lt;a href=&#34;https://processing.org/&#34;target=&#34;_blank&#34;&gt;processing&lt;/a&gt;のjs版として、ブラウザでインタラクティブなグラフィックを実装できる&lt;a href=&#34;https://p5js.org&#34;target=&#34;_blank&#34;&gt;p5js&lt;/a&gt;を使用してwebsiteに以下のようなアニメーションを実装した経験から、自分がどのように快適な開発環境を構築したかをご紹介します。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>HugoでSCSS/SASSをCSSに変換するならVersionに注意</title>
+      <link>/post/hugo-sass-version/</link>
+      <pubDate>Wed, 24 Apr 2019 01:44:39 -0700</pubDate>
+      
+      <guid>/post/hugo-sass-version/</guid>
+      <description>&lt;p&gt;Hugoにbulmaを導入した際にbulmaのSASSをCSSに変換していたのが、なぜかCircleCIでビルドする時に&lt;code&gt;error: failed to transform resource: TOCSS: failed to transform &amp;quot;bulma/bulma.sass&amp;quot; (text/x-scss): this feature is not available&lt;/code&gt;というエラーを吐いていたので報告。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>HugoのPage Resourcesの使い方</title>
+      <link>/post/hugo-resources/</link>
+      <pubDate>Wed, 17 Apr 2019 16:23:27 -0700</pubDate>
+      
+      <guid>/post/hugo-resources/</guid>
+      <description>&lt;p&gt;初めて使用するhugoのthemeを読んでいてpage resourceの使い方がすぐ理解できなかったのでメモ。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Google Spreadsheets&#43;NetlifyでHugoの簡易CMS作成</title>
+      <link>/post/google-spread-sheet-cms/</link>
+      <pubDate>Sun, 31 Mar 2019 15:52:59 -0700</pubDate>
+      
+      <guid>/post/google-spread-sheet-cms/</guid>
+      <description>&lt;p&gt;現在留学中のカリフォルニア大学サンタバーバラ校(UCSB)で、&lt;a href=&#34;https://www.blockchainatucsb.com/&#34;target=&#34;_blank&#34;&gt;Blockchain at UCSB&lt;/a&gt;という組織の幹部をしてまして、一応技術担当なので組織の紹介用&lt;a href=&#34;https://www.blockchainatucsb.com/&#34;target=&#34;_blank&#34;&gt;website&lt;/a&gt;を開発していたところ、最近の活動を掲載するセクションを他のメンバーでも編集できるようにしてほしいと要望を受けたため、特定の箇所のみ編集可能なhugoのcmsをgoogleのspreadsheetsを使用して作成しました。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>PuppeteerをFirebase Cloud Functionsで動かす</title>
+      <link>/post/puppeteer-and-cloud-function/</link>
+      <pubDate>Thu, 21 Mar 2019 17:59:07 -0700</pubDate>
+      
+      <guid>/post/puppeteer-and-cloud-function/</guid>
+      <description>&lt;p&gt;先日Puppeteer入門の記事を書きましたが、今回はその続きで、Puppeteerを用いたスクレイピングプログラムをfirebase cloud functionsにデプロイしたいと思います。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>PolyglotとGoogle Cloud Functionで形態素解析apiを作る</title>
+      <link>/post/polyglot-function/</link>
+      <pubDate>Thu, 21 Mar 2019 00:11:18 -0700</pubDate>
+      
+      <guid>/post/polyglot-function/</guid>
+      <description>&lt;p&gt;現在大学の授業で行なっているプロジェクトで英語の文章を形態素に分割することがあったため、pythonの&lt;a href=&#34;https://polyglot.readthedocs.io/en/latest/Installation.html&#34;target=&#34;_blank&#34;&gt;polyglot&lt;/a&gt;を使用し、ついでにgoogle cloud functionでベータ版として提供されている&lt;a href=&#34;https://cloud.google.com/functions/docs/concepts/python-runtime&#34;target=&#34;_blank&#34;&gt;pythonランタイム&lt;/a&gt;で形態素解析apiを作成しました。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Firebase Cloud Functionsの環境変数にJSONをサクッと設定する方法</title>
+      <link>/post/set-firebase-config/</link>
+      <pubDate>Wed, 13 Mar 2019 18:49:04 -0700</pubDate>
+      
+      <guid>/post/set-firebase-config/</guid>
+      <description>&lt;p&gt;サービスアカウントを環境変数に設定するときに使うけど毎回忘れるので備忘録としてご紹介。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Goでブロックチェーンを作る Part 2: プルーフオブワーク</title>
+      <link>/post/make-blockchain-in-golang-part-2/</link>
+      <pubDate>Sat, 02 Feb 2019 09:24:09 -0800</pubDate>
+      
+      <guid>/post/make-blockchain-in-golang-part-2/</guid>
+      <description>&lt;p&gt;この記事はIvan Kuznetsovさんの&lt;a href=&#34;https://jeiwan.cc/posts/building-blockchain-in-go-part-2/&#34;target=&#34;_blank&#34;&gt;Building Blockchain in Go. Part 2: Proof-of-Work&lt;/a&gt;を本人の許可を得て翻訳したものです。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Goでブロックチェーンを作る  Part 1: 基本型</title>
+      <link>/post/make-blockchain-in-golang-part-1/</link>
+      <pubDate>Fri, 01 Feb 2019 00:41:08 -0800</pubDate>
+      
+      <guid>/post/make-blockchain-in-golang-part-1/</guid>
+      <description>&lt;h3 id=&#34;この記事について&#34;&gt;この記事について&lt;/h3&gt;
+&lt;p&gt;この記事はIvan Kuznetsovさんの&lt;a href=&#34;https://jeiwan.cc/posts/building-blockchain-in-go-part-1/&#34;target=&#34;_blank&#34;&gt;Building Blockchain in Go. Part 1: Basic Prototype&lt;/a&gt;を本人の許可を得て翻訳したものです。他のパートの翻訳記事は随時アップロードしていきます。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Hugoにブログカード埋め込みshortcodeを実装する</title>
+      <link>/post/hugo-shortcode-web-embed/</link>
+      <pubDate>Tue, 29 Jan 2019 11:24:15 -0800</pubDate>
+      
+      <guid>/post/hugo-shortcode-web-embed/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://seita.tokyo/2019/01/22/netlify-cms%E3%81%A7%E7%94%BB%E5%83%8F%E3%81%AE%E5%A4%A7%E3%81%8D%E3%81%95%E3%82%92%E5%A4%89%E6%9B%B4%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%88%E3%81%86%E3%81%AB%E3%81%99%E3%82%8B/&#34;target=&#34;_blank&#34;&gt;先日書いた記事&lt;/a&gt;で、他に自分が運営している&lt;a href=&#34;https://ucsb.tokyo/&#34;target=&#34;_blank&#34;&gt;UCSB留学ブログ&lt;/a&gt;を記事に埋め込んで紹介したのですが、実はその埋め込み作業にかなり手間がかかったのでまとめます。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>PuppeteerでHeadlessブラウザ入門</title>
+      <link>/post/intro-to-puppeteer/</link>
+      <pubDate>Mon, 28 Jan 2019 00:20:37 -0800</pubDate>
+      
+      <guid>/post/intro-to-puppeteer/</guid>
+      <description>&lt;p&gt;大好きなgoogle cloud functionsでheadlessブラウザを動かしてスクレイピングできると聞きつけたので早速入門。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>英語病みからのエモいサイト作った話</title>
+      <link>/post/english-themas/</link>
+      <pubDate>Tue, 22 Jan 2019 21:08:15 -0800</pubDate>
+      
+      <guid>/post/english-themas/</guid>
+      <description>&lt;p&gt;アメリカで留学生活を始めてから数ヶ月経ちまして、こちらの環境にもようやく慣れてきました。&lt;/p&gt;
+&lt;p&gt;友達と各地に観光に行ったり、ハッカソンに出場したり、サーフィンしたりと楽しく過ごさせてもらってます。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Netlify CMSで画像の大きさを変更できるようにする</title>
+      <link>/post/customize-netlify-cms/</link>
+      <pubDate>Tue, 22 Jan 2019 10:22:36 -0800</pubDate>
+      
+      <guid>/post/customize-netlify-cms/</guid>
+      <description>&lt;p&gt;2019年に入ってから友人と&lt;a href=&#34;https://ucsb.tokyo/&#34;target=&#34;_blank&#34;&gt;UCSB留学ブログ&lt;/a&gt;を運営しており、主に友人が記事の執筆、自分はブログサイトの開発を担当しています。&lt;/p&gt;
+&lt;p&gt;そこで現在、&lt;a href=&#34;https://www.netlifycms.org/&#34;target=&#34;_blank&#34;&gt;Netlify CMS&lt;/a&gt;を利用して執筆と開発を分離しているのですが、CMSからアップロードした画像のサイズが変更できないという苦情を受けたのでごにょごにょして修正しました。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Hugoをcircleciで自動デプロイする</title>
+      <link>/post/deploy-hugo-with-circleci/</link>
+      <pubDate>Mon, 21 Jan 2019 12:00:06 +0200</pubDate>
+      
+      <guid>/post/deploy-hugo-with-circleci/</guid>
+      <description>&lt;p&gt;最近このブログを含めて、hugoを使ってブログを構築する機会が多かったので、githubにプッシュしたらciが自動でfirebaseにデプロイしてくれる環境を作りました。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>環境変数からmnemonicを読み込んだら躓いたメモ</title>
+      <link>/post/import-mnemonic-from-envvariable/</link>
+      <pubDate>Mon, 14 Jan 2019 00:58:06 +0200</pubDate>
+      
+      <guid>/post/import-mnemonic-from-envvariable/</guid>
+      <description>&lt;p&gt;fishの環境変数にこんな感じでmnemonicを宣言してtruffle-hdwallet-providerでアドレスを導出したところ、&lt;a href=&#34;https://iancoleman.io/bip39/&#34;target=&#34;_blank&#34;&gt;mnemonic code converter&lt;/a&gt;とは違うアドレスが出てきたので、あれ？ってなった。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Etherscanにコントラクトを登録するときに便利なツール</title>
+      <link>/post/useful-tool-for-contract-registration/</link>
+      <pubDate>Sun, 13 Jan 2019 21:58:06 +0200</pubDate>
+      
+      <guid>/post/useful-tool-for-contract-registration/</guid>
+      <description>&lt;p&gt;Ropstenでコントラクトをテストしようと思い、せっかくだからEtherscanに登録して弄ってみようと思ったものの、スムーズにいかなかったのでメモ。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Electrum Litecoin Wallet・Electron Cashをテストネットにつなぐ</title>
+      <link>/post/connect-electron-to-testnet/</link>
+      <pubDate>Sun, 13 Jan 2019 16:58:06 +0200</pubDate>
+      
+      <guid>/post/connect-electron-to-testnet/</guid>
+      <description>&lt;p&gt;開発に使う目的でインストールしたけどデフォルトでメインネットに接続してしまってテストネットへの切り替えボタンも見当たらなかったのでメモ。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Gincoのエンジニアインターンってどんな感じ？</title>
+      <link>/post/ginco-intern-engineer/</link>
+      <pubDate>Tue, 18 Dec 2018 14:48:24 -0800</pubDate>
+      
+      <guid>/post/ginco-intern-engineer/</guid>
+      <description>こんにちは、Gincoでエンジニアインターンをしていた文系大学生の内村です。 していた、というのも、実は2018年の9月をもってGincoを退</description>
+      
+    </item>
+    
+    <item>
+      <title>NEOブロックチェーンチャレンジ東京で準優勝しました!</title>
+      <link>/post/neo-hackathon/</link>
+      <pubDate>Fri, 14 Sep 2018 15:02:50 -0800</pubDate>
+      
+      <guid>/post/neo-hackathon/</guid>
+      <description>こんにちは、エンジニアインターンの内村です。 みなさま、NEOの開発はされていますでしょうか？ 実は先日開催された、NEOブロックチェーンチャレ</description>
+      
+    </item>
+    
+  </channel>
+</rss>

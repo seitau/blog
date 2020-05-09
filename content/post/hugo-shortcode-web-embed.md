@@ -10,7 +10,7 @@ categories: ["programming"]
 tags: ["hugo", "shortcode"]
 draft: false
 ---
-[先日書いた記事](https://seita.tokyo/2019/01/22/netlify-cms%E3%81%A7%E7%94%BB%E5%83%8F%E3%81%AE%E5%A4%A7%E3%81%8D%E3%81%95%E3%82%92%E5%A4%89%E6%9B%B4%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%88%E3%81%86%E3%81%AB%E3%81%99%E3%82%8B/)で、他に自分が運営している[UCSB留学ブログ](https://ucsb.tokyo/)を記事に埋め込んで紹介したのですが、実はその埋め込み作業にかなり手間がかかったのでまとめます。
+[先日書いた記事](https://seita.icu/2019/01/22/netlify-cms%E3%81%A7%E7%94%BB%E5%83%8F%E3%81%AE%E5%A4%A7%E3%81%8D%E3%81%95%E3%82%92%E5%A4%89%E6%9B%B4%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%88%E3%81%86%E3%81%AB%E3%81%99%E3%82%8B/)で、他に自分が運営している[UCSB留学ブログ](https://ucsb.tokyo/)を記事に埋め込んで紹介したのですが、実はその埋め込み作業にかなり手間がかかったのでまとめます。
 
 <!--more-->
 
@@ -224,9 +224,9 @@ div.page-embed.hatena-web-card div.embed-footer img.favicon{
 
 ## 結果
 ```go-html-template
-{ {< web-embed url="https://seita.tokyo/" >} }
+{ {< web-embed url="https://seita.icu/" >} }
 ```
 ↑これがこうなる↓
 
-{{< web-embed url="https://seita.tokyo/" >}}
+{{< web-embed url="https://seita.icu/" >}}
 <span class=emoji>:warning:</span>コードブロックがshortcodeとして解釈されるのを防ぐため波括弧にスペースを入れて対処しています。

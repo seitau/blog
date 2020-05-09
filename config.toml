@@ -1,15 +1,14 @@
-baseURL = "https://example.com"
+baseURL = "https://seita.icu/"
+languageCode = "ja"
+defaultContentLanguage = "ja"
 title = "Seita Uchimura"
 theme = "hugo-notepadium"
 copyright = "©2019 Seita Uchimura."
-
-languageCode = "zh-cn"
 hasCJKLanguage = true
-
 enableRobotsTXT = true
-
 # Enable Disqus
-#disqusShortname = "XXX"
+disqusShortname = "seita-blog"
+enableEmoji = true
 
 # Google Analytics
 #googleAnalytics = "UA-123-45"
@@ -25,13 +24,16 @@ unsafe = true  # enable raw HTML in Markdown
 style = "auto"  # default: auto. light: light theme, dark: dark theme, auto: based on system.
 dateFormat = "Monday, January 2, 2006"  # if unset, default is "2006-01-02"
 logo = ""  # if you have a logo png
-slogan = "100% JavaScript-free"
+slogan = "You ain't gonna need it"
 license = ""  # CC License
 fullRss = false # Puts entire HTML post into rss 'description' tag. If unset, default is false.
 ogpApiEndpoint = "https://api.appp.la/?url="
 
+[params.assets]
+css = ["css/blogcard.css"]  # *.css/scss/sass
+
 [params.comments]
-enable = false  # En/Disable comments globally, default: false. You can always enable comments on per page.
+enable = true  # En/Disable comments globally, default: false. You can always enable comments on per page.
 
 [params.math]
 enable = false  # optional: true, false. Enable globally, default: false. You can always enable math on per page.
@@ -47,16 +49,26 @@ enable = false
 addThisId = ""
 inlineToolId = ""
 
-[params.nav]
-showCategories = true       # /categories/
-showTags = true             # /tags/
-
-# custom navigation items
+#[params.nav]
+#showCategories = true
+#showTags = true
 
 [[params.nav.custom]]
 title = "About"
 url = "/about"
 
 [[params.nav.custom]]
-title = "Hugo"
-url = "https://gohugo.io/"
+title = "Categories"
+url = "/categories"
+
+[[params.nav.custom]]
+title = "Tags"
+url = "/tags"
+
+[params.profile]
+  enable = true
+  avatar = "/img/me.png"
+  name = "Seita Uchimura"
+  bio = "Software Engineer in Tokyo | ICU20"  # support markdown syntax
+  twitter = "https://twitter.com/sei_uchi_mura"  # https://twitter.com/XXX
+  github = "https://github.com/seita-uc"  # https://github.com/XXX

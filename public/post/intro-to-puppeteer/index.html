@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.70.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>PuppeteerでHeadlessブラウザ入門&nbsp;&ndash;&nbsp;Seita Uchimura</title><link rel="stylesheet" href="/css/core.min.d395a79dded74421e74ec643c2073f04f7ce037c87be755c7ca30a168d12828f30f6f6f16faa88e38c1d1a9d5d107d88.css" integrity="sha384-05Wnnd7XRCHnTsZDwgc/BPfOA3yHvnVcfKMKFo0Sgo8w9vbxb6qI44wdGp1dEH2I"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="PuppeteerでHeadlessブラウザ入門" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Seita Uchimura</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about">About</a><a class="nav item" href="https://gohugo%2eio/"target="_blank">Hugo</a></nav></div></span></div><div class="site slogan"><span class="title">100% JavaScript-free</span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">PuppeteerでHeadlessブラウザ入門</h1><p class="article date">Monday, January 28, 2019</p></section><article class="article markdown-body"><p>大好きなgoogle cloud functionsでheadlessブラウザを動かしてスクレイピングできると聞きつけたので早速入門。</p>
+<p>APIのdocumentは<a href="https://github.com/GoogleChrome/puppeteer/blob/v1.11.0/docs/api.md#browserpages"target="_blank">こちら</a>。</p>
+<h1 id="amazonにログインしてみる">Amazonにログインしてみる</h1>
+<p>いままでkindleでハイライトした箇所が<a href="https://read.amazon.co.jp/notebook?ref_=kcr_notebook_lib"target="_blank">Amazon Kindle</a>で確認できることは知っていたのですが、いまいち有効活用できてなかったので、自分がkindleで読んだ本の情報をスクレイピングしてなにか作ろう!と思い立ち、まずはログイン処理を実装しました。コードは以下。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kr">const</span> <span class="nx">puppeteer</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;puppeteer&#39;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">cookies_path</span> <span class="o">=</span> <span class="s1">&#39;./cookies_amazon.json&#39;</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">AMAZON_EMAIL</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">AMAZON_EMAIL</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">AMAZON_PASSWORD</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">AMAZON_PASSWORD</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">amazon_kindle_url</span> <span class="o">=</span> <span class="s1">&#39;https://read.amazon.co.jp/notebook?ref_=kcr_notebook_lib&#39;</span><span class="p">;</span>
+
+<span class="nx">async</span> <span class="kd">function</span> <span class="nx">login</span><span class="p">(</span><span class="nx">page</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">await</span> <span class="nx">page</span><span class="p">.</span><span class="kr">goto</span><span class="p">(</span><span class="nx">amazon_kindle_url</span><span class="p">);</span>
+    <span class="nx">await</span> <span class="nx">page</span><span class="p">.</span><span class="nx">waitFor</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span>
+
+    <span class="nx">await</span> <span class="nx">page</span><span class="p">.</span><span class="nx">type</span><span class="p">(</span><span class="s1">&#39;#ap_password&#39;</span><span class="p">,</span> <span class="nx">AMAZON_PASSWORD</span><span class="p">);</span>
+    <span class="nx">await</span> <span class="nx">page</span><span class="p">.</span><span class="nx">type</span><span class="p">(</span><span class="s1">&#39;#ap_email&#39;</span><span class="p">,</span> <span class="nx">AMAZON_EMAIL</span><span class="p">);</span>
+
+    <span class="nx">await</span> <span class="nx">page</span><span class="p">.</span><span class="nx">click</span><span class="p">(</span><span class="s1">&#39;#signInSubmit&#39;</span><span class="p">);</span>
+    <span class="nx">await</span> <span class="nx">page</span><span class="p">.</span><span class="nx">waitFor</span><span class="p">(</span><span class="mi">5000</span><span class="p">);</span>
+    <span class="nx">await</span> <span class="nx">page</span><span class="p">.</span><span class="nx">screenshot</span><span class="p">({</span><span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;images/amazon_logined.png&#39;</span><span class="p">});</span>
+<span class="p">}</span>
+
+<span class="p">(</span><span class="nx">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">browser</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">puppeteer</span><span class="p">.</span><span class="nx">launch</span><span class="p">({</span>
+        <span class="nx">headless</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="p">});</span>
+    <span class="kr">const</span> <span class="nx">pc</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;name&#39;</span><span class="o">:</span> <span class="s1">&#39;Chrome Mac&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;userAgent&#39;</span><span class="o">:</span> <span class="s1">&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;viewport&#39;</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s1">&#39;width&#39;</span><span class="o">:</span> <span class="mi">1024</span><span class="p">,</span>
+            <span class="s1">&#39;height&#39;</span><span class="o">:</span> <span class="mi">820</span><span class="p">,</span>
+            <span class="s1">&#39;deviceScaleFactor&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s1">&#39;isMobile&#39;</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="s1">&#39;hasTouch&#39;</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="s1">&#39;isLandscape&#39;</span><span class="o">:</span> <span class="kc">false</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+    <span class="kr">const</span> <span class="nx">page</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">browser</span><span class="p">.</span><span class="nx">newPage</span><span class="p">();</span>
+    <span class="nx">await</span> <span class="nx">page</span><span class="p">.</span><span class="nx">emulate</span><span class="p">(</span><span class="nx">pc</span><span class="p">);</span>
+
+    <span class="nx">await</span> <span class="nx">login</span><span class="p">(</span><span class="nx">page</span><span class="p">);</span>
+
+    <span class="nx">await</span> <span class="nx">page</span><span class="p">.</span><span class="nx">screenshot</span><span class="p">({</span><span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;images/amazon_login.png&#39;</span><span class="p">});</span>
+
+    <span class="kr">const</span> <span class="nx">cookies</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">page</span><span class="p">.</span><span class="nx">cookies</span><span class="p">();</span>
+    <span class="nx">fs</span><span class="p">.</span><span class="nx">writeFileSync</span><span class="p">(</span><span class="nx">cookies_path</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">cookies</span><span class="p">));</span>
+
+    <span class="nx">browser</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+<span class="p">})();</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+<p>適当なpcの設定をemulateしたのち、<a href="https://read.amazon.co.jp/notebook?ref_=kcr_notebook_lib"target="_blank">Amazon Kindle</a>のサイトに飛び、環境変数から読み込んだemailとpasswordを入力してログインしています。また、最後に確認のためのスクリーンショットを撮っています。</p>
+<p>お気付きの方も多いと思いますが、実は今回headlessブラウザ機能を使用していません。理由はheadless状態だとamazonにロボット判定されて弾かれちゃうからです。情けない限り。。</p>
+<p>次回からはcookieを利用してちゃんとheadlessブラウザでアクセスしたいと思います。</p>
+<h1 id="感想">感想</h1>
+<p>いざChromeを自動で動かしてみるとPuppeteer(人形遣い)っていうネーミングは秀逸だなと思いました。</p>
+<p>あと、スクレイピングに詳しい方、amazonにheadlessブラウザでログインする方法教えてください!</p></article><section class="article labels"><a class="category" href=/categories/programming/>programming</a><a class="tag" href=/tags/puppeteer/>puppeteer</a><a class="tag" href=/tags/headless-browser/>headless-browser</a><a class="tag" href=/tags/chrome/>chrome</a><a class="tag" href=/tags/scraping/>scraping</a></section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/hugo-shortcode-web-embed/"><span class="li iconfont icon-article"></span>Hugoにブログカード埋め込みshortcodeを実装する</a></p><p><a class="link" href="/post/english-themas/"><span class="li iconfont icon-article"></span>英語病みからのエモいサイト作った話</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2019 Seita Uchimura.</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section></body>
+
+</html>

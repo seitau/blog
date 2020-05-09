@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.70.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>PuppeteerをFirebase Cloud Functionsで動かす&nbsp;&ndash;&nbsp;Seita Uchimura</title><link rel="stylesheet" href="/css/core.min.d395a79dded74421e74ec643c2073f04f7ce037c87be755c7ca30a168d12828f30f6f6f16faa88e38c1d1a9d5d107d88.css" integrity="sha384-05Wnnd7XRCHnTsZDwgc/BPfOA3yHvnVcfKMKFo0Sgo8w9vbxb6qI44wdGp1dEH2I"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="PuppeteerをFirebase Cloud Functionsで動かす" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Seita Uchimura</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about">About</a><a class="nav item" href="https://gohugo%2eio/"target="_blank">Hugo</a></nav></div></span></div><div class="site slogan"><span class="title">100% JavaScript-free</span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">PuppeteerをFirebase Cloud Functionsで動かす</h1><p class="article date">Thursday, March 21, 2019</p></section><article class="article markdown-body"><p>先日Puppeteer入門の記事を書きましたが、今回はその続きで、Puppeteerを用いたスクレイピングプログラムをfirebase cloud functionsにデプロイしたいと思います。</p>
+<div class="body-iframe page-embed hatena-web-card">
+    <div class="embed-wrapper">
+        <div class="embed-wrapper-inner">
+            <div class="embed-content with-thumb">
+                <div class="thumb-wrapper">
+                    <a href="https://seita.tokyo/2019/01/28/puppeteer%E3%81%A7headless%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6%E5%85%A5%E9%96%80/" target="_blank">
+                        <img src="#ZgotmplZ" class="thumb">
+                    </a>
+                </div>
+                <div class="entry-body">
+                    <h2 class="entry-title">
+                        <a href="https://seita.tokyo/2019/01/28/puppeteer%E3%81%A7headless%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6%E5%85%A5%E9%96%80/" target="_blank">
+                            
+                        </a>
+                    </h2>
+                    <div class="entry-content">
+                            
+                    </div>
+                </div>
+            </div>
+            <div class="embed-footer">
+                <a href="https/seita.tokyo"target="_blank">
+                    <img src="https://www.google.com/s2/favicons?domain=seita.tokyo" alt="" title="" class="favicon">
+                    https/seita.tokyo
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<p>firebase cloud functionsの環境はtypescriptを使用しています。</p>
+<h4 id="参考記事">参考記事</h4>
+
+
+
+
+
+
+
+
+
+
+
+<div class="body-iframe page-embed hatena-web-card">
+    <div class="embed-wrapper">
+        <div class="embed-wrapper-inner">
+            <div class="embed-content with-thumb">
+                <div class="thumb-wrapper">
+                    <a href="https://angularfirebase.com/lessons/how-to-use-puppeteer-on-firebase-cloud-functions/" target="_blank">
+                        <img src="https://fireship.io/lessons/web-scraping-guide/img/featured.png" class="thumb">
+                    </a>
+                </div>
+                <div class="entry-body">
+                    <h2 class="entry-title">
+                        <a href="https://angularfirebase.com/lessons/how-to-use-puppeteer-on-firebase-cloud-functions/" target="_blank">
+                            
+                        </a>
+                    </h2>
+                    <div class="entry-content">
+                            Build a web scraper from scratch with Firebase Cloud Functions, Puppeteer, and NodeJS
+                    </div>
+                </div>
+            </div>
+            <div class="embed-footer">
+                <a href="https/angularfirebase.com"target="_blank">
+                    <img src="https://www.google.com/s2/favicons?domain=angularfirebase.com" alt="" title="" class="favicon">
+                    https/angularfirebase.com
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<h2 id="node8を指定する">Node8を指定する</h2>
+<p>Puppeteerを使用するにはNodeのバージョンが8かそれ以上である必要があるため、firebase functionsのプロジェクトにある<code>package.json</code>でベータ版であるNode8ランタイムを指定します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+    <span class="err">//</span> <span class="err">省略</span>
+    <span class="nt">&#34;engines&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;node&#34;</span><span class="p">:</span> <span class="s2">&#34;8&#34;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p>要参照: <a href="https://firebase.google.com/docs/functions/manage-functions?hl=ja#set_nodejs_version"target="_blank">Node.js のバージョンを設定する - firebase</a></p>
+<h2 id="tsconfigにdom-libraryを追加する">tsconfigにdom libraryを追加する</h2>
+<p>Puppeteerはウェブブラウザーなので、domの操作が必要になります。デフォルトでは<code>tsconfig.json</code>にDOM libは含まれていないので、追記しましょう。</p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&#34;compilerOptions&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;lib&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;es7&#34;</span><span class="p">,</span> <span class="s2">&#34;dom&#34;</span><span class="p">],</span> <span class="err">//</span> <span class="err">&lt;--</span> <span class="err">ここ</span>
+            <span class="err">//</span> <span class="err">...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><h2 id="メモリ割り当てを指定する">メモリ割り当てを指定する</h2>
+<p>Puppeteerはメモリを多く消費するため、メモリの割り当てを指定しましょう。
+自分の作った関数は処理に時間がかかったため、defaultのtimeoutである1分を超えるようであればmemoryと一緒に<code>runWith</code>で指定しましょう。</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kr">import</span> <span class="o">*</span> <span class="nx">as</span> <span class="nx">functions</span> <span class="nx">from</span> <span class="s1">&#39;firebase-functions&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="o">*</span> <span class="nx">as</span> <span class="nx">puppeteer</span> <span class="nx">from</span> <span class="s1">&#39;puppeteer&#39;</span><span class="p">;</span>
+
+
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">functions</span><span class="p">.</span><span class="nx">runWith</span><span class="p">({</span>
+  <span class="nx">timeoutSeconds</span><span class="o">:</span> <span class="mi">200</span><span class="p">,</span>
+  <span class="nx">memory</span><span class="o">:</span> <span class="s1">&#39;1GB&#39;</span>
+<span class="p">}).</span><span class="c1">// 省略
+</span><span class="c1"></span>
+</code></pre></div><p>firebaseの<a href="https://firebase.google.com/docs/functions/manage-functions?hl=ja#set_timeout_and_memory_allocation"target="_blank">タイムアウトとメモリ割り当てを設定する</a>によると、memoryとtimeoutは以下の値まで設定できるようです。</p>
+<blockquote>
+<p>timeoutSeconds の最大値は 540（9 分）です。memory に有効な値は次のとおりです。</p>
+<ul>
+<li>128MB</li>
+<li>256MB</li>
+<li>512MB</li>
+<li>1GB</li>
+<li>2GB</li>
+</ul>
+</blockquote>
+<p>要参照: <a href="https://firebase.google.com/docs/functions/manage-functions?hl=ja#set_timeout_and_memory_allocation"target="_blank">タイムアウトとメモリ割り当てを設定する - firebase</a></p>
+<h2 id="関数を作成する">関数を作成する</h2>
+<p>あとは自由にpuppeteerの処理を関数に記述するだけです。</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kr">export</span> <span class="nx">functions</span>
+    <span class="p">.</span><span class="nx">runWith</span><span class="p">({</span>
+        <span class="nx">timeoutSeconds</span><span class="o">:</span> <span class="mi">200</span><span class="p">,</span>
+        <span class="nx">memory</span><span class="o">:</span> <span class="s1">&#39;1GB&#39;</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="nx">https</span><span class="p">.</span><span class="nx">onRequest</span><span class="p">(</span><span class="nx">async</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+
+        <span class="c1">// headlessブラウザー指定と&#39;--no-sandbox&#39;のオプションを忘れずに
+</span><span class="c1"></span>        <span class="kr">const</span> <span class="nx">browser</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">puppeteer</span><span class="p">.</span><span class="nx">launch</span><span class="p">({</span>
+            <span class="nx">headless</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="nx">args</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;--no-sandbox&#39;</span><span class="p">,</span> <span class="s1">&#39;--disable-setuid-sandbox&#39;</span><span class="p">],</span>
+        <span class="p">});</span>
+        <span class="kr">const</span> <span class="nx">page</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">browser</span><span class="p">.</span><span class="nx">newPage</span><span class="p">();</span>
+
+        <span class="c1">// puppeteerの処理を記述する
+</span><span class="c1"></span>
+        <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">200</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span>
+            <span class="nx">result</span><span class="o">:</span> <span class="s2">&#34;finished&#34;</span><span class="p">,</span>
+        <span class="p">});</span>
+    <span class="p">});</span>
+</code></pre></div><p>以上！</p></article><section class="article labels"><a class="category" href=/categories/programming/>programming</a><a class="tag" href=/tags/puppeteer/>puppeteer</a><a class="tag" href=/tags/firebase/>firebase</a><a class="tag" href=/tags/scraping/>scraping</a></section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/barcelona-output/"><span class="li iconfont icon-article"></span>バルセロナに来てアウトプットは大事だなと思った話</a></p><p><a class="link" href="/post/polyglot-function/"><span class="li iconfont icon-article"></span>PolyglotとGoogle Cloud Functionで形態素解析apiを作る</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2019 Seita Uchimura.</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section></body>
+
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.70.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>PolyglotとGoogle Cloud Functionで形態素解析apiを作る&nbsp;&ndash;&nbsp;Seita Uchimura</title><link rel="stylesheet" href="/css/core.min.d395a79dded74421e74ec643c2073f04f7ce037c87be755c7ca30a168d12828f30f6f6f16faa88e38c1d1a9d5d107d88.css" integrity="sha384-05Wnnd7XRCHnTsZDwgc/BPfOA3yHvnVcfKMKFo0Sgo8w9vbxb6qI44wdGp1dEH2I"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="PolyglotとGoogle Cloud Functionで形態素解析apiを作る" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Seita Uchimura</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about">About</a><a class="nav item" href="https://gohugo%2eio/"target="_blank">Hugo</a></nav></div></span></div><div class="site slogan"><span class="title">100% JavaScript-free</span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">PolyglotとGoogle Cloud Functionで形態素解析apiを作る</h1><p class="article date">Thursday, March 21, 2019</p></section><article class="article markdown-body"><p>現在大学の授業で行なっているプロジェクトで英語の文章を形態素に分割することがあったため、pythonの<a href="https://polyglot.readthedocs.io/en/latest/Installation.html"target="_blank">polyglot</a>を使用し、ついでにgoogle cloud functionでベータ版として提供されている<a href="https://cloud.google.com/functions/docs/concepts/python-runtime"target="_blank">pythonランタイム</a>で形態素解析apiを作成しました。</p>
+<h2 id="polyglotとは">Polyglotとは</h2>
+<p>Polyglotは英語で多言語話者のことを指すのですが、pythonの<a href="https://polyglot.readthedocs.io/en/latest/Installation.html"target="_blank">polyglot</a>はその名の通り多数の自然言語を処理するツールを提供するパッケージです。</p>
+<p>Googleの<a href="https://cloud.google.com/natural-language/"target="_blank">Cloud Natural Language Api</a>の構文解析のように文章を品詞分解してくれるパッケージはよくあるのですが、polyglotのように英語の文章を形態素に分解する機能があるものは珍しいのではないでしょうか。</p>
+<p>:eye:形態素(英: morpheme)とは、言語学の用語で、意味をもつ表現要素の最小単位のことを指します。</p>
+<h3 id="形態素解析">形態素解析</h3>
+<p>Polyglotには様々な機能がありますが、今回は形態素解析だけを使用します。</p>
+<p>例えば、以下のコードで&quot;This is a sample text&quot;というテキストを形態素に分解すると、</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">polyglot.text</span> <span class="kn">import</span> <span class="n">Text</span><span class="p">,</span> <span class="n">Word</span>
+
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&#34;This is a sample text&#34;</span>
+<span class="n">words</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&#34;,&#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+    <span class="n">word</span> <span class="o">=</span> <span class="n">Word</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="s2">&#34;en&#34;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">word</span><span class="o">.</span><span class="n">morphemes</span><span class="p">)</span>
+</code></pre></div><p>以下のように一つ一つの単語を形態素に分解した結果が得られます。</p>
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">[&#39;Thi&#39;, &#39;s&#39;]
+[&#39;is&#39;]
+[&#39;a&#39;]
+[&#39;s&#39;, &#39;ample&#39;]
+[&#39;text&#39;]
+</code></pre></div><h2 id="api作成">API作成</h2>
+<p>今回はこのpolyglotの機能をフロントのjavascriptで利用したかったため、google cloud functionのpythonランタイムでpolyglotを使って形態素解析apiを作成しブラウザからアクセスできるようにしました。</p>
+<p>以下が作成したコードです。</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">polyglot.text</span> <span class="kn">import</span> <span class="n">Text</span><span class="p">,</span> <span class="n">Word</span>
+<span class="kn">from</span> <span class="nn">polyglot.downloader</span> <span class="kn">import</span> <span class="n">downloader</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">jsonify</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">Response</span>
+<span class="kn">import</span> <span class="nn">simplejson</span> <span class="kn">as</span> <span class="nn">json</span>
+
+<span class="k">def</span> <span class="nf">parse_morpheme</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">request_json</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">Response</span><span class="p">()</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;Access-Control-Allow-Origin&#39;</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">)</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;Access-Control-Allow-Methods&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;OPTIONS&#39;</span><span class="p">:</span>
+            <span class="n">headers</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Access-Control-Request-Headers&#39;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">headers</span><span class="p">:</span>
+                <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Access-Control-Allow-Headers&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">headers</span>
+                <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">=</span> <span class="mi">200</span>
+                <span class="k">return</span> <span class="n">response</span>
+
+        <span class="k">if</span> <span class="n">request_json</span> <span class="ow">and</span> <span class="s1">&#39;text&#39;</span> <span class="ow">in</span> <span class="n">request_json</span><span class="p">:</span>
+            <span class="n">downloader</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&#34;morph2.en&#34;</span><span class="p">)</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">request_json</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&#34; &#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">)</span>
+            <span class="n">parsedText</span> <span class="o">=</span> <span class="n">Text</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+            <span class="n">parsedText</span><span class="o">.</span><span class="n">language</span> <span class="o">=</span> <span class="s2">&#34;en&#34;</span>
+            <span class="n">response</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span> <span class="s2">&#34;result&#34;</span><span class="p">:</span> <span class="n">parsedText</span><span class="o">.</span><span class="n">morphemes</span> <span class="p">}))</span>
+            <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">=</span> <span class="mi">200</span>
+            <span class="k">return</span> <span class="n">response</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">response</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span> <span class="s2">&#34;error&#34;</span><span class="p">:</span> <span class="s1">&#39;invalid request&#39;</span> <span class="p">}))</span>
+            <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">=</span> <span class="mi">400</span>
+            <span class="k">return</span> <span class="n">response</span>
+
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span> <span class="s2">&#34;error&#34;</span><span class="p">:</span> <span class="s1">&#39;internal server error&#39;</span> <span class="p">}))</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">=</span> <span class="mi">500</span>
+        <span class="k">return</span> <span class="n">response</span>
+
+</code></pre></div><p>以下のrequest methodが<code>OPTIONS</code>か判定するブロックで、CORSに対応しています。</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;OPTIONS&#39;</span><span class="p">:</span>
+  <span class="n">headers</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Access-Control-Request-Headers&#39;</span><span class="p">)</span>
+
+  <span class="k">if</span> <span class="n">headers</span><span class="p">:</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Access-Control-Allow-Headers&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">headers</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">=</span> <span class="mi">200</span>
+    <span class="k">return</span> <span class="n">response</span>
+</code></pre></div><h3 id="テスト">テスト</h3>
+<p>書いた関数を毎度デプロイしてテストするのも時間がかかるので、以下のようにflaskを使用してlocalで先ほど定義した<code>parse_morpheme</code>関数をテストします。</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">jsonify</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">Response</span>
+<span class="kn">from</span> <span class="nn">main</span> <span class="kn">import</span> <span class="n">parse_morpheme</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+    <span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+    <span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">parse_morpheme</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">8000</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div><p>上のコードを<code>python</code>コマンドで実行し、&ldquo;this is an apple&quot;をデータに<code>http://127.0.0.1:8000/</code>へPOSTリクエストを送信すると、</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">curl -X POST --data <span class="s1">&#39;{&#34;text&#34;:&#34;this is an apple&#34; }&#39;</span> -H <span class="s2">&#34;Content-Type: application/json&#34;</span> http://127.0.0.1:8000/ <span class="p">|</span> jq .
+</code></pre></div><p>以下のように結果が返ってきました。良さそうですね。</p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+  <span class="nt">&#34;result&#34;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">&#34;th&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;is&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;is&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;an&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;apple&#34;</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div><h4 id="参考記事">参考記事</h4>
+
+
+
+
+
+
+
+
+
+
+
+<div class="body-iframe page-embed hatena-web-card">
+    <div class="embed-wrapper">
+        <div class="embed-wrapper-inner">
+            <div class="embed-content with-thumb">
+                <div class="thumb-wrapper">
+                    <a href="https://stackoverflow.com/a/53700497" target="_blank">
+                        <img src="https://cdn.sstatic.net/Sites/stackoverflow/Img/apple-touch-icon@2.png?v=73d79a89bded" class="thumb">
+                    </a>
+                </div>
+                <div class="entry-body">
+                    <h2 class="entry-title">
+                        <a href="https://stackoverflow.com/a/53700497" target="_blank">
+                            
+                        </a>
+                    </h2>
+                    <div class="entry-content">
+                            I&#39;m trying out the Python3.7 runtime on Google Cloud Functions. I am able to deploy the functions and make them work once deployed, however, I can&#39;t seem to run the emulator to test them locally be...
+                    </div>
+                </div>
+            </div>
+            <div class="embed-footer">
+                <a href="https/stackoverflow.com"target="_blank">
+                    <img src="https://www.google.com/s2/favicons?domain=stackoverflow.com" alt="" title="" class="favicon">
+                    https/stackoverflow.com
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<h3 id="デプロイ">デプロイ</h3>
+<p><code>parse_morpheme</code>関数を以下のコマンドでgcpにデプロイします。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">gcloud functions deploy parse_morpheme --runtime python37 --trigger-http
+</code></pre></div><h3 id="結果">結果</h3>
+<p>試しに、&ldquo;this is an apple&quot;というテキストをparseしてみると、</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">curl -X POST --data <span class="s1">&#39;{&#34;text&#34;:&#34;thisisanapple&#34; }&#39;</span> -H <span class="s2">&#34;Content-Type: application/json&#34;</span> https:cloud-functions-endpoint/parse_morpheme <span class="p">|</span> jq .
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+  <span class="nt">&#34;result&#34;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">&#34;th&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;is&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;is&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;an&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;apple&#34;</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div><p>とリスポンスが返ってきました。うまく行ってそう。</p>
+<h2 id="感想">感想</h2>
+<p>普段cloud functionはjavascriptで書いてますが、pythonの方が数倍楽に書ける気がしました。同期処理がdefaultの言語は直感的で良いですね。</p></article><section class="article labels"><a class="category" href=/categories/programming/>programming</a><a class="tag" href=/tags/polyglot/>polyglot</a><a class="tag" href=/tags/python/>python</a><a class="tag" href=/tags/google-cloud-functions/>google-cloud-functions</a></section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/puppeteer-and-cloud-function/"><span class="li iconfont icon-article"></span>PuppeteerをFirebase Cloud Functionsで動かす</a></p><p><a class="link" href="/post/set-firebase-config/"><span class="li iconfont icon-article"></span>Firebase Cloud Functionsの環境変数にJSONをサクッと設定する方法</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2019 Seita Uchimura.</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section></body>
+
+</html>

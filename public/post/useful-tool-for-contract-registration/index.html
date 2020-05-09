@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.70.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Etherscanにコントラクトを登録するときに便利なツール&nbsp;&ndash;&nbsp;Seita Uchimura</title><link rel="stylesheet" href="/css/core.min.d395a79dded74421e74ec643c2073f04f7ce037c87be755c7ca30a168d12828f30f6f6f16faa88e38c1d1a9d5d107d88.css" integrity="sha384-05Wnnd7XRCHnTsZDwgc/BPfOA3yHvnVcfKMKFo0Sgo8w9vbxb6qI44wdGp1dEH2I"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Etherscanにコントラクトを登録するときに便利なツール" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Seita Uchimura</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about">About</a><a class="nav item" href="https://gohugo%2eio/"target="_blank">Hugo</a></nav></div></span></div><div class="site slogan"><span class="title">100% JavaScript-free</span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Etherscanにコントラクトを登録するときに便利なツール</h1><p class="article date">Sunday, January 13, 2019</p></section><article class="article markdown-body"><p>Ropstenでコントラクトをテストしようと思い、せっかくだからEtherscanに登録して弄ってみようと思ったものの、スムーズにいかなかったのでメモ。</p>
+<p>Etherscanにコントラクトを登録して内容を公開するには、deployしたコントラクトのソースを用意する必要があります。ここで問題なのが、コントラクトでたくさんimportしていた時に、すべてのコントラクトのコードを一箇所にまとめなきゃいけないという点です。初めて知った時は地獄だと思いました。</p>
+<h2 id="複数ファイルにまたがるコントラクトをまとめる">複数ファイルにまたがるコントラクトをまとめる</h2>
+<p>でも世の中には便利なツールを開発してくださる先駆者の方々がいらっしゃいます。</p>
+<p>自分はtruffleで開発していたので<a href="https://www.npmjs.com/package/truffle-flattener"target="_blank">truffle-flattener</a>一択でした。truffleを使っていないなら<a href="https://github.com/BlockCatIO/solidity-flattener"target="_blank">solidity-flattener</a>もありだと思いますが、自分の場合はpipを使ったことがなくて導入に苦労したのと、openzeppelin-solidityとかの継承関係を解決してくれないので使えませんでした。</p>
+<p>truffle-flattenerはコマンドラインで</p>
+<div class="highlight"><pre class="chroma"><code class="language-fish" data-lang="fish">truffle-flattener original.sol <span class="o">&gt;&gt;</span> output.sol
+</code></pre></div><p>とやれば、継承関係も重複なく一箇所に出力してくれます。超便利。
+これでまとめたコードをEtherscanにコピペして登録完了！と思いきや、うまく行かない。なんで。</p>
+<h2 id="コンストラクタに与えた引数のabiを取得する">コンストラクタに与えた引数のabiを取得する</h2>
+<p>ここでもう一つ問題が。deploy時にコンストラクタに与えた引数のabiを入力しなきゃいけないんですね。これは面倒臭い。
+※ちなみにcontract abiの詳細はこちらの<a href="https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI"target="_blank">wiki</a>に書いてあります。</p>
+<p>幸い手元にdeploy時の引数のデータが残っていたので、6つあった引数を最悪全部エンコードして繋げればよかったのですが、なんせ泥臭いので何か方法はないかと模索したところ出会ったのが、こちらの<a href="https://abi.sonnguyen.ws/"target="_blank">Ethereum Contract ABI Converter</a>というサイト。</p>
+<p>めっちゃ簡単にabi出せるやん。超便利。</p>
+<p>ということでめでたくEtherscanにコントラクトを登録できました。
+過去に数回登録してたのにめっちゃ手間取った。。。</p></article><section class="article labels"><a class="category" href=/categories/programming/>programming</a><a class="tag" href=/tags/cryptocurrency/>cryptocurrency</a><a class="tag" href=/tags/ethereum/>ethereum</a><a class="tag" href=/tags/blockchain/>blockchain</a></section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/import-mnemonic-from-envvariable/"><span class="li iconfont icon-article"></span>環境変数からmnemonicを読み込んだら躓いたメモ</a></p><p><a class="link" href="/post/connect-electron-to-testnet/"><span class="li iconfont icon-article"></span>Electrum Litecoin Wallet・Electron Cashをテストネットにつなぐ</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2019 Seita Uchimura.</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section></body>
+
+</html>
