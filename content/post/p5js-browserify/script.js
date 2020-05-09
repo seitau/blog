@@ -12,61 +12,83 @@ let limit = new Array();
 let showBackground = true;
 let example;
 
-const sketch = function(p5) {
-    p5.setup =  function() {
-        example = document.getElementById("p5js-example");
-        example.style.height = `${example.clientWidth}px`;
-        const canvas = p5.createCanvas(example.clientWidth, example.clientHeight);
-        canvas.parent('p5js-example');
-        canvas.position(0, 0);
-        canvas.style('z-index', '0');
+const sketch_1 = function (p5) {
+  p5.setup = function () {
+    example = document.getElementById("p5js-example");
+    example.style.height = `${example.clientWidth}px`;
+    const canvas = p5.createCanvas(example.clientWidth, example.clientHeight);
+    canvas.parent('p5js-example');
+    canvas.position(0, 0);
+    canvas.style('z-index', '0');
 
-        fillArrays();
+    fillArrays();
+  }
+
+  p5.draw = function () {
+    if (p5.random(100) > 80) {
+      showBackground = !showBackground;
     }
-
-    p5.draw =  function() {
-        if(p5.random(100) > 80) {
-            showBackground = !showBackground;
-        }
-        if(showBackground) {
-            p5.background(0);
-        } 
-        showSystem();
+    if (showBackground) {
+      p5.background(0);
     }
+    showSystem();
+  }
 
-    function fillArrays() {
-        for(let i = 0; i < totals; i++) {
-            x[i] = p5.random(example.clientWidth);
-            y[i] = p5.random(example.clientHeight);
-            speed[i] = p5.random(speedMin, speedMax);
-            limit[i] = p5.random(limitMin, limitMax);
-            particleX[i] = 0.0;
-        }
+  function fillArrays() {
+    for (let i = 0; i < totals; i++) {
+      x[i] = p5.random(example.clientWidth);
+      y[i] = p5.random(example.clientHeight);
+      speed[i] = p5.random(speedMin, speedMax);
+      limit[i] = p5.random(limitMin, limitMax);
+      particleX[i] = 0.0;
     }
+  }
 
-    function showSystem() {
-        for(let i = 0; i < totals; i++) {
-            p5.stroke(255);
-            p5.line(x[i], y[i], x[i]+limit[i], y[i]);
+  function showSystem() {
+    for (let i = 0; i < totals; i++) {
+      p5.stroke(255);
+      p5.line(x[i], y[i], x[i] + limit[i], y[i]);
 
-            particleX[i] += speed[i];
+      particleX[i] += speed[i];
 
-            p5.fill(255);
-            p5.ellipse(x[i]+particleX[i], y[i], 5, 5);
+      p5.fill(255);
+      p5.ellipse(x[i] + particleX[i], y[i], 5, 5);
 
-            if(particleX[i] > limit[i]) {
-                x[i] = p5.random(example.clientWidth);
-                y[i] = p5.random(example.clientHeight);
-                speed[i] = p5.random(speedMin, speedMax);
-                limit[i] = p5.random(limitMin, limitMax);
-                particleX[i] = 0.0;
-            }
+      if (particleX[i] > limit[i]) {
+        x[i] = p5.random(example.clientWidth);
+        y[i] = p5.random(example.clientHeight);
+        speed[i] = p5.random(speedMin, speedMax);
+        limit[i] = p5.random(limitMin, limitMax);
+        particleX[i] = 0.0;
+      }
 
-            if(i > 0) {
-                p5.line(x[i]+ particleX[i], y[i], x[i-1] + particleX[i-1], y[i-1]);
-            }
-        }
+      if (i > 0) {
+        p5.line(x[i] + particleX[i], y[i], x[i - 1] + particleX[i - 1], y[i - 1]);
+      }
     }
+  }
 }
 
-new p5(sketch)
+const sleep = msec => new Promise(resolve => setTimeout(resolve, msec));
+const sketch_2 = function (p5) {
+  p5.setup = function () {
+    sample = document.getElementById("sample");
+    sample.style.height = `${sample.clientWidth}px`;
+    const canvas = p5.createCanvas(sample.clientWidth, sample.clientHeight);
+    canvas.parent('sample');
+    canvas.position(0, 0);
+    canvas.style('z-index', '0');
+    p5.background(0);
+  }
+
+  p5.draw = async function () {
+    p5.fill(255);
+    const x = p5.mouseX;
+    const y = p5.mouseY;
+    await sleep(1000);
+    p5.ellipse(x, y, 20, 20);
+  }
+}
+
+new p5(sketch_1)
+new p5(sketch_2)

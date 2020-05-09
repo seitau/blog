@@ -12,6 +12,8 @@ tags: ["p5.js", "processing", "babel", "browserify", "javascript"]
 showTOC: false
 draft: false
 ---
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.min.js"></script>
 
 今回は、[processing](https://processing.org/)のjs版として、ブラウザでインタラクティブなグラフィックを実装できる[p5js](https://p5js.org)を使用してwebsiteに以下のようなアニメーションを実装した経験から、自分がどのように快適な開発環境を構築したかをご紹介します。
 
@@ -110,4 +112,4 @@ new p5(sketch)
 
 以上のサンプルが以下のcanvasで実行されています。draw関数の中でawaitをつかって1秒後に描画されるようにしました。canvasの上でマウスを動かすと1秒遅れで円がついてくるのがわかると思います。async/awaitが解釈され、ちゃんと動いてますね！
 
-<div id="sample" style="margin:0px 20%;width:60%;height:auto;background:rgb(0,0,0,0);position:relative;"></div>
+<div id=sample style="margin:0px 20%;width:60%;height:auto;background:rgb(0,0,0,0);position:relative;"></div>
