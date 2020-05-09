@@ -9,7 +9,21 @@ resources:
 ---
 
 {{< figure src="/img/me.png" width="200">}}
-<p style="text-align:center;font-size:1.5rem;">Seita Uchimura</p>
+
+<center>
+  <p style="text-align:center;font-size:1.5rem;">Seita Uchimura</p>
+  <div class="details">
+    <a class="item" href="https://github.com/seita-uc" target="_blank">
+      <span class="iconfont icon-github"></span>
+      &nbsp;seita-uc
+    </a>
+    <span>&nbsp;</span>
+    <a class="item" href="https://twitter.com/sei_uchi_mura" target="_blank">
+      <span class="iconfont icon-twitter"></span>
+      @sei_uchi_mura
+    </a>
+  </div>
+</center>
 
 # Profile
 神奈川県出身。1997年生まれ。国際基督教大学の経営学部に所属。
