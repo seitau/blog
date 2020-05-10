@@ -79,7 +79,9 @@
       <pubDate>Fri, 26 Apr 2019 20:09:30 -0700</pubDate>
       
       <guid>/post/p5js-browserify/</guid>
-      <description>&lt;p&gt;今回は、&lt;a href=&#34;https://processing.org/&#34;target=&#34;_blank&#34;&gt;processing&lt;/a&gt;のjs版として、ブラウザでインタラクティブなグラフィックを実装できる&lt;a href=&#34;https://p5js.org&#34;target=&#34;_blank&#34;&gt;p5js&lt;/a&gt;を使用してwebsiteに以下のようなアニメーションを実装した経験から、自分がどのように快適な開発環境を構築したかをご紹介します。&lt;/p&gt;</description>
+      <description>&lt;script src=&#34;https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.min.js&#34;&gt;&lt;/script&gt;
+&lt;p&gt;今回は、&lt;a href=&#34;https://processing.org/&#34;target=&#34;_blank&#34;&gt;processing&lt;/a&gt;のjs版として、ブラウザでインタラクティブなグラフィックを実装できる&lt;a href=&#34;https://p5js.org&#34;target=&#34;_blank&#34;&gt;p5js&lt;/a&gt;を使用してwebsiteに以下のようなアニメーションを実装した経験から、自分がどのように快適な開発環境を構築したかをご紹介します。&lt;/p&gt;</description>
       
     </item>
     

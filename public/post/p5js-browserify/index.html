@@ -19,10 +19,31 @@
 <meta name="msapplication-TileColor" content="#ffffff">
 <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
 <meta name="theme-color" content="#ffffff">
+
+
+<meta property="og:site_name"           content="Seita Uchimura">
+<meta property="og:title"               content="browserify&#43;babelでasync/awaitを使用した快適p5.js開発環境構築">
+<meta property="og:url"                 content="https://seita.icu/post/p5js-browserify/">
+<meta property="og:type"                content="article">
+<meta name="twitter:card"               content="summary_large_image">
+<meta property="twitter:title"          content="browserify&#43;babelでasync/awaitを使用した快適p5.js開発環境構築">
+
+    <meta property="og:description"         content="You ain&#39;t gonna need it">
+    <meta property="twitter:description"    content="You ain&#39;t gonna need it">
+
+
+    
+    <meta property="og:image"       content="https://seita.icu/img/p5js.png">
+    <meta property="og:image:url"   content="https://seita.icu/img/p5js.png">
+    
+
+
 <body><section id="header">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Seita Uchimura</span></a></span>
         <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/">Articles</a><a class="nav item" href="/about">About</a><a class="nav item" href="/categories">Categories</a><a class="nav item" href="/tags">Tags</a></nav></div></span></div><div class="site slogan"><span class="title">You ain't gonna need it</span></div></section><section id="content"><div class="article-container"><section class="article header">
-    <h1 class="article title">browserify+babelでasync/awaitを使用した快適p5.js開発環境構築</h1><p class="article date">Friday, April 26, 2019</p></section><article class="article markdown-body"><p>今回は、<a href="https://processing.org/"target="_blank">processing</a>のjs版として、ブラウザでインタラクティブなグラフィックを実装できる<a href="https://p5js.org"target="_blank">p5js</a>を使用してwebsiteに以下のようなアニメーションを実装した経験から、自分がどのように快適な開発環境を構築したかをご紹介します。</p>
+    <h1 class="article title">browserify+babelでasync/awaitを使用した快適p5.js開発環境構築</h1><p class="article date">Friday, April 26, 2019</p></section><article class="article markdown-body"><script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.min.js"></script>
+<p>今回は、<a href="https://processing.org/"target="_blank">processing</a>のjs版として、ブラウザでインタラクティブなグラフィックを実装できる<a href="https://p5js.org"target="_blank">p5js</a>を使用してwebsiteに以下のようなアニメーションを実装した経験から、自分がどのように快適な開発環境を構築したかをご紹介します。</p>
 <div id="p5js-example" style="margin:0px 20%;width:60%;height:auto;background:rgb(0,0,0,0);position:relative;"></div>
 
 
@@ -42,64 +63,86 @@ let limit = new Array();
 let showBackground = true;
 let example;
 
-const sketch = function(p5) {
-    p5.setup =  function() {
-        example = document.getElementById("p5js-example");
-        example.style.height = `${example.clientWidth}px`;
-        const canvas = p5.createCanvas(example.clientWidth, example.clientHeight);
-        canvas.parent('p5js-example');
-        canvas.position(0, 0);
-        canvas.style('z-index', '0');
+const sketch_1 = function (p5) {
+  p5.setup = function () {
+    example = document.getElementById("p5js-example");
+    example.style.height = `${example.clientWidth}px`;
+    const canvas = p5.createCanvas(example.clientWidth, example.clientHeight);
+    canvas.parent('p5js-example');
+    canvas.position(0, 0);
+    canvas.style('z-index', '0');
 
-        fillArrays();
+    fillArrays();
+  }
+
+  p5.draw = function () {
+    if (p5.random(100) > 80) {
+      showBackground = !showBackground;
     }
-
-    p5.draw =  function() {
-        if(p5.random(100) > 80) {
-            showBackground = !showBackground;
-        }
-        if(showBackground) {
-            p5.background(0);
-        } 
-        showSystem();
+    if (showBackground) {
+      p5.background(0);
     }
+    showSystem();
+  }
 
-    function fillArrays() {
-        for(let i = 0; i < totals; i++) {
-            x[i] = p5.random(example.clientWidth);
-            y[i] = p5.random(example.clientHeight);
-            speed[i] = p5.random(speedMin, speedMax);
-            limit[i] = p5.random(limitMin, limitMax);
-            particleX[i] = 0.0;
-        }
+  function fillArrays() {
+    for (let i = 0; i < totals; i++) {
+      x[i] = p5.random(example.clientWidth);
+      y[i] = p5.random(example.clientHeight);
+      speed[i] = p5.random(speedMin, speedMax);
+      limit[i] = p5.random(limitMin, limitMax);
+      particleX[i] = 0.0;
     }
+  }
 
-    function showSystem() {
-        for(let i = 0; i < totals; i++) {
-            p5.stroke(255);
-            p5.line(x[i], y[i], x[i]+limit[i], y[i]);
+  function showSystem() {
+    for (let i = 0; i < totals; i++) {
+      p5.stroke(255);
+      p5.line(x[i], y[i], x[i] + limit[i], y[i]);
 
-            particleX[i] += speed[i];
+      particleX[i] += speed[i];
 
-            p5.fill(255);
-            p5.ellipse(x[i]+particleX[i], y[i], 5, 5);
+      p5.fill(255);
+      p5.ellipse(x[i] + particleX[i], y[i], 5, 5);
 
-            if(particleX[i] > limit[i]) {
-                x[i] = p5.random(example.clientWidth);
-                y[i] = p5.random(example.clientHeight);
-                speed[i] = p5.random(speedMin, speedMax);
-                limit[i] = p5.random(limitMin, limitMax);
-                particleX[i] = 0.0;
-            }
+      if (particleX[i] > limit[i]) {
+        x[i] = p5.random(example.clientWidth);
+        y[i] = p5.random(example.clientHeight);
+        speed[i] = p5.random(speedMin, speedMax);
+        limit[i] = p5.random(limitMin, limitMax);
+        particleX[i] = 0.0;
+      }
 
-            if(i > 0) {
-                p5.line(x[i]+ particleX[i], y[i], x[i-1] + particleX[i-1], y[i-1]);
-            }
-        }
+      if (i > 0) {
+        p5.line(x[i] + particleX[i], y[i], x[i - 1] + particleX[i - 1], y[i - 1]);
+      }
     }
+  }
 }
 
-new p5(sketch)
+const sleep = msec => new Promise(resolve => setTimeout(resolve, msec));
+const sketch_2 = function (p5) {
+  p5.setup = function () {
+    sample = document.getElementById("sample");
+    sample.style.height = `${sample.clientWidth}px`;
+    const canvas = p5.createCanvas(sample.clientWidth, sample.clientHeight);
+    canvas.parent('sample');
+    canvas.position(0, 0);
+    canvas.style('z-index', '0');
+    p5.background(0);
+  }
+
+  p5.draw = async function () {
+    p5.fill(255);
+    const x = p5.mouseX;
+    const y = p5.mouseY;
+    await sleep(1000);
+    p5.ellipse(x, y, 20, 20);
+  }
+}
+
+new p5(sketch_1)
+new p5(sketch_2)
 </script>
 
 
@@ -254,7 +297,7 @@ Reactやる時に生のJSを書くとシンドイので、ES2015やJSXで書き�
 
 <span class="k">new</span> <span class="nx">p5</span><span class="p">(</span><span class="nx">sketch</span><span class="p">)</span>
 </code></pre></div><p>以上のサンプルが以下のcanvasで実行されています。draw関数の中でawaitをつかって1秒後に描画されるようにしました。canvasの上でマウスを動かすと1秒遅れで円がついてくるのがわかると思います。async/awaitが解釈され、ちゃんと動いてますね！</p>
-<div id="sample" style="margin:0px 20%;width:60%;height:auto;background:rgb(0,0,0,0);position:relative;"></div></article><section class="article labels"><a class="category" href=/categories/programming/>programming</a><a class="tag" href=/tags/p5%2ejs/>p5.js</a><a class="tag" href=/tags/processing/>processing</a><a class="tag" href=/tags/babel/>babel</a><a class="tag" href=/tags/browserify/>browserify</a><a class="tag" href=/tags/javascript/>javascript</a></section><section class="article author"><img class="avatar" src="/img/me.png" alt><p class="name">Seita Uchimura</p><div class="bio">Software Engineer in Tokyo | ICU20</div><div class="details"><a class="item" href="https://github.com/seita-uc" target="_blank"><span class="iconfont icon-github"></span>&nbsp;seita-uc</a><a class="item" href="https://twitter.com/sei_uchi_mura" target="_blank"><span class="iconfont icon-twitter"></span>&nbsp;@sei_uchi_mura</a></div>
+<div id=sample style="margin:0px 20%;width:60%;height:auto;background:rgb(0,0,0,0);position:relative;"></div></article><section class="article labels"><a class="category" href=/categories/programming/>programming</a><a class="tag" href=/tags/p5%2ejs/>p5.js</a><a class="tag" href=/tags/processing/>processing</a><a class="tag" href=/tags/babel/>babel</a><a class="tag" href=/tags/browserify/>browserify</a><a class="tag" href=/tags/javascript/>javascript</a></section><section class="article author"><img class="avatar" src="/img/me.png" alt><p class="name">Seita Uchimura</p><div class="bio">Software Engineer in Tokyo | ICU20</div><div class="details"><a class="item" href="https://github.com/seita-uc" target="_blank"><span class="iconfont icon-github"></span>&nbsp;seita-uc</a><a class="item" href="https://twitter.com/sei_uchi_mura" target="_blank"><span class="iconfont icon-twitter"></span>&nbsp;@sei_uchi_mura</a></div>
 </section></div>
 <div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/parity-poa-truffle/"><span class="li iconfont icon-article"></span>ParityのPOAプライベートネット建ててtruffleを使う時はbyzantium対応をお忘れなく</a></p><p><a class="link" href="/post/hugo-sass-version/"><span class="li iconfont icon-article"></span>HugoでSCSS/SASSをCSSに変換するならVersionに注意</a></p></section><section class="article discussion"><div id="disqus_thread"></div>
 <script type="application/javascript">

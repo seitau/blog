@@ -24,7 +24,7 @@ draft: false
 
 過去の投稿でも書いたように、自分で構想を持って何かを作った経験から、一つの作品を誰かに見せられるまで完成させるのにどれだけの体力が必要かっていうのが少し想像できるようになって、初めて美術館でこんなことを思いました。自分なんてちょっと作ってしばらく休憩。。みたいなペースなのにすごいなーと。
 
-{{< web-embed url="https://seita.icu/2019/01/22/%E8%8B%B1%E8%AA%9E%E7%97%85%E3%81%BF%E3%81%8B%E3%82%89%E3%81%AE%E3%82%A8%E3%83%A2%E3%81%84%E3%82%B5%E3%82%A4%E3%83%88%E4%BD%9C%E3%81%A3%E3%81%9F%E8%A9%B1/" >}}
+{{< web-embed url="https://seita.icu/post/english-themas/" >}}
 
 世の中のいわゆるクリエイターの方々も、常に何かを作り続けるのを生業にするなんて創造力的にも体力的にも強いなーと、これを機に少し見方が変わりました。
 
@@ -36,7 +36,7 @@ draft: false
 
 以下はガウディの逆さ吊り実験の模様。
 
-{{< figure src="/img/inverted-experiment.png" width="400px" >}}
+{{< figure src="/img/inverted-experiment.webp" width="400px" >}}
 
 なんせ作品数が多くて見応えがあったので、美術館を後にする頃にはくたくたになっていたんですが、やはり何事も積み重ねでできてるんだなぁとしみじみ感心しました。
 
@@ -49,5 +49,5 @@ draft: false
 
 最後に綺麗なサグラダファミリアの内観を貼り付けておきます。
 
-{{< figure src="/img/sagrada-familia.png" width="500px" >}}
+{{< figure src="/img/sagrada-familia.webp" width="500px" >}}
 

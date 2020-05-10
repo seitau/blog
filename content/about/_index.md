@@ -2,13 +2,9 @@
 title: "About"
 nodateline: true
 disable_comments: true
-
-resources:
-- name: avatar
-  src: images/me.png
 ---
 
-{{< figure src="/img/me.png" width="200">}}
+{{< figure src="/img/me.webp" width="200">}}
 
 <center>
   <p style="text-align:center;font-size:1.5rem;">Seita Uchimura</p>
