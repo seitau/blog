@@ -1,35 +1,1534 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Seita Uchimura</title>
-    <link>/</link>
+    <link>https://seita.icu/</link>
     <description>Recent content on Seita Uchimura</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <copyright>©2019 Seita Uchimura.</copyright>
+    <copyright>©2021 Seita Uchimura.</copyright>
     <lastBuildDate>Sat, 30 Nov 2019 07:24:15 -0800</lastBuildDate>
     
-        <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://seita.icu/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Posts</title>
-      <link>/post/</link>
+      <title>ディレクトリ移動/ファイル選択を爆速にするTerminalツール</title>
+      <link>https://seita.icu/post/effective-commands/</link>
       <pubDate>Sat, 30 Nov 2019 07:24:15 -0800</pubDate>
       
-      <guid>/post/</guid>
-      <description></description>
-      
+      <guid>https://seita.icu/post/effective-commands/</guid>
+      <description>&lt;p&gt;fishからzshに乗り換える際に、快適な環境を構築していく中で幾つか便利コマンドを発見したりスクリプトを作成したので紹介します。&lt;/p&gt;
+&lt;h1 id=&#34;便利ツール群&#34;&gt;便利ツール群&lt;/h1&gt;
+&lt;h2 id=&#34;z&#34;&gt;&amp;ldquo;z&amp;rdquo;&lt;/h2&gt;
+&lt;p&gt;特定の文字列にマッチしたディレクトリを利用頻度でsortして表示/移動してくれるコマンド。
+
+
+
+
+
+
+
+
+
+
+
+&lt;div class=&#34;body-iframe page-embed hatena-web-card&#34;&gt;
+  &lt;a href=&#34;https://github.com/rupa/z&#34; target=&#34;_blank&#34;&gt;
+    &lt;div class=&#34;embed-wrapper&#34;&gt;
+      &lt;div class=&#34;embed-wrapper-inner&#34;&gt;
+        &lt;div class=&#34;embed-content with-thumb&#34;&gt;
+          &lt;div class=&#34;thumb-wrapper&#34;&gt;
+            &lt;img src=&#34;https://avatars.githubusercontent.com/u/46809?s=400&amp;amp;v=4&#34; class=&#34;thumb&#34;&gt;
+          &lt;/div&gt;
+          &lt;div class=&#34;entry-body&#34;&gt;
+            &lt;h2 class=&#34;entry-title&#34;&gt;
+              rupa/z
+            &lt;/h2&gt;
+            &lt;div class=&#34;entry-content&#34;&gt;
+              z - jump around. Contribute to rupa/z development by creating an account on GitHub.
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;embed-footer&#34;&gt;
+          &lt;a href=&#34;https/github.com&#34;target=&#34;_blank&#34;&gt;
+            &lt;img src=&#34;https://www.google.com/s2/favicons?domain=github.com&#34; alt=&#34;&#34; title=&#34;rupa/z&#34; class=&#34;favicon&#34;&gt;
+            https/github.com
+          &lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h2 id=&#34;fasd&#34;&gt;&amp;ldquo;fasd&amp;rdquo;&lt;/h2&gt;
+&lt;p&gt;上記のzを拡張し、ディレクトリ移動のみならずvimでのファイル編集や実行も可能にしたコマンド。
+
+
+
+
+
+
+
+
+
+
+
+&lt;div class=&#34;body-iframe page-embed hatena-web-card&#34;&gt;
+  &lt;a href=&#34;https://github.com/clvv/fasd&#34; target=&#34;_blank&#34;&gt;
+    &lt;div class=&#34;embed-wrapper&#34;&gt;
+      &lt;div class=&#34;embed-wrapper-inner&#34;&gt;
+        &lt;div class=&#34;embed-content with-thumb&#34;&gt;
+          &lt;div class=&#34;thumb-wrapper&#34;&gt;
+            &lt;img src=&#34;https://avatars.githubusercontent.com/u/200888?s=400&amp;amp;v=4&#34; class=&#34;thumb&#34;&gt;
+          &lt;/div&gt;
+          &lt;div class=&#34;entry-body&#34;&gt;
+            &lt;h2 class=&#34;entry-title&#34;&gt;
+              clvv/fasd
+            &lt;/h2&gt;
+            &lt;div class=&#34;entry-content&#34;&gt;
+              Command-line productivity booster, offers quick access to files and directories, inspired by autojump, z and v. - clvv/fasd
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;embed-footer&#34;&gt;
+          &lt;a href=&#34;https/github.com&#34;target=&#34;_blank&#34;&gt;
+            &lt;img src=&#34;https://www.google.com/s2/favicons?domain=github.com&#34; alt=&#34;&#34; title=&#34;clvv/fasd&#34; class=&#34;favicon&#34;&gt;
+            https/github.com
+          &lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h2 id=&#34;fzfvim&#34;&gt;&amp;ldquo;fzf.vim&amp;rdquo;&lt;/h2&gt;
+&lt;p&gt;有名なfuzzy finderであるfzfのvimプラグイン。vimから周辺ファイルをfuzzy findして編集できたり、各種gitコマンド結果をリッチに表示したりできる。
+
+
+
+
+
+
+
+
+
+
+
+&lt;div class=&#34;body-iframe page-embed hatena-web-card&#34;&gt;
+  &lt;a href=&#34;https://github.com/junegunn/fzf.vim&#34; target=&#34;_blank&#34;&gt;
+    &lt;div class=&#34;embed-wrapper&#34;&gt;
+      &lt;div class=&#34;embed-wrapper-inner&#34;&gt;
+        &lt;div class=&#34;embed-content with-thumb&#34;&gt;
+          &lt;div class=&#34;thumb-wrapper&#34;&gt;
+            &lt;img src=&#34;https://avatars.githubusercontent.com/u/700826?s=400&amp;amp;v=4&#34; class=&#34;thumb&#34;&gt;
+          &lt;/div&gt;
+          &lt;div class=&#34;entry-body&#34;&gt;
+            &lt;h2 class=&#34;entry-title&#34;&gt;
+              junegunn/fzf.vim
+            &lt;/h2&gt;
+            &lt;div class=&#34;entry-content&#34;&gt;
+              fzf :heart: vim. Contribute to junegunn/fzf.vim development by creating an account on GitHub.
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;embed-footer&#34;&gt;
+          &lt;a href=&#34;https/github.com&#34;target=&#34;_blank&#34;&gt;
+            &lt;img src=&#34;https://www.google.com/s2/favicons?domain=github.com&#34; alt=&#34;&#34; title=&#34;junegunn/fzf.vim&#34; class=&#34;favicon&#34;&gt;
+            https/github.com
+          &lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h1 id=&#34;自作スクリプト&#34;&gt;自作スクリプト&lt;/h1&gt;
+&lt;p&gt;普段ghq+pecoでプロジェクト間を移動しているので、ghqで管理するgitプロジェクトで頻繁にディレクトリの移動やファイル編集をします。
+その際、上に挙げたツールでは少し物足りなかったり逆に機能が大きすぎたりしたので、自分に合ったものを自作しました。&lt;/p&gt;
+&lt;h2 id=&#34;ghqpecoでgitプロジェクト移動&#34;&gt;ghq+pecoでgitプロジェクト移動&lt;/h2&gt;
+&lt;p&gt;以下の記事を参考に追加したスクリプト。もはやこれなしじゃ生きられない。
+
+
+
+
+
+
+
+
+
+
+
+&lt;div class=&#34;body-iframe page-embed hatena-web-card&#34;&gt;
+  &lt;a href=&#34;https://qiita.com/strsk/items/9151cef7e68f0746820d&#34; target=&#34;_blank&#34;&gt;
+    &lt;div class=&#34;embed-wrapper&#34;&gt;
+      &lt;div class=&#34;embed-wrapper-inner&#34;&gt;
+        &lt;div class=&#34;embed-content with-thumb&#34;&gt;
+          &lt;div class=&#34;thumb-wrapper&#34;&gt;
+            &lt;img src=&#34;https://qiita-user-contents.imgix.net/https:%2F%2Fcdn.qiita.com%2Fassets%2Fpublic%2Farticle-ogp-background-1150d8b18a7c15795b701a55ae908f94.png?ixlib=rb-1.2.2&amp;amp;w=1200&amp;amp;mark=https://qiita-user-contents.imgix.net/~text?ixlib=rb-1.2.2%26w=840%26h=380%26txt=ghq%25E3%2581%25A7%25E3%2583%25AA%25E3%2583%259D%25E3%2582%25B8%25E3%2583%2588%25E3%2583%25AA%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%25A8peco%25E9%2580%25A3%25E6%2590%25BA%25E3%2581%25A7%25E5%25BF%25AB%25E9%2581%25A9git%25E7%2594%259F%25E6%25B4%25BB%26txt-color=%2523333%26txt-font=Hiragino%2520Sans%2520W6%26txt-size=54%26txt-clip=ellipsis%26txt-align=center%252Cmiddle%26s=6296bbbcd0a4fd6a57c8e92b782dbf6d&amp;amp;mark-align=center,middle&amp;amp;blend=https://qiita-user-contents.imgix.net/~text?ixlib=rb-1.2.2%26w=840%26h=500%26txt=%2540strsk%26txt-color=%2523333%26txt-font=Hiragino%2520Sans%2520W6%26txt-size=45%26txt-align=right%252Cbottom%26s=3a1ad0efd146bf3f1cf02d9dfc8cd643&amp;amp;blend-align=center,middle&amp;amp;blend-mode=normal&amp;amp;s=5efdd24f84c71d786a354bc9f03f91eb&#34; class=&#34;thumb&#34;&gt;
+          &lt;/div&gt;
+          &lt;div class=&#34;entry-body&#34;&gt;
+            &lt;h2 class=&#34;entry-title&#34;&gt;
+              ghqでリポジトリ管理とpeco連携で快適git生活 - Qiita
+            &lt;/h2&gt;
+            &lt;div class=&#34;entry-content&#34;&gt;
+              Gitのローカルリポジトリが増えてくるとどういう構成にすればいいか悩むところだけど、ghqとpecoがあれば考える必要がありません。今まで入れてなかった事を後悔するレベル。
+
+
+ghqインストール
+
+Goがまだ入ってなければGoをイン...
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;embed-footer&#34;&gt;
+          &lt;a href=&#34;https/qiita.com&#34;target=&#34;_blank&#34;&gt;
+            &lt;img src=&#34;https://www.google.com/s2/favicons?domain=qiita.com&#34; alt=&#34;&#34; title=&#34;ghqでリポジトリ管理とpeco連携で快適git生活 - Qiita&#34; class=&#34;favicon&#34;&gt;
+            https/qiita.com
+          &lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-zsh&#34; data-lang=&#34;zsh&#34;&gt;&lt;span class=&#34;k&#34;&gt;function&lt;/span&gt; peco_select_src &lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;nb&#34;&gt;local&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;selected_dir&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;ghq list -p &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; peco --query &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$LBUFFER&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;
+  &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt; -n &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$selected_dir&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;then&lt;/span&gt;
+    &lt;span class=&#34;nv&#34;&gt;BUFFER&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;cd &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;selected_dir&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
+    zle accept-line
+  &lt;span class=&#34;k&#34;&gt;fi&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;現在のディレクトリ以下のファイルを選択&#34;&gt;現在のディレクトリ以下のファイルを選択&lt;/h2&gt;
+&lt;p&gt;対象ファイル数が多くなりすぎると重くなるので、ghqプロジェクト内のみで実行可能にしています。
+選択結果がファイルの場合はvimで開き、ディレクトリの場合はcdするように&lt;code&gt;go_to&lt;/code&gt;という関数を使用しています。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-zsh&#34; data-lang=&#34;zsh&#34;&gt;&lt;span class=&#34;k&#34;&gt;function&lt;/span&gt; select_file_below_pwd&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt; ! &lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;pwd&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; grep &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;ghq root&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;then&lt;/span&gt;
+    &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;you are not in ghq path&amp;#34;&lt;/span&gt;
+    zle accept-line
+    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
+  &lt;span class=&#34;k&#34;&gt;fi&lt;/span&gt;
+  &lt;span class=&#34;c1&#34;&gt;# grep -v -e で除外対象を指定&lt;/span&gt;
+  &lt;span class=&#34;nb&#34;&gt;local&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;selected_path&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;\
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;find . &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;    sed &lt;span class=&#34;s2&#34;&gt;&amp;#34;s/^.//g&amp;#34;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;    grep -v -e node_modules -e vendor -e /.git &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;    fzf --ansi --reverse --height 20% --border&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
+
+  &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt; -n &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$selected_path&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;then&lt;/span&gt;
+    &lt;span class=&#34;nb&#34;&gt;local&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;dest_path&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;.&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$selected_path&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; awk &lt;span class=&#34;s1&#34;&gt;&amp;#39;{print $1}&amp;#39;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
+    go_to &lt;span class=&#34;nv&#34;&gt;$dest_path&lt;/span&gt;
+  &lt;span class=&#34;k&#34;&gt;fi&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-zsh&#34; data-lang=&#34;zsh&#34;&gt;&lt;span class=&#34;k&#34;&gt;function&lt;/span&gt; go_to&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt; -f &lt;span class=&#34;nv&#34;&gt;$1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;then&lt;/span&gt;
+    nvim &lt;span class=&#34;nv&#34;&gt;$1&lt;/span&gt;
+    &lt;span class=&#34;nv&#34;&gt;dir_path&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$1&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; rev &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; cut -d &lt;span class=&#34;s1&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt; -f 2- &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; rev&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;nv&#34;&gt;BUFFER&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;cd &lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$dir_path&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
+  &lt;span class=&#34;k&#34;&gt;elif&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt; -d &lt;span class=&#34;nv&#34;&gt;$1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;then&lt;/span&gt;
+    &lt;span class=&#34;nv&#34;&gt;BUFFER&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;cd &lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$1&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
+  &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt;
+    &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;selected path is neither file nor directory&amp;#34;&lt;/span&gt;
+  &lt;span class=&#34;k&#34;&gt;fi&lt;/span&gt;
+  zle accept-line
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;ghqで管理するgitプロジェクト内で飛ぶ&#34;&gt;ghqで管理するgitプロジェクト内で飛ぶ&lt;/h2&gt;
+&lt;p&gt;ここまで紹介しておいてなんですが、実際ほぼこれしか使ってないってくらい重宝しているスクリプトです。
+ghqで管理するgitプロジェクト内の全てのファイル、ディレクトリへ瞬時に移動/編集でき、かつ&lt;code&gt;(root)&lt;/code&gt;を選択するとプロジェクトルートに飛ぶことができます。&lt;/p&gt;
+&lt;p&gt;こちらも&lt;code&gt;go_to&lt;/code&gt;を使用しています。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-zsh&#34; data-lang=&#34;zsh&#34;&gt;&lt;span class=&#34;k&#34;&gt;function&lt;/span&gt; peco_select_file_within_project&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;nb&#34;&gt;local&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;base_path&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;pwd&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; grep -o &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;ghq list -p&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;
+  &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt; -z &lt;span class=&#34;nv&#34;&gt;$base_path&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;then&lt;/span&gt;
+    &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;you are not in ghq project&amp;#34;&lt;/span&gt;
+    zle accept-line
+    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
+  &lt;span class=&#34;k&#34;&gt;fi&lt;/span&gt;
+
+  &lt;span class=&#34;nb&#34;&gt;local&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;trim_base_path&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;^&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$base_path&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; sed &lt;span class=&#34;s2&#34;&gt;&amp;#34;s/\//./g&amp;#34;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;.&amp;#34;&lt;/span&gt;
+  &lt;span class=&#34;nb&#34;&gt;local&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;paths&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;\
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;find &lt;span class=&#34;nv&#34;&gt;$base_path&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;    sed &lt;span class=&#34;s2&#34;&gt;&amp;#34;s/&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$trim_base_path&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;//g&amp;#34;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;    grep -v -e node_modules -e vendor -e .git&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
+  &lt;span class=&#34;nb&#34;&gt;local&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;selected_path&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;(root)\n&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$paths&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; awk &lt;span class=&#34;s1&#34;&gt;&amp;#39;{print $1}&amp;#39;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; fzf --ansi --reverse --height 30% --border&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
+
+  &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt; -n &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$selected_path&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;then&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[[&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$selected_path&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;(root)&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;]]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;then&lt;/span&gt;
+      go_to &lt;span class=&#34;nv&#34;&gt;$base_path&lt;/span&gt;
+      &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;fi&lt;/span&gt;
+    &lt;span class=&#34;nb&#34;&gt;local&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;dest_path&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$base_path&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$selected_path&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; awk &lt;span class=&#34;s1&#34;&gt;&amp;#39;{print $1}&amp;#39;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
+    go_to &lt;span class=&#34;nv&#34;&gt;$dest_path&lt;/span&gt;
+  &lt;span class=&#34;k&#34;&gt;fi&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;span class=&#34;image-container&#34;&gt;&lt;span class=&#34;link&#34; &gt;&lt;a href=&#34;https://seita.icu/img/command-view.png&#34; 
+        target=&#34;_blank&#34;&gt;&lt;img class=&#34;img&#34; src=&#34;https://seita.icu/img/command-view.png&#34;/&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;/span&gt;
+&lt;h1 id=&#34;おわりに&#34;&gt;おわりに&lt;/h1&gt;
+&lt;p&gt;自作スクリプトは慣れてないのもありごちゃごちゃしている感が否めないので、もっとエレガントな書き方や代替コマンドをご存知の方がいらっしゃれば教えて下さい！&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>About</title>
-      <link>/about/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>ParityのPOAプライベートネット建ててtruffleを使う時はbyzantium対応をお忘れなく</title>
+      <link>https://seita.icu/post/parity-poa-truffle/</link>
+      <pubDate>Tue, 23 Jul 2019 23:04:21 +0900</pubDate>
       
-      <guid>/about/</guid>
-      <description>Seita Uchimura &amp;nbsp;seita-uc &amp;nbsp; @sei_uchi_mura Profile 神奈川県出身。1997年生まれ。国際基督教大学の経営学部に所属。 History 2020/04 -: 株式会社えにさむ 開発責任者 受託開発 Azure, Go, React 2019/12 - 2020/05: 株式会社At</description>
+      <guid>https://seita.icu/post/parity-poa-truffle/</guid>
+      <description>&lt;p&gt;以下のtutorialに従ってparityのpoaプライベートネットを構築してから、
+
+
+
+
+
+
+
+
+
+
+
+&lt;div class=&#34;body-iframe page-embed hatena-web-card&#34;&gt;
+  &lt;a href=&#34;https://wiki.parity.io/Demo-PoA-tutorial&#34; target=&#34;_blank&#34;&gt;
+    &lt;div class=&#34;embed-wrapper&#34;&gt;
+      &lt;div class=&#34;embed-wrapper-inner&#34;&gt;
+        &lt;div class=&#34;embed-content with-thumb&#34;&gt;
+          &lt;div class=&#34;thumb-wrapper&#34;&gt;
+            &lt;img src=&#34;#ZgotmplZ&#34; class=&#34;thumb&#34;&gt;
+          &lt;/div&gt;
+          &lt;div class=&#34;entry-body&#34;&gt;
+            &lt;h2 class=&#34;entry-title&#34;&gt;
+              Page not found · GitHub Pages
+            &lt;/h2&gt;
+            &lt;div class=&#34;entry-content&#34;&gt;
+              
+        If this is your site, make sure that the filename case matches the URL.
+        For root URLs (like http://example.com/) you must provide an
+        index.html file.
       
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;embed-footer&#34;&gt;
+          &lt;a href=&#34;https/wiki.parity.io&#34;target=&#34;_blank&#34;&gt;
+            &lt;img src=&#34;https://www.google.com/s2/favicons?domain=wiki.parity.io&#34; alt=&#34;&#34; title=&#34;Page not found · GitHub Pages&#34; class=&#34;favicon&#34;&gt;
+            https/wiki.parity.io
+          &lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;truffleでコントラクトをデプロイしようとしたら以下のエラーに遭遇、&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;Error: Transaction ran out of gas. Please provide more gas.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;とか&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;The contract code couldn&amp;#39;t be stored, please check your gas limit.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;など。&lt;/p&gt;
+&lt;p&gt;どれもtruffleで開発をしてると馴染みがある感じのエラーなので、configでgasの設定いじったりdeploy時にgasをちゃんと指定すれば治るかなーと思ったのですが、全然治らず。&lt;/p&gt;
+&lt;p&gt;試しに&lt;code&gt;truffle console&lt;/code&gt;で普通のtxを発行してみると、tx自体は発行され、送金も正常に行われるものの、なぜか&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;Error: Transaction has been reverted by the EVM:
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;というエラーだけが吐かれる。実際にはrevertされてないのに奇妙である。&lt;/p&gt;
+&lt;p&gt;試しに&lt;code&gt;curl&lt;/code&gt;で素のrpcを叩いてreceiptを確認してみると、&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;nt&#34;&gt;&amp;#34;jsonrpc&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;2.0&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+  &lt;span class=&#34;nt&#34;&gt;&amp;#34;result&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;#34;blockHash&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;0x9664e8fe7be2ec3579b0b17b4ccd83fc0054adf6ca4ee227f794561e225a289f&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;#34;blockNumber&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;0x12&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;#34;contractAddress&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;null&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;#34;cumulativeGasUsed&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;0x5208&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;#34;from&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;0x004ec07d2329997267ec62b4166639513386f32e&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;#34;gasUsed&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;0x5208&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;#34;logs&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[],&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;#34;logsBloom&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;#34;root&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;null&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;#34;status&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;null&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;&amp;lt;---&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;nullになっとる！！！！！&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;#34;to&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;0xa43e00a4d376d14117e7c97bfb57b54409f9b2b4&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;#34;transactionHash&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;0x60b0ea2f7fff204391119ecf68620b83df4be67a2add3660ef00e056b758ccbf&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;#34;transactionIndex&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;0x0&amp;#34;&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+  &lt;span class=&#34;nt&#34;&gt;&amp;#34;id&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;statusがnullになっていた。これが原因でtruffle側でtxの結果がfalseと判断されerrorが出ていたのだろう。&lt;/p&gt;
+&lt;p&gt;これってもしかしてparity特有の問題？と疑ったりもしたのだが、以下のpageを発見。&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+&lt;div class=&#34;body-iframe page-embed hatena-web-card&#34;&gt;
+  &lt;a href=&#34;https://ethereum.stackexchange.com/questions/61879/why-root-and-status-is-null-in-transaction-receipts&#34; target=&#34;_blank&#34;&gt;
+    &lt;div class=&#34;embed-wrapper&#34;&gt;
+      &lt;div class=&#34;embed-wrapper-inner&#34;&gt;
+        &lt;div class=&#34;embed-content with-thumb&#34;&gt;
+          &lt;div class=&#34;thumb-wrapper&#34;&gt;
+            &lt;img src=&#34;https://cdn.sstatic.net/Sites/ethereum/Img/apple-touch-icon@2.png?v=fcf6615497f4&#34; class=&#34;thumb&#34;&gt;
+          &lt;/div&gt;
+          &lt;div class=&#34;entry-body&#34;&gt;
+            &lt;h2 class=&#34;entry-title&#34;&gt;
+              Why root and status is null in transaction receipts
+            &lt;/h2&gt;
+            &lt;div class=&#34;entry-content&#34;&gt;
+              I deployed a smart contract on my private Parity node with Web3js. I got transaction hash and logs those I submitted at my contract creation. Everything works well, I can call functions correctly. 
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;embed-footer&#34;&gt;
+          &lt;a href=&#34;https/ethereum.stackexchange.com&#34;target=&#34;_blank&#34;&gt;
+            &lt;img src=&#34;https://www.google.com/s2/favicons?domain=ethereum.stackexchange.com&#34; alt=&#34;&#34; title=&#34;Why root and status is null in transaction receipts&#34; class=&#34;favicon&#34;&gt;
+            https/ethereum.stackexchange.com
+          &lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+
+
+&lt;p&gt;どうやらparityのnodeを建てる時のchain specの設定でbyzantiumへの対応ができていなかったらしい。(statusはbyzantiumから導入されたのでnullになっていた)&lt;/p&gt;
+&lt;p&gt;ということで以下のissueに倣い、chain specにparamsとaccountを書き足してnodeを起動したら、何事もなく上手くいった。
+
+
+
+
+
+
+
+
+
+
+
+&lt;div class=&#34;body-iframe page-embed hatena-web-card&#34;&gt;
+  &lt;a href=&#34;https://github.com/paritytech/parity-ethereum/issues/7124#issuecomment-346647725&#34; target=&#34;_blank&#34;&gt;
+    &lt;div class=&#34;embed-wrapper&#34;&gt;
+      &lt;div class=&#34;embed-wrapper-inner&#34;&gt;
+        &lt;div class=&#34;embed-content with-thumb&#34;&gt;
+          &lt;div class=&#34;thumb-wrapper&#34;&gt;
+            &lt;img src=&#34;https://avatars.githubusercontent.com/u/58831716?s=400&amp;amp;v=4&#34; class=&#34;thumb&#34;&gt;
+          &lt;/div&gt;
+          &lt;div class=&#34;entry-body&#34;&gt;
+            &lt;h2 class=&#34;entry-title&#34;&gt;
+              How to enable byzantium on new networks · Issue #7124 · openethereum/parity-ethereum
+            &lt;/h2&gt;
+            &lt;div class=&#34;entry-content&#34;&gt;
+              I&amp;#39;m running: Which Parity version?: 1.8.x When using parity &amp;gt;=1.8 to create a new private PoA network, how to enable byzantium fork functionality? Changelog mentions that 1.8.0 has &amp;#34;Full Byzantium-fork compatibility&amp;#34;, but is it included ...
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;embed-footer&#34;&gt;
+          &lt;a href=&#34;https/github.com&#34;target=&#34;_blank&#34;&gt;
+            &lt;img src=&#34;https://www.google.com/s2/favicons?domain=github.com&#34; alt=&#34;&#34; title=&#34;How to enable byzantium on new networks · Issue #7124 · openethereum/parity-ethereum&#34; class=&#34;favicon&#34;&gt;
+            https/github.com
+          &lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>browserify&#43;babelでasync/awaitを使用した快適p5.js開発環境構築</title>
+      <link>https://seita.icu/post/p5js-browserify/</link>
+      <pubDate>Fri, 26 Apr 2019 20:09:30 -0700</pubDate>
+      
+      <guid>https://seita.icu/post/p5js-browserify/</guid>
+      <description>&lt;script src=&#34;https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.min.js&#34;&gt;&lt;/script&gt;
+&lt;p&gt;今回は、&lt;a href=&#34;https://processing.org/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;processing&lt;/a&gt;
+のjs版として、ブラウザでインタラクティブなグラフィックを実装できる&lt;a href=&#34;https://p5js.org&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;p5js&lt;/a&gt;
+を使用してwebsiteに以下のようなアニメーションを実装した経験から、自分がどのように快適な開発環境を構築したかをご紹介します。&lt;/p&gt;
+&lt;div id=&#34;p5js-example&#34; style=&#34;margin:0px 20%;width:60%;height:auto;background:rgb(0,0,0,0);position:relative;&#34;&gt;&lt;/div&gt;
+
+
+
+
+&lt;script&gt;const totals = 100;
+const limitMin = 15;
+const limitMax = 150;
+const speedMin = 0.5;
+const speedMax = 5;
+
+let x = new Array();
+let y = new Array();
+let speed = new Array();
+let particleX = new Array();
+let limit = new Array();
+let showBackground = true;
+let example;
+
+const sketch_1 = function (p5) {
+  p5.setup = function () {
+    example = document.getElementById(&#34;p5js-example&#34;);
+    example.style.height = `${example.clientWidth}px`;
+    const canvas = p5.createCanvas(example.clientWidth, example.clientHeight);
+    canvas.parent(&#39;p5js-example&#39;);
+    canvas.position(0, 0);
+    canvas.style(&#39;z-index&#39;, &#39;0&#39;);
+
+    fillArrays();
+  }
+
+  p5.draw = function () {
+    if (p5.random(100) &gt; 80) {
+      showBackground = !showBackground;
+    }
+    if (showBackground) {
+      p5.background(0);
+    }
+    showSystem();
+  }
+
+  function fillArrays() {
+    for (let i = 0; i &lt; totals; i++) {
+      x[i] = p5.random(example.clientWidth);
+      y[i] = p5.random(example.clientHeight);
+      speed[i] = p5.random(speedMin, speedMax);
+      limit[i] = p5.random(limitMin, limitMax);
+      particleX[i] = 0.0;
+    }
+  }
+
+  function showSystem() {
+    for (let i = 0; i &lt; totals; i++) {
+      p5.stroke(255);
+      p5.line(x[i], y[i], x[i] + limit[i], y[i]);
+
+      particleX[i] += speed[i];
+
+      p5.fill(255);
+      p5.ellipse(x[i] + particleX[i], y[i], 5, 5);
+
+      if (particleX[i] &gt; limit[i]) {
+        x[i] = p5.random(example.clientWidth);
+        y[i] = p5.random(example.clientHeight);
+        speed[i] = p5.random(speedMin, speedMax);
+        limit[i] = p5.random(limitMin, limitMax);
+        particleX[i] = 0.0;
+      }
+
+      if (i &gt; 0) {
+        p5.line(x[i] + particleX[i], y[i], x[i - 1] + particleX[i - 1], y[i - 1]);
+      }
+    }
+  }
+}
+
+const sleep = msec =&gt; new Promise(resolve =&gt; setTimeout(resolve, msec));
+const sketch_2 = function (p5) {
+  p5.setup = function () {
+    sample = document.getElementById(&#34;sample&#34;);
+    sample.style.height = `${sample.clientWidth}px`;
+    const canvas = p5.createCanvas(sample.clientWidth, sample.clientHeight);
+    canvas.parent(&#39;sample&#39;);
+    canvas.position(0, 0);
+    canvas.style(&#39;z-index&#39;, &#39;0&#39;);
+    p5.background(0);
+  }
+
+  p5.draw = async function () {
+    p5.fill(255);
+    const x = p5.mouseX;
+    const y = p5.mouseY;
+    await sleep(1000);
+    p5.ellipse(x, y, 20, 20);
+  }
+}
+
+new p5(sketch_1)
+new p5(sketch_2)
+&lt;/script&gt;
+
+
+
+&lt;h2 id=&#34;asyncawaitを使おう&#34;&gt;async/awaitを使おう&lt;/h2&gt;
+&lt;p&gt;上記の例では使用していませんが、jsでapiを叩いたりするとpromiseのハンドリングが必要になります。しかし、promiseが頻繁に登場するとthen/catchが複雑になったりして可読性が損なわれることがあるので、モダンなasync/awaitで同期処理をスッキリ書きたいところです。&lt;/p&gt;
+&lt;p&gt;比較的新しい機能であるこのasync/awaitを各主要ブラウザで使用するには、babel等のツールでブラウザに互換性のある形式にjsをトランスパイルする必要があります。&lt;/p&gt;
+&lt;p&gt;babelとasync/awaitについてはこちらの記事で詳しく説明されているのでご参照ください。
+
+
+
+
+
+
+
+
+
+
+
+&lt;div class=&#34;body-iframe page-embed hatena-web-card&#34;&gt;
+  &lt;a href=&#34;https://qiita.com/ea54595/items/e6e36fcf1d10deadc17a&#34; target=&#34;_blank&#34;&gt;
+    &lt;div class=&#34;embed-wrapper&#34;&gt;
+      &lt;div class=&#34;embed-wrapper-inner&#34;&gt;
+        &lt;div class=&#34;embed-content with-thumb&#34;&gt;
+          &lt;div class=&#34;thumb-wrapper&#34;&gt;
+            &lt;img src=&#34;https://qiita-user-contents.imgix.net/https:%2F%2Fcdn.qiita.com%2Fassets%2Fpublic%2Farticle-ogp-background-1150d8b18a7c15795b701a55ae908f94.png?ixlib=rb-1.2.2&amp;amp;w=1200&amp;amp;mark=https://qiita-user-contents.imgix.net/~text?ixlib=rb-1.2.2%26w=840%26h=380%26txt=%25E4%25BB%258A%25E6%259B%25B4%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589%2520Babel%2520%25E3%2581%25A7%2520ES7%2520Async%252FAwait%2520%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%26txt-color=%2523333%26txt-font=Hiragino%2520Sans%2520W6%26txt-size=54%26txt-clip=ellipsis%26txt-align=center%252Cmiddle%26s=8d4bf43ae4f12c755b2122ac318aa3b8&amp;amp;mark-align=center,middle&amp;amp;blend=https://qiita-user-contents.imgix.net/~text?ixlib=rb-1.2.2%26w=840%26h=500%26txt=%2540ea54595%26txt-color=%2523333%26txt-font=Hiragino%2520Sans%2520W6%26txt-size=45%26txt-align=right%252Cbottom%26s=e576a466a64b169f4b0b1f07dc41e047&amp;amp;blend-align=center,middle&amp;amp;blend-mode=normal&amp;amp;s=e4f75fcf95744d0babe10861c13ebe52&#34; class=&#34;thumb&#34;&gt;
+          &lt;/div&gt;
+          &lt;div class=&#34;entry-body&#34;&gt;
+            &lt;h2 class=&#34;entry-title&#34;&gt;
+              今更ながら Babel で ES7 Async/Await を試してみた - Qiita
+            &lt;/h2&gt;
+            &lt;div class=&#34;entry-content&#34;&gt;
+              この記事は Sansan Advent Calendar 2015の15日目です。
+さぁ AdventCalender なんて書いてるので年末ですね。
+最近フロントエンドをやらなかったので JavaScript 書かなくなって追いかけ...
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;embed-footer&#34;&gt;
+          &lt;a href=&#34;https/qiita.com&#34;target=&#34;_blank&#34;&gt;
+            &lt;img src=&#34;https://www.google.com/s2/favicons?domain=qiita.com&#34; alt=&#34;&#34; title=&#34;今更ながら Babel で ES7 Async/Await を試してみた - Qiita&#34; class=&#34;favicon&#34;&gt;
+            https/qiita.com
+          &lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h3 id=&#34;browserifybabel&#34;&gt;browserify+babel&lt;/h3&gt;
+&lt;p&gt;数あるツールの中でも、今回はbrowserifyを選択しました。理由は機能が大きすぎず学習コストを抑えながら自分の目的を果たしてくれそうだったからです。&lt;/p&gt;
+&lt;p&gt;browserify+babelの基本的な使い方はこちらの記事で紹介されています。
+
+
+
+
+
+
+
+
+
+
+
+&lt;div class=&#34;body-iframe page-embed hatena-web-card&#34;&gt;
+  &lt;a href=&#34;https://qiita.com/foursue/items/d80667eff2faed8613f2#browserify%E3%81%A7%E4%BD%BF%E3%81%86%E5%A0%B4%E5%90%88&#34; target=&#34;_blank&#34;&gt;
+    &lt;div class=&#34;embed-wrapper&#34;&gt;
+      &lt;div class=&#34;embed-wrapper-inner&#34;&gt;
+        &lt;div class=&#34;embed-content with-thumb&#34;&gt;
+          &lt;div class=&#34;thumb-wrapper&#34;&gt;
+            &lt;img src=&#34;https://qiita-user-contents.imgix.net/https:%2F%2Fcdn.qiita.com%2Fassets%2Fpublic%2Farticle-ogp-background-1150d8b18a7c15795b701a55ae908f94.png?ixlib=rb-1.2.2&amp;amp;w=1200&amp;amp;mark=https://qiita-user-contents.imgix.net/~text?ixlib=rb-1.2.2%26w=840%26h=380%26txt=Babel%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%258A%25E3%2581%2586%26txt-color=%2523333%26txt-font=Hiragino%2520Sans%2520W6%26txt-size=54%26txt-clip=ellipsis%26txt-align=center%252Cmiddle%26s=b636235515046b771f633321998cf49c&amp;amp;mark-align=center,middle&amp;amp;blend=https://qiita-user-contents.imgix.net/~text?ixlib=rb-1.2.2%26w=840%26h=500%26txt=%2540foursue%26txt-color=%2523333%26txt-font=Hiragino%2520Sans%2520W6%26txt-size=45%26txt-align=right%252Cbottom%26s=cd49903fe34e0276e44cff9cf9eeb5b3&amp;amp;blend-align=center,middle&amp;amp;blend-mode=normal&amp;amp;s=b2ab2749ba20fe99a08ad34f49ddf479&#34; class=&#34;thumb&#34;&gt;
+          &lt;/div&gt;
+          &lt;div class=&#34;entry-body&#34;&gt;
+            &lt;h2 class=&#34;entry-title&#34;&gt;
+              Babelを使おう - Qiita
+            &lt;/h2&gt;
+            &lt;div class=&#34;entry-content&#34;&gt;
+              
+
+Babel
+
+Reactやる時に生のJSを書くとシンドイので、ES2015やJSXで書きます。だけど、生のJSとは違いES2015やJSXはブラウザで直接実行できません。ですのでトランスパイラとよばれるプリプロセッサを使ってそれら...
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;embed-footer&#34;&gt;
+          &lt;a href=&#34;https/qiita.com&#34;target=&#34;_blank&#34;&gt;
+            &lt;img src=&#34;https://www.google.com/s2/favicons?domain=qiita.com&#34; alt=&#34;&#34; title=&#34;Babelを使おう - Qiita&#34; class=&#34;favicon&#34;&gt;
+            https/qiita.com
+          &lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;念の為自分の&lt;code&gt;package.json&lt;/code&gt;の一部を掲載しておきます。以下の内容でbrowserifyを走らせれば、module化されたファイルを&lt;code&gt;import&lt;/code&gt;や&lt;code&gt;require&lt;/code&gt;で複数読み込んでいる場合でもブラウザで実行できる形式によしなに変換してくれて、かつbabelがjsをトランスパイルしてくれます。ありがたや〜。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;#34;scripts&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;#34;watch-js&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;watchify -t babelify static/js/src/*.js -o static/js/dist/bundle.js -dv&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;#34;watch&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;npm run watch-js&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;#34;build&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;browserify static/js/src/main.js -o static/js/dist/bundle.js&amp;#34;&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;#34;browserify&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;#34;transform&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[[&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;babelify&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;nt&#34;&gt;&amp;#34;presets&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;@babel/preset-env&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}]]&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;#34;devDependencies&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;#34;@babel/core&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;^7.3.4&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;#34;@babel/preset-env&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;^7.3.4&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;#34;babel-preset-env&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;^1.7.0&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;#34;babelify&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;^10.0.0&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;#34;babel-polyfill&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;^6.26.0&amp;#34;&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;#34;dependencies&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;#34;p5&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;^0.8.0&amp;#34;&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;localにwatchifyがインストールされていれば、以上の&lt;code&gt;watch-js&lt;/code&gt;を実行するとjsファイルの変更を検知して自動ビルドしてくれるようになります。&lt;/p&gt;
+&lt;h2 id=&#34;p5jsを使おう&#34;&gt;p5.jsを使おう&lt;/h2&gt;
+&lt;p&gt;自分は以下のようにCDNでp5.jsをhtmlファイル内で読み込んで使用しています。適宜最新のバージョンを指定するようにしましょう。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;script&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;src&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;script&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;script&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;src&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.min.js&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;script&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;実際にp5.jsの処理を記述するファイルでは、まず冒頭で&lt;code&gt;import &#39;babel-polyfill&#39;;&lt;/code&gt;とすることで一部機能が利用可能になります。&lt;/p&gt;
+&lt;p&gt;公式によると、&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;This will emulate a full ES2015+ environment (no &amp;lt; Stage 4 proposals) and is intended to be used in an application rather than a library/tool. (this polyfill is automatically loaded when using babel-node).&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;This means you can use new built-ins like Promise or WeakMap, static methods like Array.from or Object.assign, instance methods like Array.prototype.includes, and generator functions (provided you use the regenerator plugin).&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;だそうで、プロミスだったり、WeakMapだったりの便利機能が実際には利用できるようになっているらしいです。&lt;/p&gt;
+&lt;p&gt;また、自分は&lt;a href=&#34;https://github.com/processing/p5.js/wiki/Global-and-instance-mode&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;instance mode&lt;/a&gt;
+でp5.jsを記述しています。この方が、複数のsketchを管理したり、他のjsモジュールを使用する際に便利だからです。&lt;/p&gt;
+&lt;p&gt;以下にp5.jsのサンプルコードを貼り付けておきます。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span class=&#34;kr&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;babel-polyfill&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;sleep&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;msec&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Promise&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;resolve&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;setTimeout&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;resolve&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;msec&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;));&lt;/span&gt;
+&lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;sketch&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;function&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;p5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;p5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;setup&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;function&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;nx&#34;&gt;p5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;createCanvas&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;800&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;800&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+        &lt;span class=&#34;nx&#34;&gt;p5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;background&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+
+    &lt;span class=&#34;nx&#34;&gt;p5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;draw&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;async&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;function&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;nx&#34;&gt;p5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;fill&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;255&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+        &lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;p5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;mouseX&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+        &lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;y&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;p5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;mouseY&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+        &lt;span class=&#34;nx&#34;&gt;await&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;sleep&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1000&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+        &lt;span class=&#34;nx&#34;&gt;p5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;ellipse&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;20&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;20&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;p5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;sketch&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;以上のサンプルが以下のcanvasで実行されています。draw関数の中でawaitをつかって1秒後に描画されるようにしました。canvasの上でマウスを動かすと1秒遅れで円がついてくるのがわかると思います。async/awaitが解釈され、ちゃんと動いてますね！&lt;/p&gt;
+&lt;div id=sample style=&#34;margin:0px 20%;width:60%;height:auto;background:rgb(0,0,0,0);position:relative;&#34;&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>HugoでSCSS/SASSをCSSに変換するならVersionに注意</title>
+      <link>https://seita.icu/post/hugo-sass-version/</link>
+      <pubDate>Wed, 24 Apr 2019 01:44:39 -0700</pubDate>
+      
+      <guid>https://seita.icu/post/hugo-sass-version/</guid>
+      <description>&lt;p&gt;Hugoにbulmaを導入した際にbulmaのSASSをCSSに変換していたのが、なぜかCircleCIでビルドする時に&lt;code&gt;error: failed to transform resource: TOCSS: failed to transform &amp;quot;bulma/bulma.sass&amp;quot; (text/x-scss): this feature is not available&lt;/code&gt;というエラーを吐いていたので報告。&lt;/p&gt;
+&lt;h2 id=&#34;scsssassをcssに変換してくれる&#34;&gt;SCSS/SASSをCSSに変換してくれる&lt;/h2&gt;
+&lt;p&gt;Hugoでは以下のようにSCSS/SASSをCSSに変換してくれる機能があるので非常に便利です。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-go-html-template&#34; data-lang=&#34;go-html-template&#34;&gt;&lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$bulma&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;resources&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;.Get&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;bulma/bulma.sass&amp;#34;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+&lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$scss&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$bulma&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+&lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$options&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;dict&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;targetPath&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;style.css&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;outputStyle&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;compressed&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;enableSourceMap&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+&lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$style&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$scss&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;resources&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;.ToCSS&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$options&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;link&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;href&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$style&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;.Permalink&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;rel&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;stylesheet&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;hugoのversionにextendedが必要&#34;&gt;Hugoのversionにextendedが必要&lt;/h2&gt;
+&lt;p&gt;しかしながら、以下のFAQにある通り、この機能を使用するにはHugoのversionにextendedがついている必要があります。
+
+
+
+
+
+
+
+
+
+
+
+&lt;div class=&#34;body-iframe page-embed hatena-web-card&#34;&gt;
+  &lt;a href=&#34;https://gohugo.io/troubleshooting/faq/#i-get-tocss-this-feature-is-not-available-in-your-current-hugo-version&#34; target=&#34;_blank&#34;&gt;
+    &lt;div class=&#34;embed-wrapper&#34;&gt;
+      &lt;div class=&#34;embed-wrapper-inner&#34;&gt;
+        &lt;div class=&#34;embed-content with-thumb&#34;&gt;
+          &lt;div class=&#34;thumb-wrapper&#34;&gt;
+            &lt;img src=&#34;https://gohugo.io/images/gohugoio-card.png&#34; class=&#34;thumb&#34;&gt;
+          &lt;/div&gt;
+          &lt;div class=&#34;entry-body&#34;&gt;
+            &lt;h2 class=&#34;entry-title&#34;&gt;
+              Frequently Asked Questions
+            &lt;/h2&gt;
+            &lt;div class=&#34;entry-content&#34;&gt;
+              Solutions to some common Hugo problems.
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;embed-footer&#34;&gt;
+          &lt;a href=&#34;https/gohugo.io&#34;target=&#34;_blank&#34;&gt;
+            &lt;img src=&#34;https://www.google.com/s2/favicons?domain=gohugo.io&#34; alt=&#34;&#34; title=&#34;Frequently Asked Questions&#34; class=&#34;favicon&#34;&gt;
+            https/gohugo.io
+          &lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;自分はCircleCIでDocker HubからpullしていたimageでextendedのついていないHugoのversionをinstallしていたため、直ちに修正しました。&lt;/p&gt;
+&lt;p&gt;念の為修正後のDockerfileを晒しておきます。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-Dockerfile&#34; data-lang=&#34;Dockerfile&#34;&gt;&lt;span class=&#34;c&#34;&gt;# use latest Node (alpine)&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt;&lt;span class=&#34;s&#34;&gt; node:8&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# Download and install hugo ここ!!&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;ENV&lt;/span&gt; HUGO_VERSION 0.55.3&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;ENV&lt;/span&gt; HUGO_BINARY hugo_extended_&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;HUGO_VERSION&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;_Linux-64bit.deb&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;c&#34;&gt;#ADD https://github.com/spf13/hugo/releases/download/v${HUGO_VERSION}/${HUGO_BINARY} /tmp/hugo.deb&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;RUN&lt;/span&gt; curl -sL -o /tmp/hugo.deb &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;    https://github.com/spf13/hugo/releases/download/v&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;HUGO_VERSION&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;/&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;HUGO_BINARY&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;    dpkg -i /tmp/hugo.deb &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;    rm /tmp/hugo.deb &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;    mkdir /usr/share/blog&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;WORKDIR&lt;/span&gt;&lt;span class=&#34;s&#34;&gt; /usr/share/blog&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;RUN&lt;/span&gt;  npm -g config &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; user root &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;     npm install -g firebase-tools&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# Expose default hugo port&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;EXPOSE&lt;/span&gt;&lt;span class=&#34;s&#34;&gt; 1313&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;それでは良いHugoライフを。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>HugoのPage Resourcesの使い方</title>
+      <link>https://seita.icu/post/hugo-resources/</link>
+      <pubDate>Wed, 17 Apr 2019 16:23:27 -0700</pubDate>
+      
+      <guid>https://seita.icu/post/hugo-resources/</guid>
+      <description>&lt;p&gt;初めて使用するhugoのthemeを読んでいてpage resourceの使い方がすぐ理解できなかったのでメモ。&lt;/p&gt;
+&lt;h3 id=&#34;参考ページ&#34;&gt;参考ページ&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://regisphilibert.com/blog/2018/01/hugo-page-resources-and-how-to-use-them/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Hugo Page Resources
+and how to use them&amp;hellip;&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://gohugo.io/content-management/page-resources/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Page Resources -HUGO公式ドキュメント-&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;postごとにディレクトリを作る&#34;&gt;postごとにディレクトリを作る&lt;/h2&gt;
+&lt;p&gt;以下は上記の&lt;a href=&#34;https://regisphilibert.com/blog/2018/01/hugo-page-resources-and-how-to-use-them/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Hugo Page Resources
+and how to use them&amp;hellip;&lt;/a&gt;
+からお借りした図。&lt;/p&gt;
+&lt;p&gt;自分は普段postごとにディレクトリを作ることはしませんが、以下のようにディレクトリをポストのスラッグ名(例では&lt;code&gt;&amp;quot;i-love-eating-cupcakes&amp;quot;&lt;/code&gt;)で作成し、その中に&lt;code&gt;index.md&lt;/code&gt;、&lt;code&gt;images&lt;/code&gt;とファイルを分けて置くことも可能です。こうしておくと、staticフォルダに画像が溜まりまくって何が何だか分からなくなるのを防げるので良いですね。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;.
+└── content
+    ├── post
+    │   ├── i-love-eating-cupcakes
+    │   │   ├── index.md //index.mdにfont matterとか記事を書く
+    │   │   └── images
+    │   │       ├── yummy-cupcake.jpg
+    │   │       └── shiny-glaze.jpg
+    │   └── i-hate-baking-cupcakes
+    │       ├── index.md 
+    │       └── images
+    │           ├── overcooked-dough.jpg
+    │           └── sloppy-icing.jpg
+    └── recipes
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;pageからresourceにアクセスする&#34;&gt;pageからresourceにアクセスする&lt;/h2&gt;
+&lt;p&gt;今回の例では、&lt;code&gt;images&lt;/code&gt;がpage resourcesにあたります。例えば、&lt;code&gt;i-love-eating-cupcakes&lt;/code&gt;のpostの&lt;code&gt;yummy-cupcake.jpg&lt;/code&gt;にアクセスしたい場合、以下のように取得することができます。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-go-html-template&#34; data-lang=&#34;go-html-template&#34;&gt;&lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;with&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;na&#34;&gt;.Site.GetPage&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;/post/i-love-eating-cupcakes&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+  &lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;na&#34;&gt;.Resources.Match&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;images/yummy-cupcake.jpg&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt; 
+&lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;.Resources.Match &amp;quot;images/yummy-cupcake.jpg&amp;quot;&lt;/code&gt;で&amp;quot;images/yummy-cupcake.jpg&amp;quot;にマッチするファイルを取得しています。Matchの他にもMethodがありますので、詳しくは&lt;a href=&#34;https://gohugo.io/content-management/page-resources/#methods&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;こちら&lt;/a&gt;
+を参照してください。&lt;/p&gt;
+&lt;h2 id=&#34;resourceにメタデータを与える&#34;&gt;resourceにメタデータを与える&lt;/h2&gt;
+&lt;p&gt;上の図で言うindex.mdのfont matterに以下のようにpage resourceのメタデータを記載することができます。toml記法で表記しています。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-toml&#34; data-lang=&#34;toml&#34;&gt;&lt;span class=&#34;err&#34;&gt;---&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;title&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;HugoのPage Resourcesの使い方&amp;#34;&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;date&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;ld&#34;&gt;2019-04-17T16:23:27-07:00&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;draft&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;false&lt;/span&gt;
+
+&lt;span class=&#34;p&#34;&gt;[[&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;resources&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]]&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;src&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;images/yummy-cupcake.jpg&amp;#34;&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;name&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;featured-image&amp;#34;&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;title&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;yummy-cupcake&amp;#34;&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;resources&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;params&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;icon&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;photo&amp;#34;&lt;/span&gt;
+&lt;span class=&#34;err&#34;&gt;---&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;このように&lt;code&gt;name&lt;/code&gt;をつけてあげることで、先ほど&lt;code&gt;.Resources.Match &amp;quot;images/yummy-cupcake.jpg&amp;quot;&lt;/code&gt;としていたところを、&lt;code&gt;.Resources.Match &amp;quot;featured-image&amp;quot;&lt;/code&gt;とわかりやすく短縮することができます。詳しくは&lt;a href=&#34;https://gohugo.io/content-management/page-resources/#resources-metadata-example&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;こちら&lt;/a&gt;
+を参照してください。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Google Spreadsheets&#43;NetlifyでHugoの簡易CMS作成</title>
+      <link>https://seita.icu/post/google-spread-sheet-cms/</link>
+      <pubDate>Sun, 31 Mar 2019 15:52:59 -0700</pubDate>
+      
+      <guid>https://seita.icu/post/google-spread-sheet-cms/</guid>
+      <description>&lt;p&gt;現在留学中のカリフォルニア大学サンタバーバラ校(UCSB)で、&lt;a href=&#34;https://www.blockchainatucsb.com/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Blockchain at UCSB&lt;/a&gt;
+という組織の幹部をしてまして、一応技術担当なので組織の紹介用&lt;a href=&#34;https://www.blockchainatucsb.com/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;website&lt;/a&gt;
+を開発していたところ、最近の活動を掲載するセクションを他のメンバーでも編集できるようにしてほしいと要望を受けたため、特定の箇所のみ編集可能なhugoのcmsをgoogleのspreadsheetsを使用して作成しました。&lt;/p&gt;
+&lt;div class=&#34;body-iframe page-embed hatena-web-card&#34;&gt;
+  &lt;a href=&#34;https://blockchain-at-ucsb-develop.netlify.com&#34; target=&#34;_blank&#34;&gt;
+    &lt;div class=&#34;embed-wrapper&#34;&gt;
+      &lt;div class=&#34;embed-wrapper-inner&#34;&gt;
+        &lt;div class=&#34;embed-content with-thumb&#34;&gt;
+          &lt;div class=&#34;thumb-wrapper&#34;&gt;
+            &lt;img src=&#34;https://blockchain-at-ucsb-develop.netlify.com/img/blockchain-at-ucsb.png&#34; class=&#34;thumb&#34;&gt;
+          &lt;/div&gt;
+          &lt;div class=&#34;entry-body&#34;&gt;
+            &lt;h2 class=&#34;entry-title&#34;&gt;
+              Blockchain at UCSB
+            &lt;/h2&gt;
+            &lt;div class=&#34;entry-content&#34;&gt;
+              Blockchain at UCSB (BCUCSB) is a community of students, entrepreneurs, and academics at UC Santa Barbara who have come together to educate and bring awareness about compelling blockchain technology and its applications. We host workshops, speaker events, innovation competitions, and socials to bring blockchain awareness to our local community.
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;embed-footer&#34;&gt;
+          &lt;a href=&#34;https/blockchain-at-ucsb-develop.netlify.com&#34;target=&#34;_blank&#34;&gt;
+            &lt;img src=&#34;https://www.google.com/s2/favicons?domain=blockchain-at-ucsb-develop.netlify.com&#34; alt=&#34;&#34; title=&#34;Blockchain at UCSB&#34; class=&#34;favicon&#34;&gt;
+            https/blockchain-at-ucsb-develop.netlify.com
+          &lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+
+
+&lt;h1 id=&#34;先に完成形&#34;&gt;先に完成形&lt;/h1&gt;
+&lt;p&gt;完成したsheetはこんな感じです。&lt;/p&gt;
+&lt;p&gt;各項目のtitle, link, description, google driveに保存したimageのlinkが整理されています。&lt;/p&gt;
+&lt;span class=&#34;image-container&#34;&gt;&lt;span class=&#34;link&#34; &gt;&lt;a href=&#34;https://seita.icu/img/google-sheets.png&#34; 
+        target=&#34;_blank&#34;&gt;&lt;img class=&#34;img&#34; src=&#34;https://seita.icu/img/google-sheets.png&#34;/&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;/span&gt;
+&lt;p&gt;右側の派手な&amp;quot;Update Website&amp;quot;というボタンを押すと、netlifyのwebhookをtriggerしてsheetの内容を反映したwebsiteをdeployできます。&lt;/p&gt;
+&lt;p&gt;Updateすると、&lt;a href=&#34;https://www.blockchainatucsb.com/#activities&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;website&lt;/a&gt;
+のactivitiesセクションのみがsheetの内容に沿って更新されます。&lt;/p&gt;
+&lt;p&gt;以下のセクションです。
+&lt;span class=&#34;image-container&#34;&gt;&lt;span class=&#34;link&#34; &gt;&lt;a href=&#34;https://seita.icu/img/activities_screenshot.png&#34; 
+        target=&#34;_blank&#34;&gt;&lt;img class=&#34;img&#34; src=&#34;https://seita.icu/img/activities_screenshot.png&#34;/&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Netlify CMSや他のCMSは今回の用途にはオーバースペックだったのと、spreadsheetsをJSONバックエンドとして使用してみたいという個人的な願望があったため、あえてnetlify+spreadsheetsという構成にしました。&lt;/p&gt;
+&lt;h2 id=&#34;spreadsheetsのデータをjsonで取得&#34;&gt;spreadsheetsのデータをJSONで取得&lt;/h2&gt;
+&lt;p&gt;参考にしたのはこちらのサイト&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://coderwall.com/p/duapqq/use-a-google-spreadsheet-as-your-json-backend&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Use a Google Spreadsheet as your JSON backend&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://developers.google.com/gdata/samples/spreadsheet_sample&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Simple example of retrieving JSON feeds from Spreadsheets Data API&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;細かい説明は上記のサイトでみてもらうとして、spreadsheetsを&lt;code&gt;ファイル&lt;/code&gt;-&amp;gt;&lt;code&gt;webで公開する&lt;/code&gt;の順で公開してから、&lt;code&gt;https://spreadsheets.google.com/feeds/list/ + spreadsheetsのID + /od6/public/values?alt=json&lt;/code&gt;にGETするとsheetの内容をJSONで受け取ることができます。spreadsheetsのIDは普通にsheetを開いたときのurlに含まれています。&lt;/p&gt;
+&lt;p&gt;自分のtitle, link, imageurl, descriptionというカラムに分けたsheetでは以下のようにデータがJSONで返ってきます。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-JSON&#34; data-lang=&#34;JSON&#34;&gt;&lt;span class=&#34;err&#34;&gt;//省略&lt;/span&gt;
+&lt;span class=&#34;s2&#34;&gt;&amp;#34;gsx$title&amp;#34;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;nt&#34;&gt;&amp;#34;$t&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Innovation Summit&amp;#34;&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;,&lt;/span&gt;
+&lt;span class=&#34;s2&#34;&gt;&amp;#34;gsx$link&amp;#34;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;nt&#34;&gt;&amp;#34;$t&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;https://innovateucsb.wixsite.com/website&amp;#34;&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;,&lt;/span&gt;
+&lt;span class=&#34;s2&#34;&gt;&amp;#34;gsx$imageurl&amp;#34;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;nt&#34;&gt;&amp;#34;$t&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;https://drive.google.com/file/d/1aFXSAnavoPCkVwI5v7VV-UQJEykN9wMt/view?usp=sharing&amp;#34;&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;,&lt;/span&gt;
+&lt;span class=&#34;s2&#34;&gt;&amp;#34;gsx$description&amp;#34;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;nt&#34;&gt;&amp;#34;$t&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;BCUCSB collaborated with UCSB Innovation Council and other campus organizations to put together a one-day campus event (November 17, 2018) designed to foster and harness creative thinking and develop a innovative business model to improve problems found in global categories such as energy, sustainability, income inequality, digital security, and health.&amp;#34;&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;hugoでsheetの内容を表示する&#34;&gt;Hugoでsheetの内容を表示する&lt;/h2&gt;
+&lt;p&gt;Hugoで上記のJSONデータを表示するため、getJSONでデータを受け取るのですが、上記のようにJSONのプロパティ名に&lt;code&gt;$&lt;/code&gt;(ドル記号)が入っているとhugoではエラーが発生してしまいます。これを回避するため、以下では&lt;code&gt;$&lt;/code&gt;が含まれる箇所を正規表現で取り除いています。&lt;/p&gt;
+&lt;p&gt;ここでは、Hugoの&lt;code&gt;config.toml&lt;/code&gt;にSite ParamとしてGoogleSpreadSheetIdを設定しており、partialの先頭でspreadsheetsのendpointを組み立てています。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-go-html-template&#34; data-lang=&#34;go-html-template&#34;&gt;&lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$googleSpreadSheetEndpoint&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;printf&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;%s%s%s&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;https://spreadsheets.google.com/feeds/list/&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;na&#34;&gt;$.Page.Site.Params.GoogleSpreadSheetId&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;/od6/public/values?alt=json&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+&lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$json&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;getJSON&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$googleSpreadSheetEndpoint&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+
+&lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$entries&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$json&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;.feed.entry&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+
+&lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;range&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$entry&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$entries&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+  &lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$scratch&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;newScratch&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+  &lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;range&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$key&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$value&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$entry&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+    &lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;hasPrefix&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$key&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;gsx&amp;#34;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+      &lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$sanitizedKey&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;replaceRE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;^gsx.&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$key&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+      &lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;range&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$k&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$v&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$value&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+        &lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;eq&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$sanitizedKey&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;imageurl&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+          &lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$imageId&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;replaceRE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;^https?://drive.google.com/file/d/(.*)/view.usp=sharing&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;$1&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$v&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+          &lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$v&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;printf&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;%s%s&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://drive.google.com/uc?export=view&amp;amp;id=&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$imageId&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+        &lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+      &lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$scratch&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;.Set&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$sanitizedKey&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$v&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+    &lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+  &lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+&lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;imageurlを加工しているのは、google driveに保存されたimageのurlをそのまま使用してもwebsiteに画像が表示されないためで、urlを&lt;code&gt;http://drive.google.com/uc?export=view&amp;amp;id=&lt;/code&gt;に置き換えて対応しています。詳しくは以下を参照。&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+&lt;div class=&#34;body-iframe page-embed hatena-web-card&#34;&gt;
+  &lt;a href=&#34;http://posaune.hatenablog.com/entry/2013/08/14/162251&#34; target=&#34;_blank&#34;&gt;
+    &lt;div class=&#34;embed-wrapper&#34;&gt;
+      &lt;div class=&#34;embed-wrapper-inner&#34;&gt;
+        &lt;div class=&#34;embed-content with-thumb&#34;&gt;
+          &lt;div class=&#34;thumb-wrapper&#34;&gt;
+            &lt;img src=&#34;https://cdn.blog.st-hatena.com/images/theme/og-image-1500.png&#34; class=&#34;thumb&#34;&gt;
+          &lt;/div&gt;
+          &lt;div class=&#34;entry-body&#34;&gt;
+            &lt;h2 class=&#34;entry-title&#34;&gt;
+              はてなブログ
+            &lt;/h2&gt;
+            &lt;div class=&#34;entry-content&#34;&gt;
+              
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;embed-footer&#34;&gt;
+          &lt;a href=&#34;http/posaune.hatenablog.com&#34;target=&#34;_blank&#34;&gt;
+            &lt;img src=&#34;https://www.google.com/s2/favicons?domain=posaune.hatenablog.com&#34; alt=&#34;&#34; title=&#34;はてなブログ&#34; class=&#34;favicon&#34;&gt;
+            http/posaune.hatenablog.com
+          &lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+
+
+&lt;p&gt;また、加工したJSONのプロパティ名をkeyにvalueを一時的に保持するため、&lt;a href=&#34;https://gohugo.io/functions/scratch/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;.Scratch&lt;/a&gt;
+というscratchpadの役割を果たすhugoの備え付け関数を使用しています。ここでは一時的なDictionaryのように用いています。&lt;/p&gt;
+&lt;h3 id=&#34;partial全体像&#34;&gt;partial全体像&lt;/h3&gt;
+&lt;p&gt;結果として作成したhugoのpartialは以下のようになりました。&lt;/p&gt;
+&lt;p&gt;spreadsheetsから取得したJSONのfeed.entryに含まれる配列をrangeで繰り返し処理しながら各eventの項目を展開しています。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-go-html-template&#34; data-lang=&#34;go-html-template&#34;&gt;&lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$googleSpreadSheetEndpoint&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;printf&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;%s%s%s&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;https://spreadsheets.google.com/feeds/list/&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;na&#34;&gt;$.Page.Site.Params.GoogleSpreadSheetId&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;/od6/public/values?alt=json&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+&lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$json&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;getJSON&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$googleSpreadSheetEndpoint&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+&lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$entries&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$json&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;.feed.entry&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+
+&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;div&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;events&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;range&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$entry&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$entries&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+      &lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$scratch&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;newScratch&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+      &lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;range&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$key&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$value&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$entry&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+        &lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;hasPrefix&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$key&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;gsx&amp;#34;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+          &lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$sanitizedKey&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;replaceRE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;^gsx.&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$key&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+          &lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;range&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$k&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$v&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$value&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+            &lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;eq&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$sanitizedKey&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;imageurl&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+              &lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$imageId&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;replaceRE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;^https?://drive.google.com/file/d/(.*)/view.usp=sharing&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;$1&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$v&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+              &lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$v&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;printf&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;%s%s&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://drive.google.com/uc?export=view&amp;amp;id=&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$imageId&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+            &lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+            &lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$scratch&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;.Set&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$sanitizedKey&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$v&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+          &lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+        &lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+      &lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+
+      &lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$imageUrl&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$scratch&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;.Get&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;imageurl&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+      &lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$link&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$scratch&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;.Get&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;link&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+      &lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$title&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$scratch&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;.Get&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;title&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+      &lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$description&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$scratch&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;.Get&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;description&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+      &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;div&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;is-col item&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+          &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;href&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$link&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+              &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;div&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;eyecatch-wrapper&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+                  &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;img&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;src&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$imageUrl&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;absURL&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;eyecatch&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+              &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;div&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+              &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;div&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;content&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+                  &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;h3&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;title&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+                      &lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$title&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+                  &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;h3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+                  &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;div&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;description is-muted&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+                      &lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$description&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+                  &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;div&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+              &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;div&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+          &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;div&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;cp&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;}}&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;div&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;これで、このサイトをbuildするたび、spreadsheetsの内容が反映されるようになりました。&lt;/p&gt;
+&lt;h2 id=&#34;spreadsheetsにupdateボタンを設置する&#34;&gt;SpreadsheetsにUpdateボタンを設置する&lt;/h2&gt;
+&lt;p&gt;Spreadsheetsを更新するたびwebsiteに表示されている内容も更新されてほしいので、sheetにボタンを設置します。&lt;/p&gt;
+&lt;p&gt;Spreadsheetsの&lt;code&gt;ツール&lt;/code&gt;-&amp;gt;&lt;code&gt;スクリプトエディター&lt;/code&gt;から、google apps scriptを以下のように記述します。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-GAS&#34; data-lang=&#34;GAS&#34;&gt;&lt;span class=&#34;nf&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;updateWebsite&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;nf&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;url&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;no&#34;&gt;netlify_build_hooks_endpoint&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;c&#34;&gt;;
+&lt;/span&gt;&lt;span class=&#34;c&#34;&gt;&lt;/span&gt;  &lt;span class=&#34;no&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;payload&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;{}&lt;/span&gt;
+  &lt;span class=&#34;nf&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;options&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;err&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;method&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;&lt;/span&gt;  &lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;no&#34;&gt;POST&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;err&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;payload&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;payload&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;err&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;followRedirects&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;err&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;muteHttpExceptions&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;true&lt;/span&gt;
+  &lt;span class=&#34;err&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;c&#34;&gt;;
+&lt;/span&gt;&lt;span class=&#34;c&#34;&gt;&lt;/span&gt;  &lt;span class=&#34;nf&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;result&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;UrlFetchApp.fetch&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;no&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;options&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;c&#34;&gt;;
+&lt;/span&gt;&lt;span class=&#34;c&#34;&gt;&lt;/span&gt;
+  &lt;span class=&#34;nf&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;no&#34;&gt;result.getResponseCode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;200&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;nf&#34;&gt;Logger.log&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;no&#34;&gt;result.getContentText&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;&lt;span class=&#34;c&#34;&gt;;
+&lt;/span&gt;&lt;span class=&#34;c&#34;&gt;&lt;/span&gt;  &lt;span class=&#34;err&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;err&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;netlify_build_hooks_endpoint&lt;/code&gt;にnetlifyでホスティングされている方は自身のサイトのbuild webhookを入力してください。&lt;/p&gt;
+&lt;p&gt;このスクリプトのupdateWebsite()という関数をspreadsheetsから実行することにより、netlifyのbuild webhookに対して空のpostリクエストを送信し、websiteをbuildすることができます。&lt;/p&gt;
+&lt;p&gt;ボタンの設置とgoogle apps scriptの連携に関しては、&lt;a href=&#34;https://www.atmarkit.co.jp/ait/articles/1708/14/news011.html&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;こちら&lt;/a&gt;
+を参考にしてください。&lt;/p&gt;
+&lt;h2 id=&#34;おわりに&#34;&gt;おわりに&lt;/h2&gt;
+&lt;p&gt;Spreadsheetsはシェアが簡単でかつ多くの人に馴染みのあるツールなので、今回のような開発者ではない人に提供するインターフェースとしてはとても便利で優秀なんじゃないかなと感じました。他のプロジェクトでも機会があれば利用していきたいです。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>バルセロナに来てアウトプットは大事だなと思った話</title>
+      <link>https://seita.icu/post/barcelona-output/</link>
+      <pubDate>Thu, 28 Mar 2019 19:34:17 +0100</pubDate>
+      
+      <guid>https://seita.icu/post/barcelona-output/</guid>
+      <description>&lt;p&gt;最近諸事情あってスペインのバルセロナに観光に行きまして、ガウディに始まり、ピカソやダリなど名だたる芸術家たちの美術館に足を運びました。&lt;/p&gt;
+&lt;p&gt;正直言って美術に精通しているわけでもないので、正しく鑑賞できた気はあまりしないのですが、自分が見ても特に勉強になったのは、まず彼らの作品数の多さです。&lt;/p&gt;
+&lt;h2 id=&#34;とにかくアウトプット&#34;&gt;とにかくアウトプット&lt;/h2&gt;
+&lt;p&gt;人が一生のなかで作ったものなので、ある程度数があるのは当たり前だとは思うんですが、冷静に考えて1人の作品だけで大きな建物を埋め尽くせるってだけでも非凡だなと感じました。&lt;/p&gt;
+&lt;p&gt;過去の投稿でも書いたように、自分で構想を持って何かを作った経験から、一つの作品を誰かに見せられるまで完成させるのにどれだけの体力が必要かっていうのが少し想像できるようになって、初めて美術館でこんなことを思いました。自分なんてちょっと作ってしばらく休憩。。みたいなペースなのにすごいなーと。&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+&lt;div class=&#34;body-iframe page-embed hatena-web-card&#34;&gt;
+  &lt;a href=&#34;https://seita.icu/post/english-themas/&#34; target=&#34;_blank&#34;&gt;
+    &lt;div class=&#34;embed-wrapper&#34;&gt;
+      &lt;div class=&#34;embed-wrapper-inner&#34;&gt;
+        &lt;div class=&#34;embed-content with-thumb&#34;&gt;
+          &lt;div class=&#34;thumb-wrapper&#34;&gt;
+            &lt;img src=&#34;https://seita.icu/img/themas.jpg&#34; class=&#34;thumb&#34;&gt;
+          &lt;/div&gt;
+          &lt;div class=&#34;entry-body&#34;&gt;
+            &lt;h2 class=&#34;entry-title&#34;&gt;
+              英語病みからのエモいサイト作った話
+            &lt;/h2&gt;
+            &lt;div class=&#34;entry-content&#34;&gt;
+              You ain&amp;#39;t gonna need it
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;embed-footer&#34;&gt;
+          &lt;a href=&#34;https/seita.icu&#34;target=&#34;_blank&#34;&gt;
+            &lt;img src=&#34;https://www.google.com/s2/favicons?domain=seita.icu&#34; alt=&#34;&#34; title=&#34;英語病みからのエモいサイト作った話&#34; class=&#34;favicon&#34;&gt;
+            https/seita.icu
+          &lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+
+
+&lt;p&gt;世の中のいわゆるクリエイターの方々も、常に何かを作り続けるのを生業にするなんて創造力的にも体力的にも強いなーと、これを機に少し見方が変わりました。&lt;/p&gt;
+&lt;h2 id=&#34;何事も積み重ね&#34;&gt;何事も積み重ね&lt;/h2&gt;
+&lt;p&gt;逆説的ですが、普段のアウトプットが多いからこそ多くの良いものを作れるのだとも思いました。&lt;/p&gt;
+&lt;p&gt;この点では特にガウディが印象的だったのですが、彼の美術館には、新しい構想を練るための実験であったり、下書きが非常に豊富に展示されており、ガウディがどのような過程を経て特異な建築構造を設計したかというストーリーが描かれていました。そこでは、どんな些細なことにも着想を得て手を動かしていたガウディの創作への姿勢が顕れていました。&lt;/p&gt;
+&lt;p&gt;以下はガウディの逆さ吊り実験の模様。&lt;/p&gt;
+&lt;span class=&#34;image-container&#34;&gt;&lt;span class=&#34;link&#34; &gt;&lt;a href=&#34;https://seita.icu/img/inverted-experiment.webp&#34; 
+        target=&#34;_blank&#34;&gt;&lt;img class=&#34;img&#34; src=&#34;https://seita.icu/img/inverted-experiment.webp&#34; width=&#34;400px&#34;/&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;/span&gt;
+&lt;p&gt;なんせ作品数が多くて見応えがあったので、美術館を後にする頃にはくたくたになっていたんですが、やはり何事も積み重ねでできてるんだなぁとしみじみ感心しました。&lt;/p&gt;
+&lt;p&gt;ピカソとかガウディとかの天才の名前を先に聞いてしまうと、素晴らしい作品があたかも簡単に生まれたように感じてしまうのですが、そこに行き着くまでの過程が見えてないだけなんですよね。&lt;/p&gt;
+&lt;h2 id=&#34;他に学ぶことあるはずだけど&#34;&gt;他に学ぶことあるはずだけど&lt;/h2&gt;
+&lt;p&gt;まぁ、こんなことは美術の巨匠たちに学ぶまでもないことなんでしょうけど笑。
+地中海の芸術的な雰囲気に感化されてそれっぽいこと書きました。&lt;/p&gt;
+&lt;p&gt;最後に綺麗なサグラダファミリアの内観を貼り付けておきます。&lt;/p&gt;
+&lt;span class=&#34;image-container&#34;&gt;&lt;span class=&#34;link&#34; &gt;&lt;a href=&#34;https://seita.icu/img/sagrada-familia.webp&#34; 
+        target=&#34;_blank&#34;&gt;&lt;img class=&#34;img&#34; src=&#34;https://seita.icu/img/sagrada-familia.webp&#34; width=&#34;500px&#34;/&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;/span&gt;</description>
+    </item>
+    
+    <item>
+      <title>PuppeteerをFirebase Cloud Functionsで動かす</title>
+      <link>https://seita.icu/post/puppeteer-and-cloud-function/</link>
+      <pubDate>Thu, 21 Mar 2019 17:59:07 -0700</pubDate>
+      
+      <guid>https://seita.icu/post/puppeteer-and-cloud-function/</guid>
+      <description>&lt;p&gt;先日Puppeteer入門の記事を書きましたが、今回はその続きで、Puppeteerを用いたスクレイピングプログラムをfirebase cloud functionsにデプロイしたいと思います。&lt;/p&gt;
+&lt;div class=&#34;body-iframe page-embed hatena-web-card&#34;&gt;
+  &lt;a href=&#34;https://seita.icu/2019/01/28/puppeteer%E3%81%A7headless%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6%E5%85%A5%E9%96%80/&#34; target=&#34;_blank&#34;&gt;
+    &lt;div class=&#34;embed-wrapper&#34;&gt;
+      &lt;div class=&#34;embed-wrapper-inner&#34;&gt;
+        &lt;div class=&#34;embed-content with-thumb&#34;&gt;
+          &lt;div class=&#34;thumb-wrapper&#34;&gt;
+            &lt;img src=&#34;https://seita.icu/img/me.webp&#34; class=&#34;thumb&#34;&gt;
+          &lt;/div&gt;
+          &lt;div class=&#34;entry-body&#34;&gt;
+            &lt;h2 class=&#34;entry-title&#34;&gt;
+              404 Page not found
+            &lt;/h2&gt;
+            &lt;div class=&#34;entry-content&#34;&gt;
+              You ain&amp;#39;t gonna need it
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;embed-footer&#34;&gt;
+          &lt;a href=&#34;https/seita.icu&#34;target=&#34;_blank&#34;&gt;
+            &lt;img src=&#34;https://www.google.com/s2/favicons?domain=seita.icu&#34; alt=&#34;&#34; title=&#34;404 Page not found&#34; class=&#34;favicon&#34;&gt;
+            https/seita.icu
+          &lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+
+
+&lt;p&gt;firebase cloud functionsの環境はtypescriptを使用しています。&lt;/p&gt;
+&lt;h4 id=&#34;参考記事&#34;&gt;参考記事&lt;/h4&gt;
+
+
+
+
+
+
+
+
+
+
+
+&lt;div class=&#34;body-iframe page-embed hatena-web-card&#34;&gt;
+  &lt;a href=&#34;https://angularfirebase.com/lessons/how-to-use-puppeteer-on-firebase-cloud-functions/&#34; target=&#34;_blank&#34;&gt;
+    &lt;div class=&#34;embed-wrapper&#34;&gt;
+      &lt;div class=&#34;embed-wrapper-inner&#34;&gt;
+        &lt;div class=&#34;embed-content with-thumb&#34;&gt;
+          &lt;div class=&#34;thumb-wrapper&#34;&gt;
+            &lt;img src=&#34;https://fireship.io/lessons/web-scraping-guide/img/featured.png&#34; class=&#34;thumb&#34;&gt;
+          &lt;/div&gt;
+          &lt;div class=&#34;entry-body&#34;&gt;
+            &lt;h2 class=&#34;entry-title&#34;&gt;
+              Modern Web Scraping Guide
+            &lt;/h2&gt;
+            &lt;div class=&#34;entry-content&#34;&gt;
+              Build a web scraper from scratch with Firebase Cloud Functions, Puppeteer, and NodeJS
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;embed-footer&#34;&gt;
+          &lt;a href=&#34;https/angularfirebase.com&#34;target=&#34;_blank&#34;&gt;
+            &lt;img src=&#34;https://www.google.com/s2/favicons?domain=angularfirebase.com&#34; alt=&#34;&#34; title=&#34;Modern Web Scraping Guide&#34; class=&#34;favicon&#34;&gt;
+            https/angularfirebase.com
+          &lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+
+
+&lt;h2 id=&#34;node8を指定する&#34;&gt;Node8を指定する&lt;/h2&gt;
+&lt;p&gt;Puppeteerを使用するにはNodeのバージョンが8かそれ以上である必要があるため、firebase functionsのプロジェクトにある&lt;code&gt;package.json&lt;/code&gt;でベータ版であるNode8ランタイムを指定します。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;err&#34;&gt;//&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;省略&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;#34;engines&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;#34;node&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;8&amp;#34;&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;要参照: &lt;a href=&#34;https://firebase.google.com/docs/functions/manage-functions?hl=ja#set_nodejs_version&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Node.js のバージョンを設定する - firebase&lt;/a&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;tsconfigにdom-libraryを追加する&#34;&gt;tsconfigにdom libraryを追加する&lt;/h2&gt;
+&lt;p&gt;Puppeteerはウェブブラウザーなので、domの操作が必要になります。デフォルトでは&lt;code&gt;tsconfig.json&lt;/code&gt;にDOM libは含まれていないので、追記しましょう。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;#34;compilerOptions&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;#34;lib&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;es7&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;dom&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;//&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;&amp;lt;--&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;ここ&lt;/span&gt;
+            &lt;span class=&#34;err&#34;&gt;//&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;...&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;メモリ割り当てを指定する&#34;&gt;メモリ割り当てを指定する&lt;/h2&gt;
+&lt;p&gt;Puppeteerはメモリを多く消費するため、メモリの割り当てを指定しましょう。
+自分の作った関数は処理に時間がかかったため、defaultのtimeoutである1分を超えるようであればmemoryと一緒に&lt;code&gt;runWith&lt;/code&gt;で指定しましょう。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span class=&#34;kr&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;functions&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;firebase-functions&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kr&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;puppeteer&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;puppeteer&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+
+
+&lt;span class=&#34;kr&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;default&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;functions&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;runWith&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;({&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;timeoutSeconds&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;200&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;memory&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;1GB&amp;#39;&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}).&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 省略
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;firebaseの&lt;a href=&#34;https://firebase.google.com/docs/functions/manage-functions?hl=ja#set_timeout_and_memory_allocation&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;タイムアウトとメモリ割り当てを設定する&lt;/a&gt;
+によると、memoryとtimeoutは以下の値まで設定できるようです。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;timeoutSeconds の最大値は 540（9 分）です。memory に有効な値は次のとおりです。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;128MB&lt;/li&gt;
+&lt;li&gt;256MB&lt;/li&gt;
+&lt;li&gt;512MB&lt;/li&gt;
+&lt;li&gt;1GB&lt;/li&gt;
+&lt;li&gt;2GB&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;要参照: &lt;a href=&#34;https://firebase.google.com/docs/functions/manage-functions?hl=ja#set_timeout_and_memory_allocation&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;タイムアウトとメモリ割り当てを設定する - firebase&lt;/a&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;関数を作成する&#34;&gt;関数を作成する&lt;/h2&gt;
+&lt;p&gt;あとは自由にpuppeteerの処理を関数に記述するだけです。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span class=&#34;kr&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;functions&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;runWith&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;({&lt;/span&gt;
+        &lt;span class=&#34;nx&#34;&gt;timeoutSeconds&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;200&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;nx&#34;&gt;memory&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;1GB&amp;#39;&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;})&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;https&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;onRequest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;async&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;req&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;res&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+
+        &lt;span class=&#34;c1&#34;&gt;// headlessブラウザー指定と&amp;#39;--no-sandbox&amp;#39;のオプションを忘れずに
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;browser&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;await&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;puppeteer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;launch&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;({&lt;/span&gt;
+            &lt;span class=&#34;nx&#34;&gt;headless&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+            &lt;span class=&#34;nx&#34;&gt;args&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;--no-sandbox&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;--disable-setuid-sandbox&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;});&lt;/span&gt;
+        &lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;page&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;await&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;browser&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;newPage&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+
+        &lt;span class=&#34;c1&#34;&gt;// puppeteerの処理を記述する
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;res&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;status&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;200&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;json&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;({&lt;/span&gt;
+            &lt;span class=&#34;nx&#34;&gt;result&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;finished&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;});&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;以上！&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>PolyglotとGoogle Cloud Functionで形態素解析apiを作る</title>
+      <link>https://seita.icu/post/polyglot-function/</link>
+      <pubDate>Thu, 21 Mar 2019 00:11:18 -0700</pubDate>
+      
+      <guid>https://seita.icu/post/polyglot-function/</guid>
+      <description>&lt;p&gt;現在大学の授業で行なっているプロジェクトで英語の文章を形態素に分割することがあったため、pythonの&lt;a href=&#34;https://polyglot.readthedocs.io/en/latest/Installation.html&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;polyglot&lt;/a&gt;
+を使用し、ついでにgoogle cloud functionでベータ版として提供されている&lt;a href=&#34;https://cloud.google.com/functions/docs/concepts/python-runtime&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;pythonランタイム&lt;/a&gt;
+で形態素解析apiを作成しました。&lt;/p&gt;
+&lt;h2 id=&#34;polyglotとは&#34;&gt;Polyglotとは&lt;/h2&gt;
+&lt;p&gt;Polyglotは英語で多言語話者のことを指すのですが、pythonの&lt;a href=&#34;https://polyglot.readthedocs.io/en/latest/Installation.html&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;polyglot&lt;/a&gt;
+はその名の通り多数の自然言語を処理するツールを提供するパッケージです。&lt;/p&gt;
+&lt;p&gt;Googleの&lt;a href=&#34;https://cloud.google.com/natural-language/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Cloud Natural Language Api&lt;/a&gt;
+の構文解析のように文章を品詞分解してくれるパッケージはよくあるのですが、polyglotのように英語の文章を形態素に分解する機能があるものは珍しいのではないでしょうか。&lt;/p&gt;
+&lt;p&gt;👁️形態素(英: morpheme)とは、言語学の用語で、意味をもつ表現要素の最小単位のことを指します。&lt;/p&gt;
+&lt;h3 id=&#34;形態素解析&#34;&gt;形態素解析&lt;/h3&gt;
+&lt;p&gt;Polyglotには様々な機能がありますが、今回は形態素解析だけを使用します。&lt;/p&gt;
+&lt;p&gt;例えば、以下のコードで&amp;quot;This is a sample text&amp;quot;というテキストを形態素に分解すると、&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;polyglot.text&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Word&lt;/span&gt;
+
+&lt;span class=&#34;n&#34;&gt;text&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;This is a sample text&amp;#34;&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;words&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;text&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;replace&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;,&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;split&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+
+&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;w&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;words&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;word&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Word&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;w&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;language&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;en&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;word&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;morphemes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;以下のように一つ一つの単語を形態素に分解した結果が得られます。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;[&amp;#39;Thi&amp;#39;, &amp;#39;s&amp;#39;]
+[&amp;#39;is&amp;#39;]
+[&amp;#39;a&amp;#39;]
+[&amp;#39;s&amp;#39;, &amp;#39;ample&amp;#39;]
+[&amp;#39;text&amp;#39;]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;api作成&#34;&gt;API作成&lt;/h2&gt;
+&lt;p&gt;今回はこのpolyglotの機能をフロントのjavascriptで利用したかったため、google cloud functionのpythonランタイムでpolyglotを使って形態素解析apiを作成しブラウザからアクセスできるようにしました。&lt;/p&gt;
+&lt;p&gt;以下が作成したコードです。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;polyglot.text&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Word&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;polyglot.downloader&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;downloader&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;flask&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Flask&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;jsonify&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;request&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Response&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;simplejson&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;json&lt;/span&gt;
+
+&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;parse_morpheme&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;request&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;request_json&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;request&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;get_json&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;response&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Response&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;response&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;headers&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;add&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Access-Control-Allow-Origin&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;*&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;response&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;headers&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;add&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Access-Control-Allow-Methods&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;POST&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;try&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;request&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;method&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;OPTIONS&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+            &lt;span class=&#34;n&#34;&gt;headers&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;request&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;headers&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Access-Control-Request-Headers&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+
+            &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;headers&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+                &lt;span class=&#34;n&#34;&gt;response&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;headers&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Access-Control-Allow-Headers&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;headers&lt;/span&gt;
+                &lt;span class=&#34;n&#34;&gt;response&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;status_code&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;200&lt;/span&gt;
+                &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;response&lt;/span&gt;
+
+        &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;request_json&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;and&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;text&amp;#39;&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;request_json&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+            &lt;span class=&#34;n&#34;&gt;downloader&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;download&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;morph2.en&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+            &lt;span class=&#34;n&#34;&gt;text&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;request_json&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;text&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;replace&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34; &amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+            &lt;span class=&#34;n&#34;&gt;parsedText&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+            &lt;span class=&#34;n&#34;&gt;parsedText&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;language&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;en&amp;#34;&lt;/span&gt;
+            &lt;span class=&#34;n&#34;&gt;response&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;set_data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;json&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dumps&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;({&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;result&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;parsedText&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;morphemes&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}))&lt;/span&gt;
+            &lt;span class=&#34;n&#34;&gt;response&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;status_code&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;200&lt;/span&gt;
+            &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;response&lt;/span&gt;
+
+        &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+            &lt;span class=&#34;n&#34;&gt;response&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;set_data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;json&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dumps&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;({&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;error&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;invalid request&amp;#39;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}))&lt;/span&gt;
+            &lt;span class=&#34;n&#34;&gt;response&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;status_code&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;400&lt;/span&gt;
+            &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;response&lt;/span&gt;
+
+    &lt;span class=&#34;k&#34;&gt;except&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;response&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;set_data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;json&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dumps&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;({&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;error&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;internal server error&amp;#39;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}))&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;response&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;status_code&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;500&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;response&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;以下のrequest methodが&lt;code&gt;OPTIONS&lt;/code&gt;か判定するブロックで、CORSに対応しています。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;request&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;method&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;OPTIONS&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+  &lt;span class=&#34;n&#34;&gt;headers&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;request&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;headers&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Access-Control-Request-Headers&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+
+  &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;headers&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;response&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;headers&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Access-Control-Allow-Headers&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;headers&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;response&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;status_code&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;200&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;response&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;テスト&#34;&gt;テスト&lt;/h3&gt;
+&lt;p&gt;書いた関数を毎度デプロイしてテストするのも時間がかかるので、以下のようにflaskを使用してlocalで先ほど定義した&lt;code&gt;parse_morpheme&lt;/code&gt;関数をテストします。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;flask&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Flask&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;jsonify&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;request&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Response&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;main&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;parse_morpheme&lt;/span&gt;
+
+&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;vm&#34;&gt;__name__&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;__main__&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;app&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Flask&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;vm&#34;&gt;__name__&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+
+    &lt;span class=&#34;nd&#34;&gt;@app.route&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;methods&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;POST&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;index&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;parse_morpheme&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;request&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+
+    &lt;span class=&#34;n&#34;&gt;app&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;run&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;127.0.0.1&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;8000&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;debug&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;bp&#34;&gt;True&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上のコードを&lt;code&gt;python&lt;/code&gt;コマンドで実行し、&amp;ldquo;this is an apple&amp;quot;をデータに&lt;code&gt;http://127.0.0.1:8000/&lt;/code&gt;へPOSTリクエストを送信すると、&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;curl -X POST --data &lt;span class=&#34;s1&#34;&gt;&amp;#39;{&amp;#34;text&amp;#34;:&amp;#34;this is an apple&amp;#34; }&amp;#39;&lt;/span&gt; -H &lt;span class=&#34;s2&#34;&gt;&amp;#34;Content-Type: application/json&amp;#34;&lt;/span&gt; http://127.0.0.1:8000/ &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; jq .
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;以下のように結果が返ってきました。良さそうですね。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;nt&#34;&gt;&amp;#34;result&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;
+    &lt;span class=&#34;s2&#34;&gt;&amp;#34;th&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;s2&#34;&gt;&amp;#34;is&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;s2&#34;&gt;&amp;#34;is&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;s2&#34;&gt;&amp;#34;an&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;s2&#34;&gt;&amp;#34;apple&amp;#34;&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;参考記事&#34;&gt;参考記事&lt;/h4&gt;
+
+
+
+
+
+
+
+
+
+
+
+&lt;div class=&#34;body-iframe page-embed hatena-web-card&#34;&gt;
+  &lt;a href=&#34;https://stackoverflow.com/a/53700497&#34; target=&#34;_blank&#34;&gt;
+    &lt;div class=&#34;embed-wrapper&#34;&gt;
+      &lt;div class=&#34;embed-wrapper-inner&#34;&gt;
+        &lt;div class=&#34;embed-content with-thumb&#34;&gt;
+          &lt;div class=&#34;thumb-wrapper&#34;&gt;
+            &lt;img src=&#34;https://cdn.sstatic.net/Sites/stackoverflow/Img/apple-touch-icon@2.png?v=73d79a89bded&#34; class=&#34;thumb&#34;&gt;
+          &lt;/div&gt;
+          &lt;div class=&#34;entry-body&#34;&gt;
+            &lt;h2 class=&#34;entry-title&#34;&gt;
+              Test Python Google Cloud Functions locally
+            &lt;/h2&gt;
+            &lt;div class=&#34;entry-content&#34;&gt;
+              I&amp;#39;m trying out the Python3.7 runtime on Google Cloud Functions. I am able to deploy the functions and make them work once deployed, however, I can&amp;#39;t seem to run the emulator to test them locally be...
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;embed-footer&#34;&gt;
+          &lt;a href=&#34;https/stackoverflow.com&#34;target=&#34;_blank&#34;&gt;
+            &lt;img src=&#34;https://www.google.com/s2/favicons?domain=stackoverflow.com&#34; alt=&#34;&#34; title=&#34;Test Python Google Cloud Functions locally&#34; class=&#34;favicon&#34;&gt;
+            https/stackoverflow.com
+          &lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+
+
+&lt;h3 id=&#34;デプロイ&#34;&gt;デプロイ&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;parse_morpheme&lt;/code&gt;関数を以下のコマンドでgcpにデプロイします。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;gcloud functions deploy parse_morpheme --runtime python37 --trigger-http
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;結果&#34;&gt;結果&lt;/h3&gt;
+&lt;p&gt;試しに、&amp;ldquo;this is an apple&amp;quot;というテキストをparseしてみると、&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;curl -X POST --data &lt;span class=&#34;s1&#34;&gt;&amp;#39;{&amp;#34;text&amp;#34;:&amp;#34;thisisanapple&amp;#34; }&amp;#39;&lt;/span&gt; -H &lt;span class=&#34;s2&#34;&gt;&amp;#34;Content-Type: application/json&amp;#34;&lt;/span&gt; https:cloud-functions-endpoint/parse_morpheme &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; jq .
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;nt&#34;&gt;&amp;#34;result&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;
+    &lt;span class=&#34;s2&#34;&gt;&amp;#34;th&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;s2&#34;&gt;&amp;#34;is&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;s2&#34;&gt;&amp;#34;is&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;s2&#34;&gt;&amp;#34;an&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;s2&#34;&gt;&amp;#34;apple&amp;#34;&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;とリスポンスが返ってきました。うまく行ってそう。&lt;/p&gt;
+&lt;h2 id=&#34;感想&#34;&gt;感想&lt;/h2&gt;
+&lt;p&gt;普段cloud functionはjavascriptで書いてますが、pythonの方が数倍楽に書ける気がしました。同期処理がdefaultの言語は直感的で良いですね。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Firebase Cloud Functionsの環境変数にJSONをサクッと設定する方法</title>
+      <link>https://seita.icu/post/set-firebase-config/</link>
+      <pubDate>Wed, 13 Mar 2019 18:49:04 -0700</pubDate>
+      
+      <guid>https://seita.icu/post/set-firebase-config/</guid>
+      <description>&lt;p&gt;サービスアカウントを環境変数に設定するときに使うけど毎回忘れるので備忘録としてご紹介。&lt;/p&gt;
+&lt;div class=&#34;body-iframe page-embed hatena-web-card&#34;&gt;
+  &lt;a href=&#34;https://github.com/firebase/firebase-tools/issues/406#issuecomment-353017349&#34; target=&#34;_blank&#34;&gt;
+    &lt;div class=&#34;embed-wrapper&#34;&gt;
+      &lt;div class=&#34;embed-wrapper-inner&#34;&gt;
+        &lt;div class=&#34;embed-content with-thumb&#34;&gt;
+          &lt;div class=&#34;thumb-wrapper&#34;&gt;
+            &lt;img src=&#34;https://repository-images.githubusercontent.com/15402300/09bda880-1383-11eb-893e-b6d42a06754e&#34; class=&#34;thumb&#34;&gt;
+          &lt;/div&gt;
+          &lt;div class=&#34;entry-body&#34;&gt;
+            &lt;h2 class=&#34;entry-title&#34;&gt;
+              Accept JSON file for functions:config:set · Issue #406 · firebase/firebase-tools
+            &lt;/h2&gt;
+            &lt;div class=&#34;entry-content&#34;&gt;
+              Currently, it is possible to get the whole functions config as a JSON file using firebase functions:config:get, but we have to manually inline each variable when using the firebase functions:config:set command, which makes it practically...
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;embed-footer&#34;&gt;
+          &lt;a href=&#34;https/github.com&#34;target=&#34;_blank&#34;&gt;
+            &lt;img src=&#34;https://www.google.com/s2/favicons?domain=github.com&#34; alt=&#34;&#34; title=&#34;Accept JSON file for functions:config:set · Issue #406 · firebase/firebase-tools&#34; class=&#34;favicon&#34;&gt;
+            https/github.com
+          &lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;firebase functions:config:set &lt;span class=&#34;nv&#34;&gt;service_account&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;cat service_account.json&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;基本的にはこれで間に合うけど、&lt;a href=&#34;https://stedolan.github.io/jq/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;jq&lt;/a&gt;
+が入っていれば以下みたいなかっこいいこともできる。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;firebase functions:config:set service_account.&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;jq -r &lt;span class=&#34;s1&#34;&gt;&amp;#39;to_entries[] | [.key, (.value | tojson)] | join(&amp;#34;=&amp;#34;)&amp;#39;&lt;/span&gt; &amp;lt; service_account.json  &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
   </channel>

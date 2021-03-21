@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="ja"><meta charset="utf-8"><meta name="generator" content="Hugo 0.70.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="ja"><meta charset="utf-8"><meta name="generator" content="Hugo 0.73.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark"><title>HugoのPage Resourcesの使い方&nbsp;&ndash;&nbsp;Seita Uchimura</title><link rel="stylesheet" href="/css/core.min.1da70b65b9c82f71467709aa7a330775043330343060d023bd8bf952c866afd590f3c03e043790670f1e868dff06ab27.css" integrity="sha384-HacLZbnIL3FGdwmqejMHdQQzMDQwYNAjvYv5Ushmr9WQ88A&#43;BDeQZw8eho3/Bqsn"><meta name="twitter:card" content="summary" />
+<meta name="supported-color-schemes" content="light dark"><title>HugoのPage Resourcesの使い方&nbsp;&ndash;&nbsp;Seita Uchimura</title><link rel="stylesheet" href="/css/core.min.e95e9ce9bcca923242c30ba9410f527693481fa9d13403de1fd9e778fc2a06ec5d06dda7f07add92948e07872e8639ea.css" integrity="sha384-6V6c6bzKkjJCwwupQQ9SdpNIH6nRNAPeH9nnePwqBuxdBt2n8HrdkpSOB4cuhjnq"><meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="HugoのPage Resourcesの使い方" /><link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
 <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
@@ -44,13 +44,16 @@
     <h1 class="article title">HugoのPage Resourcesの使い方</h1><p class="article date">Wednesday, April 17, 2019</p></section><article class="article markdown-body"><p>初めて使用するhugoのthemeを読んでいてpage resourceの使い方がすぐ理解できなかったのでメモ。</p>
 <h3 id="参考ページ">参考ページ</h3>
 <ul>
-<li><a href="https://regisphilibert.com/blog/2018/01/hugo-page-resources-and-how-to-use-them/"target="_blank">Hugo Page Resources
-and how to use them&hellip;</a></li>
-<li><a href="https://gohugo.io/content-management/page-resources/"target="_blank">Page Resources -HUGO公式ドキュメント-</a></li>
+<li><a href="https://regisphilibert.com/blog/2018/01/hugo-page-resources-and-how-to-use-them/"target="_blank" rel="noopener noreferrer">Hugo Page Resources
+and how to use them&hellip;</a>
+</li>
+<li><a href="https://gohugo.io/content-management/page-resources/"target="_blank" rel="noopener noreferrer">Page Resources -HUGO公式ドキュメント-</a>
+</li>
 </ul>
 <h2 id="postごとにディレクトリを作る">postごとにディレクトリを作る</h2>
-<p>以下は上記の<a href="https://regisphilibert.com/blog/2018/01/hugo-page-resources-and-how-to-use-them/"target="_blank">Hugo Page Resources
-and how to use them&hellip;</a>からお借りした図。</p>
+<p>以下は上記の<a href="https://regisphilibert.com/blog/2018/01/hugo-page-resources-and-how-to-use-them/"target="_blank" rel="noopener noreferrer">Hugo Page Resources
+and how to use them&hellip;</a>
+からお借りした図。</p>
 <p>自分は普段postごとにディレクトリを作ることはしませんが、以下のようにディレクトリをポストのスラッグ名(例では<code>&quot;i-love-eating-cupcakes&quot;</code>)で作成し、その中に<code>index.md</code>、<code>images</code>とファイルを分けて置くことも可能です。こうしておくと、staticフォルダに画像が溜まりまくって何が何だか分からなくなるのを防げるので良いですね。</p>
 <div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">.
 └── content
@@ -71,7 +74,8 @@ and how to use them&hellip;</a>からお借りした図。</p>
 <div class="highlight"><pre class="chroma"><code class="language-go-html-template" data-lang="go-html-template"><span class="cp">{{</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="na">.Site.GetPage</span><span class="w"> </span><span class="s">&#34;/post/i-love-eating-cupcakes&#34;</span><span class="w"> </span><span class="cp">}}</span>
   <span class="cp">{{</span><span class="w"> </span><span class="na">.Resources.Match</span><span class="w"> </span><span class="s">&#34;images/yummy-cupcake.jpg&#34;</span><span class="w"> </span><span class="cp">}}</span> 
 <span class="cp">{{</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="cp">}}</span>
-</code></pre></div><p><code>.Resources.Match &quot;images/yummy-cupcake.jpg&quot;</code>で&quot;images/yummy-cupcake.jpg&quot;にマッチするファイルを取得しています。Matchの他にもMethodがありますので、詳しくは<a href="https://gohugo.io/content-management/page-resources/#methods"target="_blank">こちら</a>を参照してください。</p>
+</code></pre></div><p><code>.Resources.Match &quot;images/yummy-cupcake.jpg&quot;</code>で&quot;images/yummy-cupcake.jpg&quot;にマッチするファイルを取得しています。Matchの他にもMethodがありますので、詳しくは<a href="https://gohugo.io/content-management/page-resources/#methods"target="_blank" rel="noopener noreferrer">こちら</a>
+を参照してください。</p>
 <h2 id="resourceにメタデータを与える">resourceにメタデータを与える</h2>
 <p>上の図で言うindex.mdのfont matterに以下のようにpage resourceのメタデータを記載することができます。toml記法で表記しています。</p>
 <div class="highlight"><pre class="chroma"><code class="language-toml" data-lang="toml"><span class="err">---</span>
@@ -86,9 +90,11 @@ and how to use them&hellip;</a>からお借りした図。</p>
   <span class="p">[</span><span class="nx">resources</span><span class="p">.</span><span class="nx">params</span><span class="p">]</span>
     <span class="nx">icon</span> <span class="p">=</span> <span class="s2">&#34;photo&#34;</span>
 <span class="err">---</span>
-</code></pre></div><p>このように<code>name</code>をつけてあげることで、先ほど<code>.Resources.Match &quot;images/yummy-cupcake.jpg&quot;</code>としていたところを、<code>.Resources.Match &quot;featured-image&quot;</code>とわかりやすく短縮することができます。詳しくは<a href="https://gohugo.io/content-management/page-resources/#resources-metadata-example"target="_blank">こちら</a>を参照してください。</p></article><section class="article labels"><a class="category" href=/categories/programming/>programming</a><a class="tag" href=/tags/hugo/>hugo</a></section><section class="article author"><img class="avatar" src="/img/me.png" alt><p class="name">Seita Uchimura</p><div class="bio">Software Engineer in Tokyo | ICU20</div><div class="details"><a class="item" href="https://github.com/seita-uc" target="_blank"><span class="iconfont icon-github"></span>&nbsp;seita-uc</a><a class="item" href="https://twitter.com/sei_uchi_mura" target="_blank"><span class="iconfont icon-twitter"></span>&nbsp;@sei_uchi_mura</a></div>
-</section></div>
-<div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/hugo-sass-version/"><span class="li iconfont icon-article"></span>HugoでSCSS/SASSをCSSに変換するならVersionに注意</a></p><p><a class="link" href="/post/google-spread-sheet-cms/"><span class="li iconfont icon-article"></span>Google Spreadsheets+NetlifyでHugoの簡易CMS作成</a></p></section><section class="article discussion"><div id="disqus_thread"></div>
+</code></pre></div><p>このように<code>name</code>をつけてあげることで、先ほど<code>.Resources.Match &quot;images/yummy-cupcake.jpg&quot;</code>としていたところを、<code>.Resources.Match &quot;featured-image&quot;</code>とわかりやすく短縮することができます。詳しくは<a href="https://gohugo.io/content-management/page-resources/#resources-metadata-example"target="_blank" rel="noopener noreferrer">こちら</a>
+を参照してください。</p></article><section class="article labels"><a class="category" href=/categories/programming/>programming</a><a class="tag" href=/tags/hugo/>hugo</a></section><section class="article author"><img class="avatar" src="/img/me.webp" alt><p class="name">Seita Uchimura</p><div class="bio">Software Engineer in Tokyo | ICU20</div><div class="details"><a class="item" href="https://github.com/seita-uc" target="_blank" rel="noopener noreferrer"><span class="iconfont icon-github"></span>&nbsp;seita-uc</a><a class="item" href="https://twitter.com/sei_uchi_mura" target="_blank" rel="noopener noreferrer"><span class="iconfont icon-twitter"></span>&nbsp;@sei_uchi_mura</a></div>
+</section>
+</div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/hugo-sass-version/"><span class="iconfont icon-article"></span>HugoでSCSS/SASSをCSSに変換するならVersionに注意</a></p><p><a class="link" href="/post/google-spread-sheet-cms/"><span class="iconfont icon-article"></span>Google Spreadsheets+NetlifyでHugoの簡易CMS作成</a></p></section><section class="article discussion"><div id="disqus_thread"></div>
 <script type="application/javascript">
     var disqus_config = function () {
     
@@ -108,7 +114,7 @@ and how to use them&hellip;</a>からお借りした図。</p>
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></section></div></section><section id="footer"><div class="footer-wrap">
-    <p class="copyright">©2019 Seita Uchimura.</p>
+    <p class="copyright">©2021 Seita Uchimura.</p>
     <p class="powerby"><span>Powered by </span><a href="https://gohugo.io"
         target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/"
         target="_blank">Notepadium</a></p>

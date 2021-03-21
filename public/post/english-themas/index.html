@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="ja"><meta charset="utf-8"><meta name="generator" content="Hugo 0.70.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="ja"><meta charset="utf-8"><meta name="generator" content="Hugo 0.73.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark"><title>英語病みからのエモいサイト作った話&nbsp;&ndash;&nbsp;Seita Uchimura</title><link rel="stylesheet" href="/css/core.min.1da70b65b9c82f71467709aa7a330775043330343060d023bd8bf952c866afd590f3c03e043790670f1e868dff06ab27.css" integrity="sha384-HacLZbnIL3FGdwmqejMHdQQzMDQwYNAjvYv5Ushmr9WQ88A&#43;BDeQZw8eho3/Bqsn"><meta name="twitter:card" content="summary" />
+<meta name="supported-color-schemes" content="light dark"><title>英語病みからのエモいサイト作った話&nbsp;&ndash;&nbsp;Seita Uchimura</title><link rel="stylesheet" href="/css/core.min.e95e9ce9bcca923242c30ba9410f527693481fa9d13403de1fd9e778fc2a06ec5d06dda7f07add92948e07872e8639ea.css" integrity="sha384-6V6c6bzKkjJCwwupQQ9SdpNIH6nRNAPeH9nnePwqBuxdBt2n8HrdkpSOB4cuhjnq"><meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="英語病みからのエモいサイト作った話" /><link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
 <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
@@ -58,25 +58,32 @@
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </p>
 <h1 id="反骨駆動開発">反骨駆動開発</h1>
-<p>ちょうどそんな悶々とした気持ちでいたころ、自分が受講していたTechnologies and Humanitiesというinterdisciplinaryの授業で、<a href="https://ja.wikipedia.org/wiki/STEM%E6%95%99%E8%82%B2"target="_blank">STEM</a>に代わる<a href="http://themas.mat.ucsb.edu/"target="_blank">THEMAS</a>(STEM + Humanity + Art)を軸に、自分でなんでも好きなもの創って、学期末に発表して！という課題を受けました。とにかく独創的に世界を表現しろ！というものでした。</p>
-<p>そこで僕は、他に言語学の授業を受講していたのも相俟って、ここぞとばかりに言語への不満を表現すべく<a href="http://www.themas.tokyo/"target="_blank">こんなもの</a>を開発しました。</p>
+<p>ちょうどそんな悶々とした気持ちでいたころ、自分が受講していたTechnologies and Humanitiesというinterdisciplinaryの授業で、<a href="https://ja.wikipedia.org/wiki/STEM%E6%95%99%E8%82%B2"target="_blank" rel="noopener noreferrer">STEM</a>
+に代わる<a href="http://themas.mat.ucsb.edu/"target="_blank" rel="noopener noreferrer">THEMAS</a>
+(STEM + Humanity + Art)を軸に、自分でなんでも好きなもの創って、学期末に発表して！という課題を受けました。とにかく独創的に世界を表現しろ！というものでした。</p>
+<p>そこで僕は、他に言語学の授業を受講していたのも相俟って、ここぞとばかりに言語への不満を表現すべく<a href="http://www.themas.tokyo/"target="_blank" rel="noopener noreferrer">こんなもの</a>
+を開発しました。</p>
 <span class="image-container"><span class="link" ><a href="/img/final-project.gif" 
         target="_blank"><img class="img" src="/img/final-project.gif"/></a></span>
 </span>
 <p>前衛的？抽象的？とにかくエモみが深い、当時の自分の迷走具合が窺える作品です。
 ちなみに作品名は&quot;Heartbeat of Language&rdquo;。それぞれの言語をクリックするとその心音が聴けるという理解に苦しむ機能付きです。</p>
 <h2 id="作品解説">作品解説</h2>
-<p>この作品は、世界の支配的な言語による情報格差を視覚化するというコンセプトで作成しました。一応一つ一つの言語を囲む丸が心臓ということになっており、wikipediaがその言語で更新されるたび脈打つ仕組みになっています。この実装は<a href="http://listen.hatnote.com/"target="_blank">Listen to Wikipedia</a>というサイトから着想を得ており、実際にこのサイトで使用されていたwebsocketサーバーを勝手に利用しています(ごめんなさい)。心臓が脈打つアニメーションは<a href="https://d3js.org/"target="_blank">d3.js</a>で実現しました。</p>
+<p>この作品は、世界の支配的な言語による情報格差を視覚化するというコンセプトで作成しました。一応一つ一つの言語を囲む丸が心臓ということになっており、wikipediaがその言語で更新されるたび脈打つ仕組みになっています。この実装は<a href="http://listen.hatnote.com/"target="_blank" rel="noopener noreferrer">Listen to Wikipedia</a>
+というサイトから着想を得ており、実際にこのサイトで使用されていたwebsocketサーバーを勝手に利用しています(ごめんなさい)。心臓が脈打つアニメーションは<a href="https://d3js.org/"target="_blank" rel="noopener noreferrer">d3.js</a>
+で実現しました。</p>
 <p>要するに、<strong>心臓の脈数が多ければ多いほどインターネット上のその言語での情報が増加しており、脈数が少ない言語との情報格差が拡がっている</strong>、ということが伝えたいメッセージになります。</p>
-<p><a href="http://www.themas.tokyo/"target="_blank">http://www.themas.tokyo/</a>に行くとわかりますが、何時にみても英語での更新は活発に行われている一方、その他のマイナー言語ではほとんど更新が行われていません。いかに英語という言語がインターネットにおいて支配的な立場にあるかがわかります。もちろんwikipediaがインターネットの全てでは無いですし、ここに表示されていない世界の言語も山ほどありますが、そこはご愛嬌ということで。</p>
+<p><a href="http://www.themas.tokyo/"target="_blank" rel="noopener noreferrer">http://www.themas.tokyo/</a>
+に行くとわかりますが、何時にみても英語での更新は活発に行われている一方、その他のマイナー言語ではほとんど更新が行われていません。いかに英語という言語がインターネットにおいて支配的な立場にあるかがわかります。もちろんwikipediaがインターネットの全てでは無いですし、ここに表示されていない世界の言語も山ほどありますが、そこはご愛嬌ということで。</p>
 <h2 id="ご満悦">ご満悦</h2>
 <p>期末の発表で、英語が脈打つ様を見せながら、非英語圏の人たちはは新しい情報を得るために英語を勉強しなければいけないんですよー、英語圏の人はいいですよねーとやんわり毒を吐いて目的を果たしたところ、なぜか教授が気に入ってくださりA+をもらえたので僕は非常に満足しています。</p>
 <h1 id="最後に">最後に</h1>
 <p>よくよく考えると、エンジニアとしてコードを書くようになってから全部自分で作って公開したのはこれが初めてだと気づき、特に実用的な価値の無いサイトながらも感慨深く愛着を感じています。</p>
 <p>なにかコンセプトをもってそれを体現するのは楽しいなと思えた良い体験でした。</p>
-<p>以上。</p></article><section class="article labels"><a class="category" href=/categories/programming/>programming</a><a class="category" href=/categories/study-abroad/>study-abroad</a><a class="tag" href=/tags/english/>English</a></section><section class="article author"><img class="avatar" src="/img/me.png" alt><p class="name">Seita Uchimura</p><div class="bio">Software Engineer in Tokyo | ICU20</div><div class="details"><a class="item" href="https://github.com/seita-uc" target="_blank"><span class="iconfont icon-github"></span>&nbsp;seita-uc</a><a class="item" href="https://twitter.com/sei_uchi_mura" target="_blank"><span class="iconfont icon-twitter"></span>&nbsp;@sei_uchi_mura</a></div>
-</section></div>
-<div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/intro-to-puppeteer/"><span class="li iconfont icon-article"></span>PuppeteerでHeadlessブラウザ入門</a></p><p><a class="link" href="/post/customize-netlify-cms/"><span class="li iconfont icon-article"></span>Netlify CMSで画像の大きさを変更できるようにする</a></p></section><section class="article discussion"><div id="disqus_thread"></div>
+<p>以上。</p></article><section class="article labels"><a class="category" href=/categories/programming/>programming</a><a class="category" href=/categories/study-abroad/>study-abroad</a><a class="tag" href=/tags/english/>English</a></section><section class="article author"><img class="avatar" src="/img/me.webp" alt><p class="name">Seita Uchimura</p><div class="bio">Software Engineer in Tokyo | ICU20</div><div class="details"><a class="item" href="https://github.com/seita-uc" target="_blank" rel="noopener noreferrer"><span class="iconfont icon-github"></span>&nbsp;seita-uc</a><a class="item" href="https://twitter.com/sei_uchi_mura" target="_blank" rel="noopener noreferrer"><span class="iconfont icon-twitter"></span>&nbsp;@sei_uchi_mura</a></div>
+</section>
+</div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/intro-to-puppeteer/"><span class="iconfont icon-article"></span>PuppeteerでHeadlessブラウザ入門</a></p><p><a class="link" href="/post/customize-netlify-cms/"><span class="iconfont icon-article"></span>Netlify CMSで画像の大きさを変更できるようにする</a></p></section><section class="article discussion"><div id="disqus_thread"></div>
 <script type="application/javascript">
     var disqus_config = function () {
     
@@ -96,7 +103,7 @@
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></section></div></section><section id="footer"><div class="footer-wrap">
-    <p class="copyright">©2019 Seita Uchimura.</p>
+    <p class="copyright">©2021 Seita Uchimura.</p>
     <p class="powerby"><span>Powered by </span><a href="https://gohugo.io"
         target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/"
         target="_blank">Notepadium</a></p>

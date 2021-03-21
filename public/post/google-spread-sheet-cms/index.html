@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="ja"><meta charset="utf-8"><meta name="generator" content="Hugo 0.70.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="ja"><meta charset="utf-8"><meta name="generator" content="Hugo 0.73.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark"><title>Google Spreadsheets&#43;NetlifyでHugoの簡易CMS作成&nbsp;&ndash;&nbsp;Seita Uchimura</title><link rel="stylesheet" href="/css/core.min.1da70b65b9c82f71467709aa7a330775043330343060d023bd8bf952c866afd590f3c03e043790670f1e868dff06ab27.css" integrity="sha384-HacLZbnIL3FGdwmqejMHdQQzMDQwYNAjvYv5Ushmr9WQ88A&#43;BDeQZw8eho3/Bqsn"><meta name="twitter:card" content="summary" />
+<meta name="supported-color-schemes" content="light dark"><title>Google Spreadsheets&#43;NetlifyでHugoの簡易CMS作成&nbsp;&ndash;&nbsp;Seita Uchimura</title><link rel="stylesheet" href="/css/core.min.e95e9ce9bcca923242c30ba9410f527693481fa9d13403de1fd9e778fc2a06ec5d06dda7f07add92948e07872e8639ea.css" integrity="sha384-6V6c6bzKkjJCwwupQQ9SdpNIH6nRNAPeH9nnePwqBuxdBt2n8HrdkpSOB4cuhjnq"><meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Google Spreadsheets&#43;NetlifyでHugoの簡易CMS作成" /><link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
 <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
@@ -41,7 +41,9 @@
 <body><section id="header">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Seita Uchimura</span></a></span>
         <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/">Articles</a><a class="nav item" href="/about">About</a><a class="nav item" href="/categories">Categories</a><a class="nav item" href="/tags">Tags</a></nav></div></span></div><div class="site slogan"><span class="title">You ain't gonna need it</span></div></section><section id="content"><div class="article-container"><section class="article header">
-    <h1 class="article title">Google Spreadsheets+NetlifyでHugoの簡易CMS作成</h1><p class="article date">Sunday, March 31, 2019</p></section><article class="article markdown-body"><p>現在留学中のカリフォルニア大学サンタバーバラ校(UCSB)で、<a href="https://www.blockchainatucsb.com/"target="_blank">Blockchain at UCSB</a>という組織の幹部をしてまして、一応技術担当なので組織の紹介用<a href="https://www.blockchainatucsb.com/"target="_blank">website</a>を開発していたところ、最近の活動を掲載するセクションを他のメンバーでも編集できるようにしてほしいと要望を受けたため、特定の箇所のみ編集可能なhugoのcmsをgoogleのspreadsheetsを使用して作成しました。</p>
+    <h1 class="article title">Google Spreadsheets+NetlifyでHugoの簡易CMS作成</h1><p class="article date">Sunday, March 31, 2019</p></section><article class="article markdown-body"><p>現在留学中のカリフォルニア大学サンタバーバラ校(UCSB)で、<a href="https://www.blockchainatucsb.com/"target="_blank" rel="noopener noreferrer">Blockchain at UCSB</a>
+という組織の幹部をしてまして、一応技術担当なので組織の紹介用<a href="https://www.blockchainatucsb.com/"target="_blank" rel="noopener noreferrer">website</a>
+を開発していたところ、最近の活動を掲載するセクションを他のメンバーでも編集できるようにしてほしいと要望を受けたため、特定の箇所のみ編集可能なhugoのcmsをgoogleのspreadsheetsを使用して作成しました。</p>
 <div class="body-iframe page-embed hatena-web-card">
   <a href="https://blockchain-at-ucsb-develop.netlify.com" target="_blank">
     <div class="embed-wrapper">
@@ -78,7 +80,8 @@
         target="_blank"><img class="img" src="/img/google-sheets.png"/></a></span>
 </span>
 <p>右側の派手な&quot;Update Website&quot;というボタンを押すと、netlifyのwebhookをtriggerしてsheetの内容を反映したwebsiteをdeployできます。</p>
-<p>Updateすると、<a href="https://www.blockchainatucsb.com/#activities"target="_blank">website</a>のactivitiesセクションのみがsheetの内容に沿って更新されます。</p>
+<p>Updateすると、<a href="https://www.blockchainatucsb.com/#activities"target="_blank" rel="noopener noreferrer">website</a>
+のactivitiesセクションのみがsheetの内容に沿って更新されます。</p>
 <p>以下のセクションです。
 <span class="image-container"><span class="link" ><a href="/img/activities_screenshot.png" 
         target="_blank"><img class="img" src="/img/activities_screenshot.png"/></a></span>
@@ -87,8 +90,10 @@
 <h2 id="spreadsheetsのデータをjsonで取得">spreadsheetsのデータをJSONで取得</h2>
 <p>参考にしたのはこちらのサイト</p>
 <ul>
-<li><a href="https://coderwall.com/p/duapqq/use-a-google-spreadsheet-as-your-json-backend"target="_blank">Use a Google Spreadsheet as your JSON backend</a></li>
-<li><a href="https://developers.google.com/gdata/samples/spreadsheet_sample"target="_blank">Simple example of retrieving JSON feeds from Spreadsheets Data API</a></li>
+<li><a href="https://coderwall.com/p/duapqq/use-a-google-spreadsheet-as-your-json-backend"target="_blank" rel="noopener noreferrer">Use a Google Spreadsheet as your JSON backend</a>
+</li>
+<li><a href="https://developers.google.com/gdata/samples/spreadsheet_sample"target="_blank" rel="noopener noreferrer">Simple example of retrieving JSON feeds from Spreadsheets Data API</a>
+</li>
 </ul>
 <p>細かい説明は上記のサイトでみてもらうとして、spreadsheetsを<code>ファイル</code>-&gt;<code>webで公開する</code>の順で公開してから、<code>https://spreadsheets.google.com/feeds/list/ + spreadsheetsのID + /od6/public/values?alt=json</code>にGETするとsheetの内容をJSONで受け取ることができます。spreadsheetsのIDは普通にsheetを開いたときのurlに含まれています。</p>
 <p>自分のtitle, link, imageurl, descriptionというカラムに分けたsheetでは以下のようにデータがJSONで返ってきます。</p>
@@ -168,7 +173,8 @@
 </div>
 
 
-<p>また、加工したJSONのプロパティ名をkeyにvalueを一時的に保持するため、<a href="https://gohugo.io/functions/scratch/"target="_blank">.Scratch</a>というscratchpadの役割を果たすhugoの備え付け関数を使用しています。ここでは一時的なDictionaryのように用いています。</p>
+<p>また、加工したJSONのプロパティ名をkeyにvalueを一時的に保持するため、<a href="https://gohugo.io/functions/scratch/"target="_blank" rel="noopener noreferrer">.Scratch</a>
+というscratchpadの役割を果たすhugoの備え付け関数を使用しています。ここでは一時的なDictionaryのように用いています。</p>
 <h3 id="partial全体像">partial全体像</h3>
 <p>結果として作成したhugoのpartialは以下のようになりました。</p>
 <p>spreadsheetsから取得したJSONのfeed.entryに含まれる配列をrangeで繰り返し処理しながら各eventの項目を展開しています。</p>
@@ -281,11 +287,13 @@
 <span class="err">}</span>
 </code></pre></div><p><code>netlify_build_hooks_endpoint</code>にnetlifyでホスティングされている方は自身のサイトのbuild webhookを入力してください。</p>
 <p>このスクリプトのupdateWebsite()という関数をspreadsheetsから実行することにより、netlifyのbuild webhookに対して空のpostリクエストを送信し、websiteをbuildすることができます。</p>
-<p>ボタンの設置とgoogle apps scriptの連携に関しては、<a href="https://www.atmarkit.co.jp/ait/articles/1708/14/news011.html"target="_blank">こちら</a>を参考にしてください。</p>
+<p>ボタンの設置とgoogle apps scriptの連携に関しては、<a href="https://www.atmarkit.co.jp/ait/articles/1708/14/news011.html"target="_blank" rel="noopener noreferrer">こちら</a>
+を参考にしてください。</p>
 <h2 id="おわりに">おわりに</h2>
-<p>Spreadsheetsはシェアが簡単でかつ多くの人に馴染みのあるツールなので、今回のような開発者ではない人に提供するインターフェースとしてはとても便利で優秀なんじゃないかなと感じました。他のプロジェクトでも機会があれば利用していきたいです。</p></article><section class="article labels"><a class="category" href=/categories/programming/>programming</a><a class="tag" href=/tags/hugo/>hugo</a><a class="tag" href=/tags/cms/>cms</a><a class="tag" href=/tags/google-spreadsheets/>google-spreadsheets</a><a class="tag" href=/tags/netlify/>netlify</a></section><section class="article author"><img class="avatar" src="/img/me.png" alt><p class="name">Seita Uchimura</p><div class="bio">Software Engineer in Tokyo | ICU20</div><div class="details"><a class="item" href="https://github.com/seita-uc" target="_blank"><span class="iconfont icon-github"></span>&nbsp;seita-uc</a><a class="item" href="https://twitter.com/sei_uchi_mura" target="_blank"><span class="iconfont icon-twitter"></span>&nbsp;@sei_uchi_mura</a></div>
-</section></div>
-<div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/hugo-resources/"><span class="li iconfont icon-article"></span>HugoのPage Resourcesの使い方</a></p><p><a class="link" href="/post/barcelona-output/"><span class="li iconfont icon-article"></span>バルセロナに来てアウトプットは大事だなと思った話</a></p></section><section class="article discussion"><div id="disqus_thread"></div>
+<p>Spreadsheetsはシェアが簡単でかつ多くの人に馴染みのあるツールなので、今回のような開発者ではない人に提供するインターフェースとしてはとても便利で優秀なんじゃないかなと感じました。他のプロジェクトでも機会があれば利用していきたいです。</p></article><section class="article labels"><a class="category" href=/categories/programming/>programming</a><a class="tag" href=/tags/hugo/>hugo</a><a class="tag" href=/tags/cms/>cms</a><a class="tag" href=/tags/google-spreadsheets/>google-spreadsheets</a><a class="tag" href=/tags/netlify/>netlify</a></section><section class="article author"><img class="avatar" src="/img/me.webp" alt><p class="name">Seita Uchimura</p><div class="bio">Software Engineer in Tokyo | ICU20</div><div class="details"><a class="item" href="https://github.com/seita-uc" target="_blank" rel="noopener noreferrer"><span class="iconfont icon-github"></span>&nbsp;seita-uc</a><a class="item" href="https://twitter.com/sei_uchi_mura" target="_blank" rel="noopener noreferrer"><span class="iconfont icon-twitter"></span>&nbsp;@sei_uchi_mura</a></div>
+</section>
+</div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/hugo-resources/"><span class="iconfont icon-article"></span>HugoのPage Resourcesの使い方</a></p><p><a class="link" href="/post/barcelona-output/"><span class="iconfont icon-article"></span>バルセロナに来てアウトプットは大事だなと思った話</a></p></section><section class="article discussion"><div id="disqus_thread"></div>
 <script type="application/javascript">
     var disqus_config = function () {
     
@@ -305,7 +313,7 @@
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></section></div></section><section id="footer"><div class="footer-wrap">
-    <p class="copyright">©2019 Seita Uchimura.</p>
+    <p class="copyright">©2021 Seita Uchimura.</p>
     <p class="powerby"><span>Powered by </span><a href="https://gohugo.io"
         target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/"
         target="_blank">Notepadium</a></p>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="ja"><meta charset="utf-8"><meta name="generator" content="Hugo 0.70.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="ja"><meta charset="utf-8"><meta name="generator" content="Hugo 0.73.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark"><title>環境変数からmnemonicを読み込んだら躓いたメモ&nbsp;&ndash;&nbsp;Seita Uchimura</title><link rel="stylesheet" href="/css/core.min.1da70b65b9c82f71467709aa7a330775043330343060d023bd8bf952c866afd590f3c03e043790670f1e868dff06ab27.css" integrity="sha384-HacLZbnIL3FGdwmqejMHdQQzMDQwYNAjvYv5Ushmr9WQ88A&#43;BDeQZw8eho3/Bqsn"><meta name="twitter:card" content="summary" />
+<meta name="supported-color-schemes" content="light dark"><title>環境変数からmnemonicを読み込んだら躓いたメモ&nbsp;&ndash;&nbsp;Seita Uchimura</title><link rel="stylesheet" href="/css/core.min.e95e9ce9bcca923242c30ba9410f527693481fa9d13403de1fd9e778fc2a06ec5d06dda7f07add92948e07872e8639ea.css" integrity="sha384-6V6c6bzKkjJCwwupQQ9SdpNIH6nRNAPeH9nnePwqBuxdBt2n8HrdkpSOB4cuhjnq"><meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="環境変数からmnemonicを読み込んだら躓いたメモ" /><link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
 <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
@@ -41,7 +41,8 @@
 <body><section id="header">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Seita Uchimura</span></a></span>
         <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/">Articles</a><a class="nav item" href="/about">About</a><a class="nav item" href="/categories">Categories</a><a class="nav item" href="/tags">Tags</a></nav></div></span></div><div class="site slogan"><span class="title">You ain't gonna need it</span></div></section><section id="content"><div class="article-container"><section class="article header">
-    <h1 class="article title">環境変数からmnemonicを読み込んだら躓いたメモ</h1><p class="article date">Monday, January 14, 2019</p></section><article class="article markdown-body"><p>fishの環境変数にこんな感じでmnemonicを宣言してtruffle-hdwallet-providerでアドレスを導出したところ、<a href="https://iancoleman.io/bip39/"target="_blank">mnemonic code converter</a>とは違うアドレスが出てきたので、あれ？ってなった。</p>
+    <h1 class="article title">環境変数からmnemonicを読み込んだら躓いたメモ</h1><p class="article date">Monday, January 14, 2019</p></section><article class="article markdown-body"><p>fishの環境変数にこんな感じでmnemonicを宣言してtruffle-hdwallet-providerでアドレスを導出したところ、<a href="https://iancoleman.io/bip39/"target="_blank" rel="noopener noreferrer">mnemonic code converter</a>
+とは違うアドレスが出てきたので、あれ？ってなった。</p>
 <div class="highlight"><pre class="chroma"><code class="language-fish" data-lang="fish"><span class="k">set</span> -x MNEMONIC catalog park praise void alarm bright olive hidden box chicken squeeze shove
 </code></pre></div><p>冷静に調べてみたところ、この環境変数を<code>process.env.MNEMONIC</code>で読み込むと、</p>
 <div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">catalogparkpraisevoidalarmbrightolivehiddenboxchickensqueezeshove
@@ -49,9 +50,10 @@
 環境変数は基本的に文字列で読み込まれるからクオーテーションはいつもつけていなかったのですが、空白が消えるのは想定外でした。
 あとmnemonicの空白がないと違うアドレスがでちゃうのも意外でした。</p>
 <div class="highlight"><pre class="chroma"><code class="language-fish" data-lang="fish"><span class="k">set</span> -x MNEMONIC <span class="s1">&#39;catalog park praise void alarm bright olive hidden box chicken squeeze shove&#39;</span>
-</code></pre></div><p>よってクオーテーションをつけてあげたらちゃんと空白つきでmnemonicが読み込まれ、欲しかったアドレスが出てきました。</p></article><section class="article labels"><a class="category" href=/categories/programming/>programming</a><a class="tag" href=/tags/mnemonic/>mnemonic</a><a class="tag" href=/tags/ethereum/>ethereum</a></section><section class="article author"><img class="avatar" src="/img/me.png" alt><p class="name">Seita Uchimura</p><div class="bio">Software Engineer in Tokyo | ICU20</div><div class="details"><a class="item" href="https://github.com/seita-uc" target="_blank"><span class="iconfont icon-github"></span>&nbsp;seita-uc</a><a class="item" href="https://twitter.com/sei_uchi_mura" target="_blank"><span class="iconfont icon-twitter"></span>&nbsp;@sei_uchi_mura</a></div>
-</section></div>
-<div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/deploy-hugo-with-circleci/"><span class="li iconfont icon-article"></span>Hugoをcircleciで自動デプロイする</a></p><p><a class="link" href="/post/useful-tool-for-contract-registration/"><span class="li iconfont icon-article"></span>Etherscanにコントラクトを登録するときに便利なツール</a></p></section><section class="article discussion"><div id="disqus_thread"></div>
+</code></pre></div><p>よってクオーテーションをつけてあげたらちゃんと空白つきでmnemonicが読み込まれ、欲しかったアドレスが出てきました。</p></article><section class="article labels"><a class="category" href=/categories/programming/>programming</a><a class="tag" href=/tags/mnemonic/>mnemonic</a><a class="tag" href=/tags/ethereum/>ethereum</a></section><section class="article author"><img class="avatar" src="/img/me.webp" alt><p class="name">Seita Uchimura</p><div class="bio">Software Engineer in Tokyo | ICU20</div><div class="details"><a class="item" href="https://github.com/seita-uc" target="_blank" rel="noopener noreferrer"><span class="iconfont icon-github"></span>&nbsp;seita-uc</a><a class="item" href="https://twitter.com/sei_uchi_mura" target="_blank" rel="noopener noreferrer"><span class="iconfont icon-twitter"></span>&nbsp;@sei_uchi_mura</a></div>
+</section>
+</div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/deploy-hugo-with-circleci/"><span class="iconfont icon-article"></span>Hugoをcircleciで自動デプロイする</a></p><p><a class="link" href="/post/useful-tool-for-contract-registration/"><span class="iconfont icon-article"></span>Etherscanにコントラクトを登録するときに便利なツール</a></p></section><section class="article discussion"><div id="disqus_thread"></div>
 <script type="application/javascript">
     var disqus_config = function () {
     
@@ -71,7 +73,7 @@
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></section></div></section><section id="footer"><div class="footer-wrap">
-    <p class="copyright">©2019 Seita Uchimura.</p>
+    <p class="copyright">©2021 Seita Uchimura.</p>
     <p class="powerby"><span>Powered by </span><a href="https://gohugo.io"
         target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/"
         target="_blank">Notepadium</a></p>

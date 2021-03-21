@@ -3,7 +3,7 @@ languageCode = "ja"
 defaultContentLanguage = "ja"
 title = "Seita Uchimura"
 theme = "hugo-notepadium"
-copyright = "©2019 Seita Uchimura."
+copyright = "©2021 Seita Uchimura."
 hasCJKLanguage = true
 enableRobotsTXT = true
 # Enable Disqus

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="ja"><meta charset="utf-8"><meta name="generator" content="Hugo 0.70.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="ja"><meta charset="utf-8"><meta name="generator" content="Hugo 0.73.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark"><title>Goでブロックチェーンを作る Part 2: プルーフオブワーク&nbsp;&ndash;&nbsp;Seita Uchimura</title><link rel="stylesheet" href="/css/core.min.1da70b65b9c82f71467709aa7a330775043330343060d023bd8bf952c866afd590f3c03e043790670f1e868dff06ab27.css" integrity="sha384-HacLZbnIL3FGdwmqejMHdQQzMDQwYNAjvYv5Ushmr9WQ88A&#43;BDeQZw8eho3/Bqsn"><meta name="twitter:card" content="summary" />
+<meta name="supported-color-schemes" content="light dark"><title>Goでブロックチェーンを作る Part 2: プルーフオブワーク&nbsp;&ndash;&nbsp;Seita Uchimura</title><link rel="stylesheet" href="/css/core.min.e95e9ce9bcca923242c30ba9410f527693481fa9d13403de1fd9e778fc2a06ec5d06dda7f07add92948e07872e8639ea.css" integrity="sha384-6V6c6bzKkjJCwwupQQ9SdpNIH6nRNAPeH9nnePwqBuxdBt2n8HrdkpSOB4cuhjnq"><meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Goでブロックチェーンを作る Part 2: プルーフオブワーク" /><link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
 <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
@@ -41,7 +41,8 @@
 <body><section id="header">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Seita Uchimura</span></a></span>
         <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/">Articles</a><a class="nav item" href="/about">About</a><a class="nav item" href="/categories">Categories</a><a class="nav item" href="/tags">Tags</a></nav></div></span></div><div class="site slogan"><span class="title">You ain't gonna need it</span></div></section><section id="content"><div class="article-container"><section class="article header">
-    <h1 class="article title">Goでブロックチェーンを作る Part 2: プルーフオブワーク</h1><p class="article date">Saturday, February 2, 2019</p></section><article class="article markdown-body"><p>この記事はIvan Kuznetsovさんの<a href="https://jeiwan.cc/posts/building-blockchain-in-go-part-2/"target="_blank">Building Blockchain in Go. Part 2: Proof-of-Work</a>を本人の許可を得て翻訳したものです。</p>
+    <h1 class="article title">Goでブロックチェーンを作る Part 2: プルーフオブワーク</h1><p class="article date">Saturday, February 2, 2019</p></section><article class="article markdown-body"><p>この記事はIvan Kuznetsovさんの<a href="https://jeiwan.cc/posts/building-blockchain-in-go-part-2/"target="_blank" rel="noopener noreferrer">Building Blockchain in Go. Part 2: Proof-of-Work</a>
+を本人の許可を得て翻訳したものです。</p>
 <h1 id="introduction">Introduction</h1>
 <p>以前の記事では、ブロックチェーンのデータベースの本質的でかつ単純なデータ構造を作りました。そして一つ一つのブロックが過去のものと鎖状に繋がるようブロックを追加できるようにもしました。しかしながら、まだ私たちの実装には決定的な欠陥があります。ブロックの追加が簡単すぎるのです。ブロックチェーンやビットコインにとってブロックの追加が困難であることは非常に重要であるため、今回はこの欠陥を修正していきます。</p>
 <h1 id="proof-of-work">Proof-of-Work</h1>
@@ -72,7 +73,8 @@
 <li>もし満たしていれば、終了。</li>
 <li>もし満たしていなければ、カウンターを増加させステップ3と4を繰り返す。</li>
 </ol>
-<p>つまり、これはブルートフォースアルゴリズム(<a href="https://ja.wikipedia.org/wiki/%E5%8A%9B%E3%81%BE%E3%81%8B%E3%81%9B%E6%8E%A2%E7%B4%A2"target="_blank">力まかせ探索</a>)です。カウンターを変化させ、新しいハッシュ値を取得し、確認する作業を繰り返します。計算リソースを大量に消費する理由がお分りいただけたでしょうか。</p>
+<p>つまり、これはブルートフォースアルゴリズム(<a href="https://ja.wikipedia.org/wiki/%E5%8A%9B%E3%81%BE%E3%81%8B%E3%81%9B%E6%8E%A2%E7%B4%A2"target="_blank" rel="noopener noreferrer">力まかせ探索</a>
+)です。カウンターを変化させ、新しいハッシュ値を取得し、確認する作業を繰り返します。計算リソースを大量に消費する理由がお分りいただけたでしょうか。</p>
 <p>ここで、ハッシュ値が満たすべき要件に目を向けてみましょう。ハッシュキャッシュのもともとの実装では、この要件は「ハッシュ値の先頭の20ビットはゼロでなくてはならない」というようなものです。ビットコインでは、設計上、マイナーの増減による計算リソースの変化に関わらずブロックの生成間隔を10分ごとに保つ必要があるため、この要件は時間ごとに調整されます。</p>
 <p>このアルゴリズムを実際に試してみるため、一つ前の例からデータを拝借して(&ldquo;I like donuts&rdquo;)、先頭の3バイトが0から始まるハッシュ値を見つけました。</p>
 <span class="image-container"><span class="link" ><a href="https://jeiwan.cc/images/hashcash-example.png" 
@@ -233,9 +235,10 @@ Data: Send <span class="m">2</span> more BTC to Ivan
 Hash: 000000e42afddf57a3daa11b43b2e0923f23e894f96d1f24bfd9b8d2d494c57a
 PoW: <span class="nb">true</span>
 </code></pre></div><h1 id="conclusion">Conclusion</h1>
-<p>ブロックの追加に労力が必要になり、私たちのブロックチェーンがまた一歩本格的な実装に近づきました。しかし、まだまだ不足している要素があります。データベースの一貫性、ウォレット、アドレス、トランザクションやコンセンサスメカニズムなどです。これらの要素は今後の記事で実装していきます。ひとまず、ハッピーマイニング！</p></article><section class="article labels"><a class="category" href=/categories/programming/>programming</a><a class="tag" href=/tags/blockchain/>blockchain</a><a class="tag" href=/tags/golang/>golang</a><a class="tag" href=/tags/translation/>translation</a></section><section class="article author"><img class="avatar" src="/img/me.png" alt><p class="name">Seita Uchimura</p><div class="bio">Software Engineer in Tokyo | ICU20</div><div class="details"><a class="item" href="https://github.com/seita-uc" target="_blank"><span class="iconfont icon-github"></span>&nbsp;seita-uc</a><a class="item" href="https://twitter.com/sei_uchi_mura" target="_blank"><span class="iconfont icon-twitter"></span>&nbsp;@sei_uchi_mura</a></div>
-</section></div>
-<div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/set-firebase-config/"><span class="li iconfont icon-article"></span>Firebase Cloud Functionsの環境変数にJSONをサクッと設定する方法</a></p><p><a class="link" href="/post/make-blockchain-in-golang-part-1/"><span class="li iconfont icon-article"></span>Goでブロックチェーンを作る  Part 1: 基本型</a></p></section><section class="article discussion"><div id="disqus_thread"></div>
+<p>ブロックの追加に労力が必要になり、私たちのブロックチェーンがまた一歩本格的な実装に近づきました。しかし、まだまだ不足している要素があります。データベースの一貫性、ウォレット、アドレス、トランザクションやコンセンサスメカニズムなどです。これらの要素は今後の記事で実装していきます。ひとまず、ハッピーマイニング！</p></article><section class="article labels"><a class="category" href=/categories/programming/>programming</a><a class="tag" href=/tags/blockchain/>blockchain</a><a class="tag" href=/tags/golang/>golang</a><a class="tag" href=/tags/translation/>translation</a></section><section class="article author"><img class="avatar" src="/img/me.webp" alt><p class="name">Seita Uchimura</p><div class="bio">Software Engineer in Tokyo | ICU20</div><div class="details"><a class="item" href="https://github.com/seita-uc" target="_blank" rel="noopener noreferrer"><span class="iconfont icon-github"></span>&nbsp;seita-uc</a><a class="item" href="https://twitter.com/sei_uchi_mura" target="_blank" rel="noopener noreferrer"><span class="iconfont icon-twitter"></span>&nbsp;@sei_uchi_mura</a></div>
+</section>
+</div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/set-firebase-config/"><span class="iconfont icon-article"></span>Firebase Cloud Functionsの環境変数にJSONをサクッと設定する方法</a></p><p><a class="link" href="/post/make-blockchain-in-golang-part-1/"><span class="iconfont icon-article"></span>Goでブロックチェーンを作る  Part 1: 基本型</a></p></section><section class="article discussion"><div id="disqus_thread"></div>
 <script type="application/javascript">
     var disqus_config = function () {
     
@@ -255,7 +258,7 @@ PoW: <span class="nb">true</span>
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></section></div></section><section id="footer"><div class="footer-wrap">
-    <p class="copyright">©2019 Seita Uchimura.</p>
+    <p class="copyright">©2021 Seita Uchimura.</p>
     <p class="powerby"><span>Powered by </span><a href="https://gohugo.io"
         target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/"
         target="_blank">Notepadium</a></p>
