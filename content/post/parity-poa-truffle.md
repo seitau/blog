@@ -13,7 +13,7 @@ draft: false
 ---
 
 以下のtutorialに従ってparityのpoaプライベートネットを構築してから、
-{{< web-embed url="https://wiki.parity.io/Demo-PoA-tutorial" >}}
+{{< web-embed url="https://github.com/openethereum/parity-ethereum" >}}
 
 truffleでコントラクトをデプロイしようとしたら以下のエラーに遭遇、
 

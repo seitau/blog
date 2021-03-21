@@ -1,4 +1,3 @@
 [build]
   publish = "public"
   command = "hugo --theme=hugo-notepadium --gc --minify"
-  functions = "functions"

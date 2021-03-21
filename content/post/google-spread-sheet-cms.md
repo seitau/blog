@@ -90,9 +90,7 @@ Hugoで上記のJSONデータを表示するため、getJSONでデータを受�
 {{ end }}
 ```
 
-imageurlを加工しているのは、google driveに保存されたimageのurlをそのまま使用してもwebsiteに画像が表示されないためで、urlを`http://drive.google.com/uc?export=view&id=`に置き換えて対応しています。詳しくは以下を参照。
-
-{{< web-embed url="http://posaune.hatenablog.com/entry/2013/08/14/162251" >}}
+imageurlを加工しているのは、google driveに保存されたimageのurlをそのまま使用してもwebsiteに画像が表示されないためで、urlを`http://drive.google.com/uc?export=view&id=`に置き換えて対応しています。
 
 また、加工したJSONのプロパティ名をkeyにvalueを一時的に保持するため、[.Scratch](https://gohugo.io/functions/scratch/)というscratchpadの役割を果たすhugoの備え付け関数を使用しています。ここでは一時的なDictionaryのように用いています。
 

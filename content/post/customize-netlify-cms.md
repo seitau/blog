@@ -17,8 +17,6 @@ draft: false
 
 <!--more-->
 
-{{< web-embed url="https://ucsb.tokyo/post/2019-01-14-%E3%81%9D%E3%82%82%E3%81%9D%E3%82%82%E3%82%AB%E3%83%AA%E3%83%95%E3%82%A9%E3%83%AB%E3%83%8B%E3%82%A2%E5%A4%A7%E5%AD%A6%E3%81%A3%E3%81%A6%E3%81%A9%E3%82%93%E3%81%AA%E3%81%A8%E3%81%93/" >}}
-
 
 # EditorComponentを追加する
 Netlify CMSはreactで書かれているということで、最初はカスタマイズできるか自信がなかったのですが、[document](https://www.netlifycms.org/docs/custom-widgets/#registereditorcomponent)を確認してみると、意外にもeditorのcomponentを簡単にカスタマイズできるようになっていて素敵でした。Hugoのfront matterに合わせて適当にボタンとかインプットとか増やせるみたいですね。

@@ -28,7 +28,7 @@ og_image = "img/me.webp"
 slogan = "You ain't gonna need it"
 license = ""  # CC License
 fullRss = false # Puts entire HTML post into rss 'description' tag. If unset, default is false.
-ogpApiEndpoint = "https://api.appp.la/?url="
+ogpApiEndpoint = "https://kotsukotsu-ogp-api.vercel.app/api/ogp?url="
 
 [params.assets]
 css = ["css/custom.css", "css/blogcard.css"]  # *.css/scss/sass

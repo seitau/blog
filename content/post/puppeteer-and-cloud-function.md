@@ -16,8 +16,6 @@ draft: false
 
 <!--more-->
 
-{{< web-embed url="https://seita.icu/2019/01/28/puppeteer%E3%81%A7headless%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6%E5%85%A5%E9%96%80/" >}}
-
 firebase cloud functionsの環境はtypescriptを使用しています。
 
 #### 参考記事
