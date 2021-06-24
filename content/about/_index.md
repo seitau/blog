@@ -76,3 +76,20 @@ disable_comments: true
 
 ## 2016/04 - 2021/03: 国際基督教大学
 ### 教養学部 アーツサイエンス学科
+
+# Products
+## Marine
+link: https://github.com/jphacks/TK_1907
+JPHacksというハッカソンにてチームで開発した、漫画クリエイターの著作権を保護するプラットフォーム。Ethereumというブロックチェーン上で広告収益の分配を行うことで、各クリエイターへの報酬分配の透明化を実現し、仕組み的に違法アップロードを撲滅する目的で開発した。自分は主にEthereumのスマートコントラクト開発、EthereumとGoのバックエンド及びwebフロントエンドとの繋ぎ込みを担当した。
+
+## QuickAid
+link: https://github.com/seita-uc/angelhack2019
+AngelHack2019というハッカソンにてチームで開発した、災害発生時の位置情報にて罹災証明をブロックチェーン上に発行し、被災者が適切なサポートを素早く受けられるよう補助するサービス。自分はEthereumのスマートコントラクト開発、node.jsによるAWS LambdaでのAPI開発を行った。
+
+## Hanco
+参加メンバーによるnote: https://note.mu/nandehu/n/n100965f60437
+2019年9月に行われたFirebase Hackathonというハッカソンにて開発した、押印というUXを残しつつ、電子署名を用いた判子による承認フローを提供するアプリ。 自分はEthereumのスマートコントラクトとFirebase Functionsを使用したnode.jsによるEthereumとiOSアプリの繋ぎ込みAPIの開発を担当した。
+
+## Great Language War
+link: https://seita-uc.github.io/great-language-war/
+アメリカ留学中に授業のプロジェクトの一環で作成した、世界の各言語における影響力の差を可視化することを試みたゲーム。p5.jsにて開発した。
