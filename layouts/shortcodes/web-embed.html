@@ -1,7 +1,7 @@
 {{ $url := .Get "url" }}
 {{ $json := getJSON $.Page.Site.Params.OgpApiEndpoint $url }}
 {{ $siteName := $json.siteName }}
-{{ $title := $json.short_description }}
+{{ $title := $json.title }}
 {{ $description := $json.description }}
 {{ $image := $json.image }}
 {{ $urlInfo := urls.Parse $url }}
