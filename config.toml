@@ -7,7 +7,7 @@ copyright = "©2021 Seita Uchimura."
 hasCJKLanguage = true
 enableRobotsTXT = true
 # Enable Disqus
-disqusShortname = "seita-blog"
+# disqusShortname = "seita-blog"
 enableEmoji = true
 
 # Google Analytics
