@@ -1,7 +1,7 @@
 baseURL = "https://seita.icu/"
 languageCode = "ja"
 defaultContentLanguage = "ja"
-title = "Seita Uchimura"
+title = "Seita"
 theme = "hugo-notepadium"
 copyright = "©2021 Seita Uchimura."
 hasCJKLanguage = true
