@@ -23,11 +23,11 @@ disable_comments: true
 
 # Profile
 - 神奈川県出身
-- 1997年生まれ
 
 # Certificate
 - 2016/11 英検一級
 - 2019/07 TOEIC 935
+- 2022/03 Google Cloud Certified Professional Cloud Architect
 
 # History
 - 2021/09 - now: **株式会社Ginco**

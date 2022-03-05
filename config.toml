@@ -3,7 +3,7 @@ languageCode = "ja"
 defaultContentLanguage = "ja"
 title = "Seita"
 theme = "hugo-notepadium"
-copyright = "©2021 Seita Uchimura."
+copyright = "©2022 Seita Uchimura."
 hasCJKLanguage = true
 enableRobotsTXT = true
 # Enable Disqus
@@ -24,7 +24,7 @@ unsafe = true  # enable raw HTML in Markdown
 style = "dark"  # default: auto. light: light theme, dark: dark theme, auto: based on system.
 dateFormat = "Monday, January 2, 2006"  # if unset, default is "2006-01-02"
 logo = ""  # if you have a logo png
-og_image = "img/me.png"
+og_image = "/img/me.png"
 slogan = "You ain't gonna need it"
 license = ""  # CC License
 fullRss = false # Puts entire HTML post into rss 'description' tag. If unset, default is false.
