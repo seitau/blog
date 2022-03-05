@@ -1,6 +1,6 @@
 ---
 title: "PostgreSQLのReplication構成をdocker-compose upで一撃で立ち上げたい"
-date: 2021-02-15T15:02:50-08:00
+date: 2022-02-15T15:02:50-08:00
 banner: "img/coding.png"
 description: ""
 images: []
