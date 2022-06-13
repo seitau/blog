@@ -6,7 +6,7 @@ images: []
 menu: ""
 categories: ["programming"]
 tags: ["github-actions", "secret", "golang"]
-title: "goでgithub actionsのsecretをencryptしてterraformで設定する"
+title: "goでgithub actionsのsecretをencryptしてterraformでapplyする"
 draft: false
 ---
 
