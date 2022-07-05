@@ -74,5 +74,5 @@ enable = true
 avatar = "/img/me.png"
 name = "Seita Uchimura"
 bio = "Software Engineer in Tokyo"  # support markdown syntax
-twitter = "sei_uchi_mura"  # https://twitter.com/XXX
-github = "seita-uc"  # https://github.com/XXX
+twitter = "_seitau"  # https://twitter.com/XXX
+github = "seitau"  # https://github.com/XXX

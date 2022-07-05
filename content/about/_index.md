@@ -9,12 +9,12 @@ disable_comments: true
 <center>
   <p style="text-align:center;font-size:1.5rem;">Seita</p>
   <div class="details">
-    <a class="item" href="https://github.com/seita-uc" target="_blank">
+    <a class="item" href="https://github.com/seitau" target="_blank">
       <span class="iconfont icon-github"></span>
       &nbsp;seita-uc
     </a>
     <span>&nbsp;</span>
-    <a class="item" href="https://twitter.com/sei_uchi_mura" target="_blank">
+    <a class="item" href="https://twitter.com/_seitau" target="_blank">
       <span class="iconfont icon-twitter"></span>
       @sei_uchi_mura
     </a>
