@@ -11,12 +11,12 @@ disable_comments: true
   <div class="details">
     <a class="item" href="https://github.com/seitau" target="_blank">
       <span class="iconfont icon-github"></span>
-      &nbsp;seita-uc
+      &nbsp;seitau
     </a>
     <span>&nbsp;</span>
     <a class="item" href="https://twitter.com/_seitau" target="_blank">
       <span class="iconfont icon-twitter"></span>
-      @sei_uchi_mura
+      @_seitau
     </a>
   </div>
 </center>
