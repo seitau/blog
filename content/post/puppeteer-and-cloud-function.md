@@ -18,9 +18,6 @@ draft: false
 
 firebase cloud functionsの環境はtypescriptを使用しています。
 
-#### 参考記事
-{{< web-embed url="https://angularfirebase.com/lessons/how-to-use-puppeteer-on-firebase-cloud-functions/" >}}
-
 ## Node8を指定する
 Puppeteerを使用するにはNodeのバージョンが8かそれ以上である必要があるため、firebase functionsのプロジェクトにある`package.json`でベータ版であるNode8ランタイムを指定します。
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="ja"><meta charset="utf-8"><meta name="generator" content="Hugo 0.73.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="ja"><meta charset="utf-8"><meta name="generator" content="Hugo 0.101.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark"><title>Goでブロックチェーンを作る Part 2: プルーフオブワーク&nbsp;&ndash;&nbsp;Seita Uchimura</title><link rel="stylesheet" href="/css/core.min.e95e9ce9bcca923242c30ba9410f527693481fa9d13403de1fd9e778fc2a06ec5d06dda7f07add92948e07872e8639ea.css" integrity="sha384-6V6c6bzKkjJCwwupQQ9SdpNIH6nRNAPeH9nnePwqBuxdBt2n8HrdkpSOB4cuhjnq"><meta name="twitter:card" content="summary" />
+<meta name="supported-color-schemes" content="light dark"><title>Goでブロックチェーンを作る Part 2: プルーフオブワーク&nbsp;&ndash;&nbsp;Seita</title><link rel="stylesheet" href="/css/core.min.7f3d5a871f9de3627f71d320f6cf013432ced54de2e7771569431b9e8cfa934f6a668e1b01f25fa9f9b78b6e31947dde.css" integrity="sha384-fz1ahx&#43;d42J/cdMg9s8BNDLO1U3i53cVaUMbnoz6k09qZo4bAfJfqfm3i24xlH3e"><meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Goでブロックチェーンを作る Part 2: プルーフオブワーク" /><link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
 <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
@@ -21,7 +21,7 @@
 <meta name="theme-color" content="#ffffff">
 
 
-<meta property="og:site_name"           content="Seita Uchimura">
+<meta property="og:site_name"           content="Seita">
 <meta property="og:title"               content="Goでブロックチェーンを作る Part 2: プルーフオブワーク">
 <meta property="og:url"                 content="https://seita.icu/post/make-blockchain-in-golang-part-2/">
 <meta property="og:type"                content="article">
@@ -39,7 +39,7 @@
 
 
 <body><section id="header">
-    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Seita Uchimura</span></a></span>
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Seita</span></a></span>
         <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/">Articles</a><a class="nav item" href="/about">About</a><a class="nav item" href="/categories">Categories</a><a class="nav item" href="/tags">Tags</a></nav></div></span></div><div class="site slogan"><span class="title">You ain't gonna need it</span></div></section><section id="content"><div class="article-container"><section class="article header">
     <h1 class="article title">Goでブロックチェーンを作る Part 2: プルーフオブワーク</h1><p class="article date">Saturday, February 2, 2019</p></section><article class="article markdown-body"><p>この記事はIvan Kuznetsovさんの<a href="https://jeiwan.cc/posts/building-blockchain-in-go-part-2/"target="_blank" rel="noopener noreferrer">Building Blockchain in Go. Part 2: Proof-of-Work</a>
 を本人の許可を得て翻訳したものです。</p>
@@ -83,71 +83,71 @@
 <p><code>ca07ca</code> はカウンターの16進数の値です。10進数では13240266になります。</p>
 <h1 id="implementation">Implementation</h1>
 <p>以上で、理論の解説は済みました。ここからはコードを書いていきましょう。最初に、マイニングの難易度を定義します。</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">const</span> <span class="nx">targetBits</span> <span class="p">=</span> <span class="mi">24</span>
-</code></pre></div><p>ビットコインでは、&ldquo;target bits&quot;は掘られたブロックのヘッダーに格納されますが、今回は難易度の調整アルゴリズムは実装しないため、クローバル定数として定義してしまいましょう。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">const</span> <span class="nx">targetBits</span> <span class="p">=</span> <span class="mi">24</span>
+</span></span></code></pre></div><p>ビットコインでは、&ldquo;target bits&quot;は掘られたブロックのヘッダーに格納されますが、今回は難易度の調整アルゴリズムは実装しないため、クローバル定数として定義してしまいましょう。</p>
 <p>24は適当な数字です、私たちの目標はメモリーを256ビット以上消費しないtargetを取得することです。また、targetのビット数と256ビットの差分は十分に大きくしますが、あまりにも大きいと適当なハッシュ値を得るのが困難になるためほどほどにしましょう。</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">ProofOfWork</span> <span class="kd">struct</span> <span class="p">{</span>
-	<span class="nx">block</span>  <span class="o">*</span><span class="nx">Block</span>
-	<span class="nx">target</span> <span class="o">*</span><span class="nx">big</span><span class="p">.</span><span class="nx">Int</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">NewProofOfWork</span><span class="p">(</span><span class="nx">b</span> <span class="o">*</span><span class="nx">Block</span><span class="p">)</span> <span class="o">*</span><span class="nx">ProofOfWork</span> <span class="p">{</span>
-	<span class="nx">target</span> <span class="o">:=</span> <span class="nx">big</span><span class="p">.</span><span class="nf">NewInt</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-	<span class="nx">target</span><span class="p">.</span><span class="nf">Lsh</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nb">uint</span><span class="p">(</span><span class="mi">256</span><span class="o">-</span><span class="nx">targetBits</span><span class="p">))</span>
-
-	<span class="nx">pow</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">ProofOfWork</span><span class="p">{</span><span class="nx">b</span><span class="p">,</span> <span class="nx">target</span><span class="p">}</span>
-
-	<span class="k">return</span> <span class="nx">pow</span>
-<span class="p">}</span>
-</code></pre></div><p>ここで<code>block</code>と<code>target</code>へのポインターを持った<code>ProofOfWork</code>構造体を定義しています。<code>target</code>とは、少し前の節で説明した「要件」の別名です。今回は、ハッシュ値をbig integerに変換して<code>target</code>よりも小さいか確認するため、型にはbig integerを用いています。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">ProofOfWork</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">block</span>  <span class="o">*</span><span class="nx">Block</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">target</span> <span class="o">*</span><span class="nx">big</span><span class="p">.</span><span class="nx">Int</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">NewProofOfWork</span><span class="p">(</span><span class="nx">b</span> <span class="o">*</span><span class="nx">Block</span><span class="p">)</span> <span class="o">*</span><span class="nx">ProofOfWork</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">target</span> <span class="o">:=</span> <span class="nx">big</span><span class="p">.</span><span class="nf">NewInt</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">target</span><span class="p">.</span><span class="nf">Lsh</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nb">uint</span><span class="p">(</span><span class="mi">256</span><span class="o">-</span><span class="nx">targetBits</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">pow</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">ProofOfWork</span><span class="p">{</span><span class="nx">b</span><span class="p">,</span> <span class="nx">target</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">pow</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>ここで<code>block</code>と<code>target</code>へのポインターを持った<code>ProofOfWork</code>構造体を定義しています。<code>target</code>とは、少し前の節で説明した「要件」の別名です。今回は、ハッシュ値をbig integerに変換して<code>target</code>よりも小さいか確認するため、型にはbig integerを用いています。</p>
 <p><code>NewProofOfWork</code>関数では、big.Intを1で初期化し、256-targetBitsだけ左にシフトしています。256はSHA-256ハッシュ値のビット数を表していて、今回はSHA-256ハッシュ関数を使用してハッシュ値を導出しています。targetを16進数表記にすると以下のようになります。</p>
-<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">0x10000000000000000000000000000000000000000000000000000000000
-</code></pre></div><p>この値は29バイトのメモリを消費します。そして以下が前述したハッシュの比較になります。</p>
-<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">0fac49161af82ed938add1d8725835cc123a1a87b1b196488360e58d4bfb51e3 (I like donuts)
-0000010000000000000000000000000000000000000000000000000000000000 (target)
-0000008b0f41ec78bab747864db66bcb9fb89920ee75f43fdaaeb5544f7f76ca (I like donutsca07ca)
-</code></pre></div><p>最初のハッシュ値（&ldquo;I like donuts&quot;をハッシュ化したもの）はtargetよりも大きいため、妥当なプルーフオブワークではありません。二つ目のハッシュ値(&ldquo;I like donutsca07ca&quot;をハッシュ化したもの)はtargetよりも小さいため、妥当な証明になります。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">0x10000000000000000000000000000000000000000000000000000000000
+</span></span></code></pre></div><p>この値は29バイトのメモリを消費します。そして以下が前述したハッシュの比較になります。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">0fac49161af82ed938add1d8725835cc123a1a87b1b196488360e58d4bfb51e3 (I like donuts)
+</span></span><span class="line"><span class="cl">0000010000000000000000000000000000000000000000000000000000000000 (target)
+</span></span><span class="line"><span class="cl">0000008b0f41ec78bab747864db66bcb9fb89920ee75f43fdaaeb5544f7f76ca (I like donutsca07ca)
+</span></span></code></pre></div><p>最初のハッシュ値（&ldquo;I like donuts&quot;をハッシュ化したもの）はtargetよりも大きいため、妥当なプルーフオブワークではありません。二つ目のハッシュ値(&ldquo;I like donutsca07ca&quot;をハッシュ化したもの)はtargetよりも小さいため、妥当な証明になります。</p>
 <p>targetは範囲の上限というように考えていただければいいでしょう。もしも数字（もしくはハッシュ値)が境界値よりも小さければ、妥当な値であり、逆も然りです。境界値を低くすれば妥当な数は減るため、より適当な値を見つけるのが困難になります。</p>
 <p>それでは、ハッシュ化するデータを用意しましょう。</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="p">(</span><span class="nx">pow</span> <span class="o">*</span><span class="nx">ProofOfWork</span><span class="p">)</span> <span class="nf">prepareData</span><span class="p">(</span><span class="nx">nonce</span> <span class="kt">int</span><span class="p">)</span> <span class="p">[]</span><span class="kt">byte</span> <span class="p">{</span>
-	<span class="nx">data</span> <span class="o">:=</span> <span class="nx">bytes</span><span class="p">.</span><span class="nf">Join</span><span class="p">(</span>
-		<span class="p">[][]</span><span class="kt">byte</span><span class="p">{</span>
-			<span class="nx">pow</span><span class="p">.</span><span class="nx">block</span><span class="p">.</span><span class="nx">PrevBlockHash</span><span class="p">,</span>
-			<span class="nx">pow</span><span class="p">.</span><span class="nx">block</span><span class="p">.</span><span class="nx">Data</span><span class="p">,</span>
-			<span class="nf">IntToHex</span><span class="p">(</span><span class="nx">pow</span><span class="p">.</span><span class="nx">block</span><span class="p">.</span><span class="nx">Timestamp</span><span class="p">),</span>
-			<span class="nf">IntToHex</span><span class="p">(</span><span class="nb">int64</span><span class="p">(</span><span class="nx">targetBits</span><span class="p">)),</span>
-			<span class="nf">IntToHex</span><span class="p">(</span><span class="nb">int64</span><span class="p">(</span><span class="nx">nonce</span><span class="p">)),</span>
-		<span class="p">},</span>
-		<span class="p">[]</span><span class="kt">byte</span><span class="p">{},</span>
-	<span class="p">)</span>
-
-	<span class="k">return</span> <span class="nx">data</span>
-<span class="p">}</span>
-</code></pre></div><p>上の箇所はブロックのフィールドをtargetとnonceとマージしているだけです。nonceは暗号学の用語で、ハッシュキャッシュの説明でいうcounterです。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">pow</span> <span class="o">*</span><span class="nx">ProofOfWork</span><span class="p">)</span> <span class="nf">prepareData</span><span class="p">(</span><span class="nx">nonce</span> <span class="kt">int</span><span class="p">)</span> <span class="p">[]</span><span class="kt">byte</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">data</span> <span class="o">:=</span> <span class="nx">bytes</span><span class="p">.</span><span class="nf">Join</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">		<span class="p">[][]</span><span class="kt">byte</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">pow</span><span class="p">.</span><span class="nx">block</span><span class="p">.</span><span class="nx">PrevBlockHash</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">pow</span><span class="p">.</span><span class="nx">block</span><span class="p">.</span><span class="nx">Data</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">IntToHex</span><span class="p">(</span><span class="nx">pow</span><span class="p">.</span><span class="nx">block</span><span class="p">.</span><span class="nx">Timestamp</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">IntToHex</span><span class="p">(</span><span class="nb">int64</span><span class="p">(</span><span class="nx">targetBits</span><span class="p">)),</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">IntToHex</span><span class="p">(</span><span class="nb">int64</span><span class="p">(</span><span class="nx">nonce</span><span class="p">)),</span>
+</span></span><span class="line"><span class="cl">		<span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="p">[]</span><span class="kt">byte</span><span class="p">{},</span>
+</span></span><span class="line"><span class="cl">	<span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">data</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>上の箇所はブロックのフィールドをtargetとnonceとマージしているだけです。nonceは暗号学の用語で、ハッシュキャッシュの説明でいうcounterです。</p>
 <p>それでは、すべての準備が整いましたので、プルーフオブワークのアルゴリズムを実装していきましょう。</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="p">(</span><span class="nx">pow</span> <span class="o">*</span><span class="nx">ProofOfWork</span><span class="p">)</span> <span class="nf">Run</span><span class="p">()</span> <span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">)</span> <span class="p">{</span>
-	<span class="kd">var</span> <span class="nx">hashInt</span> <span class="nx">big</span><span class="p">.</span><span class="nx">Int</span>
-	<span class="kd">var</span> <span class="nx">hash</span> <span class="p">[</span><span class="mi">32</span><span class="p">]</span><span class="kt">byte</span>
-	<span class="nx">nonce</span> <span class="o">:=</span> <span class="mi">0</span>
-
-	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;Mining the block containing \&#34;%s\&#34;\n&#34;</span><span class="p">,</span> <span class="nx">pow</span><span class="p">.</span><span class="nx">block</span><span class="p">.</span><span class="nx">Data</span><span class="p">)</span>
-	<span class="k">for</span> <span class="nx">nonce</span> <span class="p">&lt;</span> <span class="nx">maxNonce</span> <span class="p">{</span>
-		<span class="nx">data</span> <span class="o">:=</span> <span class="nx">pow</span><span class="p">.</span><span class="nf">prepareData</span><span class="p">(</span><span class="nx">nonce</span><span class="p">)</span>
-		<span class="nx">hash</span> <span class="p">=</span> <span class="nx">sha256</span><span class="p">.</span><span class="nf">Sum256</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
-		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;\r%x&#34;</span><span class="p">,</span> <span class="nx">hash</span><span class="p">)</span>
-		<span class="nx">hashInt</span><span class="p">.</span><span class="nf">SetBytes</span><span class="p">(</span><span class="nx">hash</span><span class="p">[:])</span>
-
-		<span class="k">if</span> <span class="nx">hashInt</span><span class="p">.</span><span class="nf">Cmp</span><span class="p">(</span><span class="nx">pow</span><span class="p">.</span><span class="nx">target</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="p">{</span>
-			<span class="k">break</span>
-		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-			<span class="nx">nonce</span><span class="o">++</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
-	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Print</span><span class="p">(</span><span class="s">&#34;\n\n&#34;</span><span class="p">)</span>
-
-	<span class="k">return</span> <span class="nx">nonce</span><span class="p">,</span> <span class="nx">hash</span><span class="p">[:]</span>
-<span class="p">}</span>
-</code></pre></div><p>まず、変数を初期化しています。<code>hashInt</code>はハッシュ値を整数で表記したものです。nonceはカウンターです。次に、有限ループ(math.MaxInt64と等しい<code>maxNonce</code>により制限されている）を回します。この制限はnonceのオーバーフローを予防するためのものです。プルーフオブワークの難易度はnonceのオーバーフローが発生するには低すぎますが、念の為実装しておきましょう。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">pow</span> <span class="o">*</span><span class="nx">ProofOfWork</span><span class="p">)</span> <span class="nf">Run</span><span class="p">()</span> <span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">hashInt</span> <span class="nx">big</span><span class="p">.</span><span class="nx">Int</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">hash</span> <span class="p">[</span><span class="mi">32</span><span class="p">]</span><span class="kt">byte</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">nonce</span> <span class="o">:=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;Mining the block containing \&#34;%s\&#34;\n&#34;</span><span class="p">,</span> <span class="nx">pow</span><span class="p">.</span><span class="nx">block</span><span class="p">.</span><span class="nx">Data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">nonce</span> <span class="p">&lt;</span> <span class="nx">maxNonce</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">data</span> <span class="o">:=</span> <span class="nx">pow</span><span class="p">.</span><span class="nf">prepareData</span><span class="p">(</span><span class="nx">nonce</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">hash</span> <span class="p">=</span> <span class="nx">sha256</span><span class="p">.</span><span class="nf">Sum256</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;\r%x&#34;</span><span class="p">,</span> <span class="nx">hash</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">hashInt</span><span class="p">.</span><span class="nf">SetBytes</span><span class="p">(</span><span class="nx">hash</span><span class="p">[:])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">hashInt</span><span class="p">.</span><span class="nf">Cmp</span><span class="p">(</span><span class="nx">pow</span><span class="p">.</span><span class="nx">target</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">break</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">nonce</span><span class="o">++</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Print</span><span class="p">(</span><span class="s">&#34;\n\n&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">nonce</span><span class="p">,</span> <span class="nx">hash</span><span class="p">[:]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>まず、変数を初期化しています。<code>hashInt</code>はハッシュ値を整数で表記したものです。nonceはカウンターです。次に、有限ループ(math.MaxInt64と等しい<code>maxNonce</code>により制限されている）を回します。この制限はnonceのオーバーフローを予防するためのものです。プルーフオブワークの難易度はnonceのオーバーフローが発生するには低すぎますが、念の為実装しておきましょう。</p>
 <p>ループの中では、</p>
 <ol>
 <li>データの用意</li>
@@ -156,109 +156,90 @@
 <li>targetとintegerを比較</li>
 </ol>
 <p>という処理が行われています。前述した内容のとおりなので簡単ですね。ではBlockのSetHashメソッドを削除し、NewBlock関数を修正していきましょう。</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">NewBlock</span><span class="p">(</span><span class="nx">data</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">prevBlockHash</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">)</span> <span class="o">*</span><span class="nx">Block</span> <span class="p">{</span>
-	<span class="nx">block</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">Block</span><span class="p">{</span><span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">().</span><span class="nf">Unix</span><span class="p">(),</span> <span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="nx">data</span><span class="p">),</span> <span class="nx">prevBlockHash</span><span class="p">,</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">{},</span> <span class="mi">0</span><span class="p">}</span>
-	<span class="nx">pow</span> <span class="o">:=</span> <span class="nf">NewProofOfWork</span><span class="p">(</span><span class="nx">block</span><span class="p">)</span>
-	<span class="nx">nonce</span><span class="p">,</span> <span class="nx">hash</span> <span class="o">:=</span> <span class="nx">pow</span><span class="p">.</span><span class="nf">Run</span><span class="p">()</span>
-
-	<span class="nx">block</span><span class="p">.</span><span class="nx">Hash</span> <span class="p">=</span> <span class="nx">hash</span><span class="p">[:]</span>
-	<span class="nx">block</span><span class="p">.</span><span class="nx">Nonce</span> <span class="p">=</span> <span class="nx">nonce</span>
-
-	<span class="k">return</span> <span class="nx">block</span>
-<span class="p">}</span>
-</code></pre></div><p>ここで、Blockのプロパティとしてnonceが保存されていることに注目してください。nonceは証明を検証する時に必要になるためです。Block構造体は現在以下のようになっています。</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Block</span> <span class="kd">struct</span> <span class="p">{</span>
-	<span class="nx">Timestamp</span>     <span class="kt">int64</span>
-	<span class="nx">Data</span>          <span class="p">[]</span><span class="kt">byte</span>
-	<span class="nx">PrevBlockHash</span> <span class="p">[]</span><span class="kt">byte</span>
-	<span class="nx">Hash</span>          <span class="p">[]</span><span class="kt">byte</span>
-	<span class="nx">Nonce</span>         <span class="kt">int</span>
-<span class="p">}</span>
-</code></pre></div><p>それでは、ちゃんと動くかプログラムを実行して確認してみましょう。</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">Mining the block containing <span class="s2">&#34;Genesis Block&#34;</span>
-00000041662c5fc2883535dc19ba8a33ac993b535da9899e593ff98e1eda56a1
-
-Mining the block containing <span class="s2">&#34;Send 1 BTC to Ivan&#34;</span>
-00000077a856e697c69833d9effb6bdad54c730a98d674f73c0b30020cc82804
-
-Mining the block containing <span class="s2">&#34;Send 2 more BTC to Ivan&#34;</span>
-000000b33185e927c9a989cc7d5aaaed739c56dad9fd9361dea558b9bfaf5fbe
-</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">Prev. hash:
-Data: Genesis Block
-Hash: 00000041662c5fc2883535dc19ba8a33ac993b535da9899e593ff98e1eda56a1
-
-Prev. hash: 00000041662c5fc2883535dc19ba8a33ac993b535da9899e593ff98e1eda56a1
-Data: Send <span class="m">1</span> BTC to Ivan
-Hash: 00000077a856e697c69833d9effb6bdad54c730a98d674f73c0b30020cc82804
-
-Prev. hash: 00000077a856e697c69833d9effb6bdad54c730a98d674f73c0b30020cc82804
-Data: Send <span class="m">2</span> more BTC to Ivan
-Hash: 000000b33185e927c9a989cc7d5aaaed739c56dad9fd9361dea558b9bfaf5fbe
-</code></pre></div><p>良さそうですね！ハッシュの生成にある程度時間がかかり、全て3つのゼロから始まっているのが確認できます。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">NewBlock</span><span class="p">(</span><span class="nx">data</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">prevBlockHash</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">)</span> <span class="o">*</span><span class="nx">Block</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">block</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">Block</span><span class="p">{</span><span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">().</span><span class="nf">Unix</span><span class="p">(),</span> <span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="nx">data</span><span class="p">),</span> <span class="nx">prevBlockHash</span><span class="p">,</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">{},</span> <span class="mi">0</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">pow</span> <span class="o">:=</span> <span class="nf">NewProofOfWork</span><span class="p">(</span><span class="nx">block</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">nonce</span><span class="p">,</span> <span class="nx">hash</span> <span class="o">:=</span> <span class="nx">pow</span><span class="p">.</span><span class="nf">Run</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">block</span><span class="p">.</span><span class="nx">Hash</span> <span class="p">=</span> <span class="nx">hash</span><span class="p">[:]</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">block</span><span class="p">.</span><span class="nx">Nonce</span> <span class="p">=</span> <span class="nx">nonce</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">block</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>ここで、Blockのプロパティとしてnonceが保存されていることに注目してください。nonceは証明を検証する時に必要になるためです。Block構造体は現在以下のようになっています。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Block</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Timestamp</span>     <span class="kt">int64</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Data</span>          <span class="p">[]</span><span class="kt">byte</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">PrevBlockHash</span> <span class="p">[]</span><span class="kt">byte</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Hash</span>          <span class="p">[]</span><span class="kt">byte</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Nonce</span>         <span class="kt">int</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>それでは、ちゃんと動くかプログラムを実行して確認してみましょう。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Mining the block containing <span class="s2">&#34;Genesis Block&#34;</span>
+</span></span><span class="line"><span class="cl">00000041662c5fc2883535dc19ba8a33ac993b535da9899e593ff98e1eda56a1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Mining the block containing <span class="s2">&#34;Send 1 BTC to Ivan&#34;</span>
+</span></span><span class="line"><span class="cl">00000077a856e697c69833d9effb6bdad54c730a98d674f73c0b30020cc82804
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Mining the block containing <span class="s2">&#34;Send 2 more BTC to Ivan&#34;</span>
+</span></span><span class="line"><span class="cl">000000b33185e927c9a989cc7d5aaaed739c56dad9fd9361dea558b9bfaf5fbe
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Prev. hash:
+</span></span><span class="line"><span class="cl">Data: Genesis Block
+</span></span><span class="line"><span class="cl">Hash: 00000041662c5fc2883535dc19ba8a33ac993b535da9899e593ff98e1eda56a1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Prev. hash: 00000041662c5fc2883535dc19ba8a33ac993b535da9899e593ff98e1eda56a1
+</span></span><span class="line"><span class="cl">Data: Send <span class="m">1</span> BTC to Ivan
+</span></span><span class="line"><span class="cl">Hash: 00000077a856e697c69833d9effb6bdad54c730a98d674f73c0b30020cc82804
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Prev. hash: 00000077a856e697c69833d9effb6bdad54c730a98d674f73c0b30020cc82804
+</span></span><span class="line"><span class="cl">Data: Send <span class="m">2</span> more BTC to Ivan
+</span></span><span class="line"><span class="cl">Hash: 000000b33185e927c9a989cc7d5aaaed739c56dad9fd9361dea558b9bfaf5fbe
+</span></span></code></pre></div><p>良さそうですね！ハッシュの生成にある程度時間がかかり、全て3つのゼロから始まっているのが確認できます。</p>
 <p>まだ1つやることが残っています。プルーフオブワークを検証できるようにしましょう。</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="p">(</span><span class="nx">pow</span> <span class="o">*</span><span class="nx">ProofOfWork</span><span class="p">)</span> <span class="nf">Validate</span><span class="p">()</span> <span class="kt">bool</span> <span class="p">{</span>
-	<span class="kd">var</span> <span class="nx">hashInt</span> <span class="nx">big</span><span class="p">.</span><span class="nx">Int</span>
-
-	<span class="nx">data</span> <span class="o">:=</span> <span class="nx">pow</span><span class="p">.</span><span class="nf">prepareData</span><span class="p">(</span><span class="nx">pow</span><span class="p">.</span><span class="nx">block</span><span class="p">.</span><span class="nx">Nonce</span><span class="p">)</span>
-	<span class="nx">hash</span> <span class="o">:=</span> <span class="nx">sha256</span><span class="p">.</span><span class="nf">Sum256</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
-	<span class="nx">hashInt</span><span class="p">.</span><span class="nf">SetBytes</span><span class="p">(</span><span class="nx">hash</span><span class="p">[:])</span>
-
-	<span class="nx">isValid</span> <span class="o">:=</span> <span class="nx">hashInt</span><span class="p">.</span><span class="nf">Cmp</span><span class="p">(</span><span class="nx">pow</span><span class="p">.</span><span class="nx">target</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
-
-	<span class="k">return</span> <span class="nx">isValid</span>
-<span class="p">}</span>
-</code></pre></div><p>ここで先ほど保存したnonceが必要になります。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">pow</span> <span class="o">*</span><span class="nx">ProofOfWork</span><span class="p">)</span> <span class="nf">Validate</span><span class="p">()</span> <span class="kt">bool</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">hashInt</span> <span class="nx">big</span><span class="p">.</span><span class="nx">Int</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">data</span> <span class="o">:=</span> <span class="nx">pow</span><span class="p">.</span><span class="nf">prepareData</span><span class="p">(</span><span class="nx">pow</span><span class="p">.</span><span class="nx">block</span><span class="p">.</span><span class="nx">Nonce</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">hash</span> <span class="o">:=</span> <span class="nx">sha256</span><span class="p">.</span><span class="nf">Sum256</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">hashInt</span><span class="p">.</span><span class="nf">SetBytes</span><span class="p">(</span><span class="nx">hash</span><span class="p">[:])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">isValid</span> <span class="o">:=</span> <span class="nx">hashInt</span><span class="p">.</span><span class="nf">Cmp</span><span class="p">(</span><span class="nx">pow</span><span class="p">.</span><span class="nx">target</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">isValid</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>ここで先ほど保存したnonceが必要になります。</p>
 <p>もう一度うまくいっているか確認してみましょう。</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-	<span class="o">...</span>
-
-	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">block</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">bc</span><span class="p">.</span><span class="nx">blocks</span> <span class="p">{</span>
-		<span class="o">...</span>
-		<span class="nx">pow</span> <span class="o">:=</span> <span class="nf">NewProofOfWork</span><span class="p">(</span><span class="nx">block</span><span class="p">)</span>
-		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;PoW: %s\n&#34;</span><span class="p">,</span> <span class="nx">strconv</span><span class="p">.</span><span class="nf">FormatBool</span><span class="p">(</span><span class="nx">pow</span><span class="p">.</span><span class="nf">Validate</span><span class="p">()))</span>
-		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">()</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div><p>Output:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">Prev. hash:
-Data: Genesis Block
-Hash: 00000093253acb814afb942e652a84a8f245069a67b5eaa709df8ac612075038
-PoW: <span class="nb">true</span>
-
-Prev. hash: 00000093253acb814afb942e652a84a8f245069a67b5eaa709df8ac612075038
-Data: Send <span class="m">1</span> BTC to Ivan
-Hash: 0000003eeb3743ee42020e4a15262fd110a72823d804ce8e49643b5fd9d1062b
-PoW: <span class="nb">true</span>
-
-Prev. hash: 0000003eeb3743ee42020e4a15262fd110a72823d804ce8e49643b5fd9d1062b
-Data: Send <span class="m">2</span> more BTC to Ivan
-Hash: 000000e42afddf57a3daa11b43b2e0923f23e894f96d1f24bfd9b8d2d494c57a
-PoW: <span class="nb">true</span>
-</code></pre></div><h1 id="conclusion">Conclusion</h1>
-<p>ブロックの追加に労力が必要になり、私たちのブロックチェーンがまた一歩本格的な実装に近づきました。しかし、まだまだ不足している要素があります。データベースの一貫性、ウォレット、アドレス、トランザクションやコンセンサスメカニズムなどです。これらの要素は今後の記事で実装していきます。ひとまず、ハッピーマイニング！</p></article><section class="article labels"><a class="category" href=/categories/programming/>programming</a><a class="tag" href=/tags/blockchain/>blockchain</a><a class="tag" href=/tags/golang/>golang</a><a class="tag" href=/tags/translation/>translation</a></section><section class="article author"><img class="avatar" src="/img/me.webp" alt><p class="name">Seita Uchimura</p><div class="bio">Software Engineer in Tokyo | ICU20</div><div class="details"><a class="item" href="https://github.com/seita-uc" target="_blank" rel="noopener noreferrer"><span class="iconfont icon-github"></span>&nbsp;seita-uc</a><a class="item" href="https://twitter.com/sei_uchi_mura" target="_blank" rel="noopener noreferrer"><span class="iconfont icon-twitter"></span>&nbsp;@sei_uchi_mura</a></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="o">...</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">block</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">bc</span><span class="p">.</span><span class="nx">blocks</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="o">...</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">pow</span> <span class="o">:=</span> <span class="nf">NewProofOfWork</span><span class="p">(</span><span class="nx">block</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;PoW: %s\n&#34;</span><span class="p">,</span> <span class="nx">strconv</span><span class="p">.</span><span class="nf">FormatBool</span><span class="p">(</span><span class="nx">pow</span><span class="p">.</span><span class="nf">Validate</span><span class="p">()))</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Output:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Prev. hash:
+</span></span><span class="line"><span class="cl">Data: Genesis Block
+</span></span><span class="line"><span class="cl">Hash: 00000093253acb814afb942e652a84a8f245069a67b5eaa709df8ac612075038
+</span></span><span class="line"><span class="cl">PoW: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Prev. hash: 00000093253acb814afb942e652a84a8f245069a67b5eaa709df8ac612075038
+</span></span><span class="line"><span class="cl">Data: Send <span class="m">1</span> BTC to Ivan
+</span></span><span class="line"><span class="cl">Hash: 0000003eeb3743ee42020e4a15262fd110a72823d804ce8e49643b5fd9d1062b
+</span></span><span class="line"><span class="cl">PoW: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Prev. hash: 0000003eeb3743ee42020e4a15262fd110a72823d804ce8e49643b5fd9d1062b
+</span></span><span class="line"><span class="cl">Data: Send <span class="m">2</span> more BTC to Ivan
+</span></span><span class="line"><span class="cl">Hash: 000000e42afddf57a3daa11b43b2e0923f23e894f96d1f24bfd9b8d2d494c57a
+</span></span><span class="line"><span class="cl">PoW: <span class="nb">true</span>
+</span></span></code></pre></div><h1 id="conclusion">Conclusion</h1>
+<p>ブロックの追加に労力が必要になり、私たちのブロックチェーンがまた一歩本格的な実装に近づきました。しかし、まだまだ不足している要素があります。データベースの一貫性、ウォレット、アドレス、トランザクションやコンセンサスメカニズムなどです。これらの要素は今後の記事で実装していきます。ひとまず、ハッピーマイニング！</p></article><section class="article labels"><a class="category" href=/categories/programming/>programming</a><a class="tag" href=/tags/blockchain/>blockchain</a><a class="tag" href=/tags/golang/>golang</a><a class="tag" href=/tags/translation/>translation</a></section><section class="article author"><img class="avatar" src="/img/me.png" alt><p class="name">Seita Uchimura</p><div class="bio">Software Engineer in Tokyo</div><div class="details"><a class="item" href="https://github.com/seitau" target="_blank" rel="noopener noreferrer"><span class="iconfont icon-github"></span>&nbsp;seitau</a><a class="item" href="https://twitter.com/_seitau" target="_blank" rel="noopener noreferrer"><span class="iconfont icon-twitter"></span>&nbsp;@_seitau</a></div>
 </section>
 </div>
-<div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/set-firebase-config/"><span class="iconfont icon-article"></span>Firebase Cloud Functionsの環境変数にJSONをサクッと設定する方法</a></p><p><a class="link" href="/post/make-blockchain-in-golang-part-1/"><span class="iconfont icon-article"></span>Goでブロックチェーンを作る  Part 1: 基本型</a></p></section><section class="article discussion"><div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "seita-blog" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></section></div></section><section id="footer"><div class="footer-wrap">
-    <p class="copyright">©2021 Seita Uchimura.</p>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/set-firebase-config/"><span class="iconfont icon-article"></span>Firebase Cloud Functionsの環境変数にJSONをサクッと設定する方法</a></p><p><a class="link" href="/post/make-blockchain-in-golang-part-1/"><span class="iconfont icon-article"></span>Goでブロックチェーンを作る  Part 1: 基本型</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2022 Seita Uchimura.</p>
     <p class="powerby"><span>Powered by </span><a href="https://gohugo.io"
         target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/"
         target="_blank">Notepadium</a></p>

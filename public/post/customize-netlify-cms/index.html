@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="ja"><meta charset="utf-8"><meta name="generator" content="Hugo 0.73.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="ja"><meta charset="utf-8"><meta name="generator" content="Hugo 0.101.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark"><title>Netlify CMSで画像の大きさを変更できるようにする&nbsp;&ndash;&nbsp;Seita Uchimura</title><link rel="stylesheet" href="/css/core.min.e95e9ce9bcca923242c30ba9410f527693481fa9d13403de1fd9e778fc2a06ec5d06dda7f07add92948e07872e8639ea.css" integrity="sha384-6V6c6bzKkjJCwwupQQ9SdpNIH6nRNAPeH9nnePwqBuxdBt2n8HrdkpSOB4cuhjnq"><meta name="twitter:card" content="summary" />
+<meta name="supported-color-schemes" content="light dark"><title>Netlify CMSで画像の大きさを変更できるようにする&nbsp;&ndash;&nbsp;Seita</title><link rel="stylesheet" href="/css/core.min.7f3d5a871f9de3627f71d320f6cf013432ced54de2e7771569431b9e8cfa934f6a668e1b01f25fa9f9b78b6e31947dde.css" integrity="sha384-fz1ahx&#43;d42J/cdMg9s8BNDLO1U3i53cVaUMbnoz6k09qZo4bAfJfqfm3i24xlH3e"><meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Netlify CMSで画像の大きさを変更できるようにする" /><link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
 <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
@@ -21,7 +21,7 @@
 <meta name="theme-color" content="#ffffff">
 
 
-<meta property="og:site_name"           content="Seita Uchimura">
+<meta property="og:site_name"           content="Seita">
 <meta property="og:title"               content="Netlify CMSで画像の大きさを変更できるようにする">
 <meta property="og:url"                 content="https://seita.icu/post/customize-netlify-cms/">
 <meta property="og:type"                content="article">
@@ -39,7 +39,7 @@
 
 
 <body><section id="header">
-    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Seita Uchimura</span></a></span>
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Seita</span></a></span>
         <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/">Articles</a><a class="nav item" href="/about">About</a><a class="nav item" href="/categories">Categories</a><a class="nav item" href="/tags">Tags</a></nav></div></span></div><div class="site slogan"><span class="title">You ain't gonna need it</span></div></section><section id="content"><div class="article-container"><section class="article header">
     <h1 class="article title">Netlify CMSで画像の大きさを変更できるようにする</h1><p class="article date">Tuesday, January 22, 2019</p></section><article class="article markdown-body"><p>2019年に入ってから友人と<a href="https://ucsb.tokyo/"target="_blank" rel="noopener noreferrer">UCSB留学ブログ</a>
 を運営しており、主に友人が記事の執筆、自分はブログサイトの開発を担当しています。</p>
@@ -51,7 +51,7 @@
 <p>早速documentに従って、<code>/static/admin/index.html</code>に記述していきます。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -77,73 +77,53 @@
 </span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nx">CMS</span><span class="p">.</span><span class="nx">registerEditorComponent</span><span class="p">({</span>
-  <span class="nx">id</span><span class="o">:</span> <span class="s2">&#34;customImage&#34;</span><span class="p">,</span>
-  <span class="nx">label</span><span class="o">:</span> <span class="s2">&#34;CustomImage&#34;</span><span class="p">,</span>
-  <span class="nx">fields</span><span class="o">:</span> <span class="p">[</span>
-    <span class="p">{</span><span class="nx">label</span><span class="o">:</span> <span class="s2">&#34;Image&#34;</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;image&#34;</span><span class="p">,</span> <span class="nx">widget</span><span class="o">:</span> <span class="s2">&#34;image&#34;</span><span class="p">},</span>
-    <span class="p">{</span><span class="nx">label</span><span class="o">:</span> <span class="s2">&#34;Width&#34;</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;width&#34;</span><span class="p">,</span> <span class="nx">widget</span><span class="o">:</span> <span class="s2">&#34;number&#34;</span><span class="p">,</span> <span class="nx">min</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="k">default</span><span class="o">:</span> <span class="mi">400</span><span class="p">}</span>
-  <span class="p">],</span>
-  <span class="nx">pattern</span><span class="o">:</span> <span class="sr">/^{ {&lt; customImage &#34;(\S+)&#34; (\S+) &gt;} }$/</span><span class="p">,</span>
-  <span class="nx">fromBlock</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">match</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">match</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">{</span>
-      <span class="nx">image</span><span class="o">:</span> <span class="nx">match</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
-      <span class="nx">width</span><span class="o">:</span> <span class="nx">match</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-    <span class="p">};</span>
-  <span class="p">},</span>
-  <span class="nx">toBlock</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="s1">&#39;{ {&lt; customImage &#34;&#39;</span> <span class="o">+</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">image</span> <span class="o">+</span> <span class="s1">&#39;&#34; &#39;</span> <span class="o">+</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">width</span> <span class="o">+</span> <span class="s1">&#39; &gt;} }&#39;</span>
-  <span class="p">},</span>
-  <span class="nx">toPreview</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="p">(</span>
-          <span class="s1">&#39;&lt;figure&gt;&lt;img src=&#39;</span> <span class="o">+</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">image</span> <span class="o">+</span> <span class="s1">&#39; width=&#39;</span> <span class="o">+</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">width</span> <span class="o">+</span> <span class="s1">&#39; style=&#34;height:auto;&#34;/&gt;&lt;/figure&gt;&#39;</span>
-         <span class="p">);</span>
-  <span class="p">}</span>
-<span class="p">});</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">CMS</span><span class="p">.</span><span class="nx">registerEditorComponent</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">id</span><span class="o">:</span> <span class="s2">&#34;customImage&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">label</span><span class="o">:</span> <span class="s2">&#34;CustomImage&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">fields</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span><span class="nx">label</span><span class="o">:</span> <span class="s2">&#34;Image&#34;</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;image&#34;</span><span class="p">,</span> <span class="nx">widget</span><span class="o">:</span> <span class="s2">&#34;image&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span><span class="nx">label</span><span class="o">:</span> <span class="s2">&#34;Width&#34;</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;width&#34;</span><span class="p">,</span> <span class="nx">widget</span><span class="o">:</span> <span class="s2">&#34;number&#34;</span><span class="p">,</span> <span class="nx">min</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="k">default</span><span class="o">:</span> <span class="mi">400</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">pattern</span><span class="o">:</span> <span class="sr">/^{ {&lt; customImage &#34;(\S+)&#34; (\S+) &gt;} }$/</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">fromBlock</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">match</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">match</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">image</span><span class="o">:</span> <span class="nx">match</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">width</span><span class="o">:</span> <span class="nx">match</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">toBlock</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s1">&#39;{ {&lt; customImage &#34;&#39;</span> <span class="o">+</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">image</span> <span class="o">+</span> <span class="s1">&#39;&#34; &#39;</span> <span class="o">+</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">width</span> <span class="o">+</span> <span class="s1">&#39; &gt;} }&#39;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">toPreview</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">          <span class="s1">&#39;&lt;figure&gt;&lt;img src=&#39;</span> <span class="o">+</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">image</span> <span class="o">+</span> <span class="s1">&#39; width=&#39;</span> <span class="o">+</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">width</span> <span class="o">+</span> <span class="s1">&#39; style=&#34;height:auto;&#34;/&gt;&lt;/figure&gt;&#39;</span>
+</span></span><span class="line"><span class="cl">         <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
 <p>上記のようにindex.htmlにscriptを追加すると、CMSからcustomImageという項目を選択することができるようになります。</p>
 <p>これで終わりかと思いきや、まだ一つやることがあります。</p>
 <p>上記のEditorComponentを使用してcustomImageを選択し画像を挿入すると、</p>
-<div class="highlight"><pre class="chroma"><code class="language-go-html-template" data-lang="go-html-template">{ {<span class="p">&lt;</span> <span class="nt">customImage</span> <span class="err">&#34;</span><span class="na">example</span><span class="err">.</span><span class="na">jpg</span><span class="err">&#34;</span> <span class="na">400</span> <span class="p">&gt;</span>} } 
-</code></pre></div><p>このようなshortcodeが実際のmarkdownファイルには記述されます。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go-html-template" data-lang="go-html-template"><span class="line"><span class="cl">{ {<span class="p">&lt;</span> <span class="nt">customImage</span> <span class="err">&#34;</span><span class="na">example</span><span class="err">.</span><span class="na">jpg</span><span class="err">&#34;</span> <span class="na">400</span> <span class="p">&gt;</span>} } 
+</span></span></code></pre></div><p>このようなshortcodeが実際のmarkdownファイルには記述されます。</p>
 <p>このままではまだhugoがimageとして解釈してくれないため、<a href="https://gohugo.io/templates/shortcode-templates/#create-custom-shortcodes"target="_blank" rel="noopener noreferrer">custom shortcode</a>
 を追加しましょう。</p>
 <h1 id="hugoのcustom-shortcodeを追加する">hugoのcustom shortcodeを追加する</h1>
 <p>hugoのプロジェクトルートにある<code>/layout/shortcodes</code>に<code>customImage.html</code>というファイルを作成し、以下のコードを保存してください。</p>
-<div class="highlight"><pre class="chroma"><code class="language-go-html-template" data-lang="go-html-template"><span class="p">&lt;</span><span class="nt">figure</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;</span><span class="cp">{{</span><span class="na">.Get</span><span class="w"> </span><span class="nx">0</span><span class="cp">}}</span><span class="s">&#34;</span> <span class="na">width</span><span class="o">=</span><span class="s">&#34;</span><span class="cp">{{</span><span class="na">.Get</span><span class="w"> </span><span class="nx">1</span><span class="cp">}}</span><span class="s">&#34;</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;height:auto;&#34;</span><span class="p">/&gt;</span>
-<span class="p">&lt;/</span><span class="nt">figure</span><span class="p">&gt;</span>
-</code></pre></div><p>shortcodeの第一引数にimageへのパス、第二引数にwidthの数値を入れることでサイズ可変のfigureを挿入することが可能になっています。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go-html-template" data-lang="go-html-template"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">figure</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;</span><span class="cp">{{</span><span class="na">.Get</span><span class="w"> </span><span class="nx">0</span><span class="cp">}}</span><span class="s">&#34;</span> <span class="na">width</span><span class="o">=</span><span class="s">&#34;</span><span class="cp">{{</span><span class="na">.Get</span><span class="w"> </span><span class="nx">1</span><span class="cp">}}</span><span class="s">&#34;</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;height:auto;&#34;</span><span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">figure</span><span class="p">&gt;</span>
+</span></span></code></pre></div><p>shortcodeの第一引数にimageへのパス、第二引数にwidthの数値を入れることでサイズ可変のfigureを挿入することが可能になっています。</p>
 <p>これで、CMSからサイズの変更できるcustomImageを挿入することができるようになりました。</p>
 <h1 id="netlify-cms良き">Netlify CMS良き</h1>
 <p>CMSを選定する際に<a href="https://forestry.io/"target="_blank" rel="noopener noreferrer">forestly.io</a>
-とも迷いましたが、もともとの機能がシンプルな分Netlify CMSのほうが拡張性があったので、選んで正解だったかなと思いました。</p></article><section class="article labels"><a class="category" href=/categories/programming/>programming</a><a class="tag" href=/tags/netlify/>netlify</a><a class="tag" href=/tags/netlify-cms/>netlify-cms</a><a class="tag" href=/tags/hugo/>hugo</a></section><section class="article author"><img class="avatar" src="/img/me.webp" alt><p class="name">Seita Uchimura</p><div class="bio">Software Engineer in Tokyo | ICU20</div><div class="details"><a class="item" href="https://github.com/seita-uc" target="_blank" rel="noopener noreferrer"><span class="iconfont icon-github"></span>&nbsp;seita-uc</a><a class="item" href="https://twitter.com/sei_uchi_mura" target="_blank" rel="noopener noreferrer"><span class="iconfont icon-twitter"></span>&nbsp;@sei_uchi_mura</a></div>
+とも迷いましたが、もともとの機能がシンプルな分Netlify CMSのほうが拡張性があったので、選んで正解だったかなと思いました。</p></article><section class="article labels"><a class="category" href=/categories/programming/>programming</a><a class="tag" href=/tags/netlify/>netlify</a><a class="tag" href=/tags/netlify-cms/>netlify-cms</a><a class="tag" href=/tags/hugo/>hugo</a></section><section class="article author"><img class="avatar" src="/img/me.png" alt><p class="name">Seita Uchimura</p><div class="bio">Software Engineer in Tokyo</div><div class="details"><a class="item" href="https://github.com/seitau" target="_blank" rel="noopener noreferrer"><span class="iconfont icon-github"></span>&nbsp;seitau</a><a class="item" href="https://twitter.com/_seitau" target="_blank" rel="noopener noreferrer"><span class="iconfont icon-twitter"></span>&nbsp;@_seitau</a></div>
 </section>
 </div>
-<div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/english-themas/"><span class="iconfont icon-article"></span>英語病みからのエモいサイト作った話</a></p><p><a class="link" href="/post/deploy-hugo-with-circleci/"><span class="iconfont icon-article"></span>Hugoをcircleciで自動デプロイする</a></p></section><section class="article discussion"><div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "seita-blog" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></section></div></section><section id="footer"><div class="footer-wrap">
-    <p class="copyright">©2021 Seita Uchimura.</p>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/english-themas/"><span class="iconfont icon-article"></span>英語病みからのエモいサイト作った話</a></p><p><a class="link" href="/post/deploy-hugo-with-circleci/"><span class="iconfont icon-article"></span>Hugoをcircleciで自動デプロイする</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2022 Seita Uchimura.</p>
     <p class="powerby"><span>Powered by </span><a href="https://gohugo.io"
         target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/"
         target="_blank">Notepadium</a></p>

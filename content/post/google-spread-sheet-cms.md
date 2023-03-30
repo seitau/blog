@@ -16,8 +16,6 @@ draft: false
 
 <!--more-->
 
-{{< web-embed url="https://blockchain-at-ucsb-develop.netlify.com" >}}
-
 # 先に完成形
 完成したsheetはこんな感じです。
 
