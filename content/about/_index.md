@@ -31,17 +31,15 @@ disable_comments: true
 - 2022/03 Certified Kubernetes Administrator
 
 # History
-- 2021/09 - now: **株式会社Ginco**
+- 2024/04 - now: **株式会社メルペイ**
+
+- 2021/09 - 2023/12: **株式会社Ginco**
 
 - 2021/04 - 2021/08: **株式会社WinTicket**
   - WinTicketのバックエンド開発
   - Go, GCP, Kubernetes, gRPC, Spanner
 
 - 2021/03: **国際基督教大学 卒業**
-
-- 2021/02 - now: **株式会社STELLA**
-  - 越境ECアプリのバックエンド・管理者ツール開発
-  - Go, GCP, Firebase, Typescript
 
 - 2021/02 - 2021/03: **株式会社サイバーエージェント**
   - AbemaTVのバックエンド開発
@@ -50,11 +48,6 @@ disable_comments: true
 - 2020/09 - 2020/12: **株式会社マッチングエージェント**
   - Tappleのバックエンド開発
   - Node.js
-
-- 2019/12 - 2020/05: **株式会社AtGame**
-  - ゲーマー向けマッチングアプリ開発
-  - 大規模なリアーキテクチャ・リファクタリング、アバター機能実装
-  - Firebase, Flutter, Dart, Typescript
 
 - 2017/11 - 2020/01: **株式会社Ginco**
   - Ethereumのスマートコントラクト開発
